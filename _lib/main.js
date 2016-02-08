@@ -106,7 +106,7 @@ window.addEventListener('load', function()
     }
 
     // build TOC HTML and overwrite backlink
-    var tocHTML = '<nav><p>Slides Navigator</p><ul><li><a href="../../index.html">&larr; Back to index</a></li></ul>';
+    var tocHTML = '<nav><p>Slides Navigator</p><ul><li><a href="index.html">&larr; Back to index</a></li></ul>';
     tocHTML += '<ul><li><a href="#/">' + document.querySelector('h1').innerHTML + '</a></li></ul>';
     if(toc.length)
     {
