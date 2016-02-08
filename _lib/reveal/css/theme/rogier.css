@@ -1,0 +1,771 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+/**
+ * Rogier theme for reveal.js.
+ *
+ * Copyright (C) 2013-2014 Rogier van der Linde
+ */
+
+@font-face {
+  font-family: 'League Gothic';
+  src: url("../../fonts/leaguegothic/league_gothic-webfont.eot");
+  src: url("../../fonts/leaguegothic/league_gothic-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/leaguegothic/league_gothic-webfont.woff") format("woff"), url("../../lib/font/league_gothic-webfont.ttf") format("truetype"), url("../../fonts/leaguegothic/league_gothic-webfont.svg#LeagueGothicRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Droid Sans Mono';
+  src: url('../../fonts/droidsans/DroidSansMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+
+body {
+  background: #e1d9c0;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.reveal abbr {
+  border-bottom: 1px dotted black;
+  cursor: help;
+}
+
+.reveal {
+  font-family: "Lato", sans-serif;
+  font-size: 36px;
+  font-weight: 200;
+  color: #333;
+}
+
+::selection {
+  color: white;
+  background: rgba(79, 64, 28, 0.99);
+  text-shadow: none;
+}
+
+html .reveal .slides, body .reveal .slides {
+  font-size: 28px;
+  letter-spacing: 0;
+  height: 100%;
+}
+
+.reveal em {
+  color: #564826;
+  background-color: #ddd;
+  font-style: normal;
+}
+
+.reveal ul, .reveal ol {
+  display: block;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 20px 0;
+  color: #000;
+  font-family: "League Gothic", Impact, sans-serif;
+  line-height: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 6px rgba(0,0,0,0.2);
+}
+
+.reveal h1 {
+  text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+.reveal h2 {
+  font-size: 76px;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+
+.reveal a:not(.image) {
+  color: #8b743d;
+  text-decoration: none;
+}
+
+.reveal a:not(.image):hover {
+  color: #c0a86e;
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #564826;
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+
+.reveal section img {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  margin: 10px 0 0 0;
+}
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #8b743d;
+}
+
+.reveal img.border {
+  border: 2px solid #999;
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-left.enabled {
+  border-right-color: #8b743d; }
+
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-right.enabled {
+  border-left-color: #8b743d; }
+
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #8b743d; }
+
+.reveal .controls div.navigate-down,
+.reveal .controls div.navigate-down.enabled {
+  border-top-color: #8b743d; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #c0a86e; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #c0a86e; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #c0a86e; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #c0a86e; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.reveal .progress span {
+  background: #8b743d;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/*********************************************
+ * LISTS
+ *********************************************/
+
+/* general */
+
+.reveal ol {
+  list-style: decimal;
+}
+
+.reveal ul {
+  list-style: disc;
+}
+
+.reveal li {
+  padding-bottom: 10px;
+}
+
+/* nested */
+
+.reveal ol ol,
+.reveal ol ul,
+.reveal ul ul,
+.reveal ul ol {
+  font-size: 80%;
+  line-height: 1.4em;
+  margin-left: 40px;
+  margin-top: 5px;
+  list-style: square;
+}
+
+.reveal li li {
+  padding-bottom: 0;
+}
+
+/* styles */
+
+.reveal .v-style {
+  list-style-image: url('../../img/list_style_check.png');
+}
+
+.reveal .plus-style {
+  list-style-image: url('../../img/list_style_plus.jpg');
+}
+
+.reveal .x-style {
+  list-style-image: url('../../img/list_style_uncheck.png');
+}
+
+.reveal .no-style {
+  list-style-type: none;
+}
+
+.reveal ul.arrow {
+  list-style-type: none;
+  font-size: 80%;
+  margin: 0;
+  margin-left: 1.25em;
+  padding: 0;
+}
+
+.reveal ul.arrow li {
+  padding-bottom: 0;
+  margin: 0;
+  line-height: 1.2em;
+}
+.reveal ul.arrow li:before {
+  content: '→  ';
+  color: black;
+}
+
+.reveal ul.arrow li:first-letter {
+  margin-left: -1.25em;
+}
+
+.reveal li.arrow {
+  list-style-type: none;
+  margin: 0;
+  margin-left: 1.25em;
+  padding: 0;
+}
+
+.reveal li.arrow:before {
+  content: '→  ';
+  color: black;
+}
+
+.reveal li.arrow:first-letter {
+  margin-left: -1.25em;
+}
+
+/*********************************************
+ * AROUND THE SLIDE
+ *********************************************/
+
+/* ikdoeict branding */
+
+.reveal #ikdoeict {
+  display: block;
+  width: 100px;
+  height: 59px;
+  text-indent: -999px;
+  overflow: hidden;
+  text-decoration: none;
+  position: absolute;
+  top: -5px;
+  right: 7px;
+  z-index: 10;
+  background: transparent url(../../img/ikdoeict.png) no-repeat;
+  opacity: 0.75;
+}
+
+.reveal #ikdoeict:hover {
+  opacity: 1;
+}
+
+/* bottom left menu */
+
+.reveal #extra {
+  position: fixed;
+  left: 10px;
+  bottom: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  z-index: 10;
+}
+
+.reveal #extra ul, .reveal #extra li {
+  list-style: none;
+}
+
+.reveal #extra .codelink {
+  background-position: top left;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  background-image: url(../../img/rar.png);
+}
+
+.reveal #extra .a:hover {
+  background: transparent url(../../img/rar.png) top left !important;
+}
+
+/* endmenu */
+
+.reveal #endmenu {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 16px;
+  line-height: 1.1em;
+  list-style: none;
+}
+
+/***********************************************
+ * NAV
+ ***********************************************/
+
+/* index menu */
+
+aside.back {
+  z-index: 10000;
+}
+
+.reveal nav {
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  left: 10px;
+  top: 10px;
+  width: 280px;
+  border: 1px dotted black;
+  max-height: 545px;
+  max-height: 95vh;
+  overflow-y: auto;
+  opacity: 0.2;
+}
+
+.reveal nav:hover {
+  opacity: 1;
+}
+
+.reveal nav > p {
+  color: #006;
+  font-size: 14px;
+  padding: 2px 10px;
+  background-color: #eee;
+  cursor: pointer;
+  margin: 0;
+  line-height: 20px;
+}
+
+.reveal nav ul, .reveal nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reveal nav > ul {
+  line-height: 30px;
+  display: none;
+}
+
+.reveal nav > ul > li {
+  padding: 5px 0;
+  font-size: 16px;
+  padding-left: 5px;
+  position: relative;
+}
+
+.reveal nav > ul > li > ul > li {
+  line-height: 18px;
+  font-size: 12px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.reveal nav:hover ul {
+  display: block;
+}
+
+.reveal nav a:hover {
+  background-color: #ddd;
+}
+
+.reveal nav .pagenr {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  color: #666;
+}
+
+.reveal nav a {
+  color: #006;
+  text-decoration: none;
+  display: block;
+  padding-left: 5px;
+}
+
+.reveal nav > ul > li > ul > li a {
+  border-bottom: 1px dotted #999;
+}
+
+.reveal nav > ul > li > ul > li a:not(.image):hover {
+  border-bottom: 1px dotted #999;
+}
+
+.reveal nav h1,
+.reveal nav h2,
+.reveal nav h3,
+.reveal nav h4 {
+  text-transform: inherit;
+}
+
+/***********************************************
+ * SLIDES
+ ***********************************************/
+
+/* title slide */
+
+.reveal.page .slides > section:first-child {
+  text-align: center;
+  background: transparent;
+}
+
+.reveal.page .slides section:first-child:not(.stack):before {
+  background: transparent;
+  border: 2px transparent;
+}
+
+.reveal .slides > section:first-child small {
+  opacity: 0.7;
+  font-size: 14px;
+  vertical-align: top;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.reveal .slides > section:first-child footer {
+   font-size: 60%;
+   position: absolute;
+   bottom: 0;
+   width: 800px;
+   text-align: center;
+}
+
+.reveal .slides > section:first-child figcaption {
+  text-align: right;
+}
+
+.reveal figure figcaption {
+  font-style: italic;
+  font-size: 12px;
+  width: 100%;
+  line-height: 1;
+  text-align: left;
+  padding-top: 5px;
+  display: block;
+}
+
+/* subtitle slide */
+
+.reveal .slides > section > section:first-child {
+  text-align: center;
+  background: none;
+  border: none;
+}
+
+.reveal .slides > section > section:first-child h1 {
+  margin-bottom: 50px;
+}
+
+.reveal .slides > section > section:first-child h1 + h2 {
+  display: none;
+}
+
+.reveal.page .slides section:not(.stack):after {
+  box-shadow: none;
+}
+
+.reveal.page .slides section {
+  min-height: 500px;
+  padding: 30px 80px 40px 80px;
+}
+
+.reveal ul.chapterlist {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 40px;
+  line-height: 45px;
+  list-style: none;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.reveal ul.chapterlist li {
+  white-space: nowrap;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.reveal ul.chapterlist li::before {
+  content: "► ";
+  font-size: 20px;
+  line-height: 45px;
+  vertical-align: middle;
+  color: #e1d9c0;
+}
+
+.reveal ul.chapterlist li.active::before, .reveal ul.chapterlist li.active:hover::before {
+  color: #8b743d;
+}
+
+/* all slides */
+
+.reveal.page .slides section:not(.stack):before {
+  background: white;
+  border: 2px solid #8b743d;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides h2 {
+  text-align: center;
+}
+
+.reveal section section > ul, .reveal section section > ol {
+  margin-left: 0;
+}
+
+/*********************************************
+ * TOOLTIPS AND INFO
+ *********************************************/
+
+.reveal .tooltip, .reveal .info {
+  background-image: url(../../img/comments.png);
+  background-repeat: no-repeat;
+  text-align: left;
+}
+
+.reveal .tooltip {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 100px;
+  height: 100px;
+  background-position: bottom right;
+  z-index: 110;
+}
+
+.reveal .tooltip + .tooltip {
+  right: 45px;
+}
+
+.reveal .tooltip + .tooltip + .tooltip {
+  right: 85px;
+}
+
+.reveal .info {
+  display: inline-block;
+  position: relative;
+  top: -10px;
+  background-image: url(../../img/commentsS.png);
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 16px;
+}
+
+.reveal .tooltip div, .reveal .info div {
+  text-align: left;
+  display: none;
+  position: absolute;
+  z-index: 111;
+  font-size: 14px;
+  line-height: 1.4em;
+  min-width: 350px;
+  opacity: 0.95;
+  border: 2px solid #ccc;
+  padding: 10px;
+  background-color: #ffc;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+  background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+  background-image: -ms-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+  background-image: -o-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+.reveal .tooltip div {
+  bottom: 30px;
+  right: 40px;
+}
+
+.reveal .info div {
+  top: 0;
+  left: 25px;
+}
+
+.reveal .tooltip:hover div, .reveal .info:hover div {
+  display: block;
+}
+
+.reveal .tooltip ul, .reveal .tooltip ol, .reveal .info ul, .reveal .info ol {
+  margin: 10px 5px 5px 20px;
+}
+
+.reveal .tooltip ul li, .reveal .tooltip ol li {
+  margin-left: 10px;
+  line-height: 1.3em;
+  padding-bottom: 0;
+  margin-bottom: 0.4em;
+}
+
+.reveal .tooltip p, .reveal .info p {
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.reveal .tooltip p:last-child, .reveal .info p:last-child {
+  margin-bottom: 0;
+}
+
+.reveal .tooltip blockquote, .reveal .info blockquote {
+  margin: 10px;
+  margin-left: 2em;
+  width: auto;
+  padding: 0;
+}
+
+.reveal .info.singleline div {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/***********************************************
+ * OTHER
+ ***********************************************/
+
+/* columns */
+
+.columns .column {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.column-12 {
+  width: 50%;
+}
+
+.columns a {
+  font-size: 18px;
+}
+
+/***********************************************
+ * CODE
+ ***********************************************/
+
+.reveal pre code {
+  font-family: 'Droid Sans Mono', Courier, monospace;
+  font-size: 16px;
+  line-height: 1.3;
+  display: block;
+  padding: 0.5em;
+  margin: 0;
+}
+
+.reveal pre code.smallpanel {
+  max-height: 300px;
+}
+
+.reveal pre code.verysmallpanel {
+  max-height: 200px;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  border: 2px solid gray;
+  width: 100%;
+  margin: 10px 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.reveal pre code.wrong {
+  background-image: url(../../img/redcross.png) !important;
+  background-position: top right !important;
+  background-repeat: no-repeat !important;
+}
+
+.reveal pre code.right {
+  background-image: url(../../img/greenv.png) !important;
+  background-position: top right !important;
+  background-repeat: no-repeat !important;
+}
+
+/*********************************************
+ * VIEW FRAGMENTS
+ *********************************************/
+
+.reveal input.run {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+
+/*********************************************
+ * OVERLAY
+ *********************************************/
+
+#overlayBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.7;
+  z-index: 1000;
+}
+
+#overlayContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1001;
+  background: #EFEFEF;
+  box-shadow: rgba(0, 0, 0, 0.296875) 0px 0px 6px 0px;
+}
+
+/*********************************************
+ * DEMO LINKS
+ *********************************************/
+
+.reveal .demolink {
+  text-align: right;
+  font-size: smaller;
+}
+
+/*********************************************
+ * COMMENTS
+ *********************************************/
+
+.comments {
+  display: none;
+}

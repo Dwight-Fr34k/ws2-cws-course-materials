@@ -1,0 +1,27 @@
+body {
+  font-family: Lato, sans-serif;
+}
+
+h1, h2 {
+  color: #8b743d;
+}
+
+body > div {
+  opacity: 0.5;
+  padding: 5px 10px;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
+body > div.highlighted {
+  opacity: 1;
+  background-color: #ccc;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 16px;
+}
