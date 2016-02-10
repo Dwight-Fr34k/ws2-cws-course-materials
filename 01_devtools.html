@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Javascript &mdash; Devtools</title>
+  <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="_lib/reveal/css/reveal.min.css">
+	<link rel="stylesheet" href="_lib/reveal/css/theme/rogier.css" id="rogier">
+	<link rel="stylesheet" href="_lib/highlight/vs.css">
+	<link rel="stylesheet" href="css/01_devtools.css">
+  <style>
+
+    .reveal ul.chapterlist {
+      column-count: 2;
+      column-gap: 60px;
+      -moz-column-count: 2;
+      -moz-column-gap: 60px;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 60px;
+      padding-left: 20px;
+      padding-bottom: 30px;
+      display: block;
+      width: 680px;
+    }
+
+    .reveal .columns {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .reveal .columns .column-13 {
+      width: 33.33%;
+      float: left;
+      font-size: 50%;
+    }
+
+    .reveal .columns .column-13 img {
+      width: 90%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .reveal .small {
+      font-size: smaller;
+    }
+
+    .reveal li.arrow {
+      font-size: smaller;
+    }
+
+    .reveal li.arrow:first-of-type {
+      margin-top: 0.3em;
+    }
+
+    .reveal li.warning {
+      color: #600;
+    }
+
+    .reveal section > img {
+      display: block;
+      margin: 1rem auto;
+      max-width: 90%;
+      border-radius: 0;
+    }
+
+    .reveal section > img.border {
+      border: 1px solid #ccc;
+    }
+
+    .reveal code.highlight, .reveal code.hl {
+      background-color: rgba(100, 100, 100, 0.1);
+      font-size: smaller;
+    }
+
+    pre .black  {
+      background-color: black;
+      color: #ffe;
+    }
+
+    .reveal blockquote {
+      margin: 1em auto;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- SLIDES -->
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h1>Devtools</h1>
+				<small>use the arrow keys to navigate; press space for slide overview<br /></small>
+				<figure>
+					<img src="img/01_devtools/devtools.png" alt="" width="100" />
+					<figcaption></figcaption>
+				</figure>
+
+				<footer>
+					<a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+				</footer>
+			</section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>IDE</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Text editor</h2>
+          <ul>
+            <li>
+              features any decent text editor should have:
+              <ul>
+                <li>
+                  out of the box
+                  <ul>
+                    <li>files &amp; folders: navigation bar, projects, tabbed files</li>
+                    <li>editing: code folding, syntax highlighting, autocompletion and -indentation, on-the-fly syntax check, shortcuts, refactoring...</li>
+                    <li>search/replace: searching in folders, regular expressions</li>
+                    <li>runtime: debugging, running, ...</li>
+                    <li>extensible: plugins / packages management</li>
+                  </ul>
+                </li>
+                <li>
+                  at least with plugins
+                  <ul>
+                    <li>EditorConfig support</li>
+                    <li>FTP/SFTP support</li>
+                  </ul>
+                </li>
+                <li>
+                  nice-to-haves
+                  <ul>
+                    <li>various tools: code snippets, todo lists...</li>
+                    <li>various integrations: Git, Vagrant, Composer...</li>
+                    <li>advanced editing options: Zen Coding (Emmet plugin), multiple cursors, intelligent paste...</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>PHPStorm</h2>
+          <ul>
+            <li>
+              <a href="https://www.jetbrains.com/phpstorm/download/">PHPStorm</a> has all this and <a href="https://plugins.jetbrains.com/?phpStorm">lots more</a>
+            </li>
+            <li>
+              decent for Javascript, excellent for PHP
+            </li>
+            <li>
+              normally <a href="https://www.jetbrains.com/phpstorm/buy/">quite expensive</a>, but <a href="https://www.jetbrains.com/student/">free for students</a>!
+            </li>
+            <li class="arrow">will your microcosmos for many hours; start learning <a href="https://www.jetbrains.com/phpstorm/help/phpstorm-editor.html">the basics</a>!</li>
+          </ul>
+          <img src="img/01_devtools/phpstorm.png" alt="" width="200" />
+        </section>
+        <section data-toc-title="EditorConfig">
+          <h2>EditorConfig (1)</h2>
+          <ul>
+            <li>
+              from <a href="http://editorconfig.org/">their website</a>:
+            </li>
+          </ul>
+          <blockquote>
+            EditorConfig [...] maintains consistent coding styles between different editors and IDEs.
+          </blockquote>
+          <ul>
+            <li class="arrow">
+              file format for indentation and end-of-line settings
+            </li>
+            <li class="arrow">
+              native editorconfig support or as plugin for most editors, including PHPStorm and SublimeText
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>EditorConfig (2)</h2>
+          <ul>
+            <li>
+              create a <code class="hl">.editorconfig</code> file in the root of your project:
+            </li>
+          </ul>
+          <img src="img/01_devtools/editorconfig.png" alt="" class="border" />
+          <ul>
+            <li class="arrow">
+              include this file when versioning your project (e.g. Git)
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>Package management</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Classic workflow">
+          <h2>Classic workflow (1)</h2>
+          <ul>
+            <li>
+              To create a new project, you would typically:
+              <ul>
+                <li>create a subdirectory in your wwwroot, e.g. <code class="hl">my_site</code></li>
+                <li>create a directory structure (or probably copy from a previous project)</li>
+              </ul>
+            </li>
+          </ul>
+          <img src="img/01_devtools/classic_folders.png" alt="" />
+          <ul>
+            <li class="arrow"><code class="hl">assets</code>: pdf's, designs, documentation...</li>
+            <li class="arrow"><code class="hl">dist</code>: public files, accessible to the browser</li>
+            <li class="arrow"><code class="hl">library</code>: third party code</li>
+            <li class="arrow"><code class="hl">src</code>: source files, e.g. views, scss...</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Classic workflow (2)</h2>
+          <ul>
+            <li>
+              Then you would include some libraries:
+              <ul>
+                <li>find library on the internet</li>
+                <li>pick some version; download it</li>
+                <li>extract it in some folder</li>
+                <li>link it in your code</li>
+                <li>use it</li>
+              </ul>
+            </li>
+            <li><span class="small">[PRO]</span> finally you version everything, e.g. with Git</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Classic workflow (2)</h2>
+          <ul>
+            <li>
+              To update a library (bugfix or new feature), you would
+              <ul>
+                <li>remove the old library folder</li>
+                <li>repeat the process: find, download, extract, link again</li>
+                <li>cross your fingers and hope it still works (dependencies)</li>
+              </ul>
+            </li>
+            <li>
+              To distribute or deploy, you would:
+              <ul>
+                <li>FTP or zip/send the whole thing</li>
+                <li>Download and extract the whole thing again</li>
+              </ul>
+            </li>
+            <li>
+              This may be ok-<i>ish</i> if you work alone, but:
+              <ul class="x-style">
+                <li>versioning a library doesn't really make sense</li>
+                <li>distributing code with libraries explodes download size</li>
+                <li>changing or updating a library isn't easy when working in team</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Hosted libraries?</h2>
+          <ul>
+            <li>
+              Hosted libraries (<a href="https://developers.google.com/speed/libraries/">Google</a>, <a href="http://www.asp.net/ajax/cdn">Microsoft</a>, <a href="http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs">Baidu</a>...) may sound like a solution...
+              <ul class="v-style">
+                <li>no unnecessary versioning</li>
+                <li>no unnecessary distributed code</li>
+                <li>changing, adding or updating a library is easier</li>
+              </ul>
+            </li>
+            <li class="no-style">
+              ...but:
+              <ul class="x-style">
+                <li>only works with single pages</li>
+                <li>doesn't work with serverside code like PHP</li>
+                <li>number of available libraries is limited</li>
+                <li>download speed isn't always reliable, slowing down your pages</li>
+                <li>security breach</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              <p>Remember that if you include an externally hosted script, it can read anything that happens on each rendered webpage. This may be ok for Google or Microsoft, but beware of some never heard of third party.</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Package management</h2>
+          <ul>
+            <li>
+              <em>Package management</em> is automating the task of downloading, extracting and including third-party code:
+              <ul>
+                <li>distribute your code without third party code</li>
+                <li>include a dependencies configuration file</li>
+                <li>each user installs dependencies by running install on this file</li>
+              </ul>
+            </li>
+            <li>
+              A <em>package</em> may be a code library (PHP SwiftMailer, jQuery, fontawesome...) or development tool (LESS, Gulp...)
+            </li>
+            <li>
+              Most popular package managers:
+              <ul>
+                <li><a href="http://bower.io/">Bower</a>: aims at frontend packages</li>
+                <li><a href="https://getcomposer.org/">Composer</a>: targets PHP packages</li>
+                <li><a href="https://www.npmjs.com/">NPM</a>: manages NodeJS modules</li>
+                <li><a href="https://www.nuget.org/">NuGet</a>: focusses on .NET packages (see OPO webprogrammatie)</li>
+              </ul>
+            </li>
+            <li class="arrow">for most projects, you will probaby need NPM, Bower and Composer together</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Available packages</h2>
+          <ul>
+            <li>
+              Check the list of available packages for <a href="http://bower.io/search/">Bower</a>, <a href="https://packagist.org/explore/">Composer</a> or <a href="https://www.npmjs.com/">NPM</a>
+            </li>
+            <li>
+              We will use separate folders to put installable packages (see later)
+            </li>
+            <li>
+              If a library is not available as package, just download and extract it like you're used to in the <code class="hl">library</code> folder:
+            </li>
+          </ul>
+          <img src="img/01_devtools/obscure.png" alt="" />
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>NPM</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>About NPM</h2>
+          <ul>
+            <li>
+              <a href="https://www.npmjs.com/">NPM</a> (Node Package Manager) focuses on NodeJS modules, mostly development tools like taks automation, minify etc...
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm.png" alt="" />
+        </section>
+        <section>
+          <h2>Installing NPM</h2>
+          <ul>
+            <li>
+              NPN automatically comes with <a href="https://nodejs.org/en/">NodeJS</a>.
+            </li>
+            <li>
+              Warning: modules like Bower and Gulp expect to be installed in the <code class="hl">AppData</code> folder, not in the Program Files; if this is not the case, change the NPM directories with these commands:
+              <div><pre class="bigger"><code class="donthighlight black">&gt; npm config set prefix "C:\Users\YOURNAME\AppData\Local\npm"
+&gt; npm config set cache "C:\Users\YOURNAME\AppData\Local\npm-cache"
+</code></pre></div>
+<span class="small">(source: <a href="http://stackoverflow.com/questions/7300132/how-to-use-npm-with-node-exe/9366416#9366416">stackoverflow.org</a>)</span>
+            </li>
+            <li>
+              Make sure to add the NPM and NPM cache folders to your system's <code class="hl">PATH</code>variable, in Windows:
+              <code class="hl">C:\Users\YOURNAME\AppData\Local\npm;</code><br>
+              <code class="hl">C:\Users\YOURNAME\AppData\Local\npm-cache</code>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="global package install">
+          <h2>global package install (1)</h2>
+          <ul>
+            <li>
+              install a module globally: run <code class="hl">npm install -g &lt;module_name&gt;</code>
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_global.png" alt="" />
+          <ul>
+            <li class="arrow">available for all projects</li>
+            <li class="arrow">installed in <code class="hl">.../AppData/.../node_modules</code> folder (Windows)</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>global package install (2)</h2>
+          <ul>
+            <li>
+              installed in <code class="hl">.../AppData/.../node_modules</code> folder (Windows)
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_global2.png" alt="" class="border" />
+          <ul>
+            <li class="arrow">note that all subdependencies are also installed</li>
+          </ul>
+        </section>
+        <section data-toc-title="local package install">
+          <h2>local package install (1)</h2>
+          <ul>
+            <li>
+              install a module locally: run <code class="hl">npm install &lt;module_name&gt;</code>
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_local.png" alt="" />
+          <ul>
+            <li class="arrow">available for the current project</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>local package install (2)</h2>
+          <ul>
+            <li>installed in <code class="hl">&lt;projectfolder&gt;/node_modules</code></li>
+            <li>
+              exclude this folder from versioning with <code class="hl">.gitignore</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_local2b.png" alt="" />
+          <div class="tooltip">
+            <div>
+              Installing a module locally makes it available for the project, but this does not mean it is available as a command in the shell. Sometimes you will even need to install it globally <i>and</i> locally. Some interesting reads:
+              <ul>
+                <li><a href="http://stackoverflow.com/questions/27389974/locally-installed-versus-globally-installed-npm-modules">Locally installed versus globally installed NPM modules</a> (stackoverflow.com)</li>
+                <li><a href="https://nodejs.org/en/blog/npm/npm-1-0-global-vs-local-installation/">Global vs Local installation</a> (nodejs.org)</li>
+                <li><a href="http://stackoverflow.com/questions/22115400/why-do-we-need-to-install-gulp-globally-and-locally">Why do we need to install gulp globally and locally?</a> (stackoverflow.com)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="package.json">
+          <h2>package.json (1)</h2>
+          <ul>
+            <li>
+              how do others know which NPM modules your project requires?
+            </li>
+            <li>
+              add <code class="hl">package.json</code> to the root of your project
+            </li>
+            <li>
+              create one manually, or get helped by running <code class="hl">npm init</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_init2.png" alt="" />
+        </section>
+        <section data-toc-title="">
+          <h2>package.json (2)</h2>
+          <ul>
+            <li>
+              distribute your project without installed npm modules:
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_package_json.png" alt="" class="border" />
+          <ul>
+            <li class="arrow">users will install all modules from <code class="hl">package.json</code> by running <code class="hl">npm install</code></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Specifying versions</h2>
+          <ul>
+            <li>
+              Version requirements uses <a href="https://github.com/npm/node-semver">semver syntax</a>:
+              <ul>
+                <li>exact version: <code class="hl">"4.2.1"</code></li>
+                <li>range: <code class="hl">"&gt;=4.1.6,&lt;=5.0"</code></li>
+                <li>wildcard: <code class="hl">"4.1.*"</code></li>
+                <li>tilde: <code class="hl">"~4.1"</code>, equivalent of <code class="hl">"&gt;=4.1,&lt;5.0"</code></li>
+                <li>latest commit: <code class="hl">"dev-master"</code></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>DevDependencies</h2>
+          <ul>
+            <li>
+              NPM (and also Bower, see later) allows you to specify <code class="hl">devDependencies</code>, which you only need during development:
+            </li>
+          </ul>
+          <img src="img/01_devtools/npm_devdeps.png" alt="" />
+          <ul>
+            <li class="arrow">
+              in production, ignore devDependencies by running <code class="hl">npm install <span style="color:#900">-p</span></code>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="NPM commands">
+          <h2>NPM commands (1)</h2>
+          <ul>
+            <li>
+              Some useful NPM commands:
+              <ul>
+                <li>
+                  help creating a <code class="hl">package.json</code>:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm init</code></pre></div>
+                </li>
+                <li>
+                  install all modules listed in <code class="hl">package.json</code>:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install</code></pre></div>
+                </li>
+                <li>
+                  install all modules listed in <code class="hl">package.json</code>, but ignore devDependencies:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install -p</code></pre></div>
+                </li>
+                <li>
+                  install a module:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install [module_name]</code></pre></div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>NPM commands (2)</h2>
+          <ul>
+            <li>
+              Some useful NPM commands (cont'd):
+              <ul>
+                <li>
+                  install a module globally:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install [module_name] -g</code></pre></div>
+                </li>
+                <li>
+                  install a module, and add to <code class="hl">package.json</code> as dependency:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install [module_name] --save</code></pre></div>
+                </li>
+                <li>
+                  install a module, and add to <code class="hl">package.json</code> as devDependency:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install [module_name]; --save-dev</code></pre></div>
+                </li>
+                <li>
+                  list installed modules:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm ls</code></pre></div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>NPM commands (3)</h2>
+          <ul>
+            <li>
+              Some useful NPM commands (cont'd):
+              <ul>
+                <li>
+                  remove a module:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm uninstall [module_name]</code></pre></div>
+                </li>
+                <li>
+                  remove a module, and update package.json:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm uninstall [module_name] --save</code></pre></div>
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm uninstall [module_name] --save-dev</code></pre></div>
+                </li>
+                <li>
+                  check npm configuration:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm config ls -l</code></pre></div>
+                </li>
+                <li>
+                  check module version:
+                  <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm [module_name] -v</code></pre></div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>NPM pitfalls</h2>
+          <ul>
+            <li>
+              NPM is a great tool you can't live without, but has a few caveats:
+              <ul>
+                <li>
+                  NPM also installs subdependencies, subsubdependencies and so on. This may lead to a very deep tree, which in Windows may cause problems due to the maximum filename length limitation. A few solutions:
+                  <ul>
+                    <li>remove the module that causes problems</li>
+                    <li>install NPM betaversion 3</li>
+                    <li>use the NPM dedupe module to flatten the tree as much as possible</li>
+                  </ul>
+                </li>
+                <li>
+                  The same subdependency, e.g. jQuery, may be needed in multiple modules. NPM will install duplicates, which is not very disk-space efficient.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>Bower</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>About Bower</h2>
+          <ul>
+            <li>
+              <a href="http://bower.io/search/">Bower</a> aims at frontend libraries (HTML/CSS/Javascript/SVG...).
+            </li>
+          </ul>
+          <img src="img/01_devtools/bower.png" alt="" style="max-width: 70%" class="border" />
+        </section>
+        <section>
+          <h2>Installing Bower</h2>
+          <ul>
+            <li>
+              It is available as NPM module, so install it globally:
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; npm install -g bower</code></pre></div>
+            </li>
+            <li>
+              Make sure it is installed in the <code class="hl">AppData</code> folder, see <a href="01_devtools.html#/installing-npm">this slide</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Bower commands</h2>
+          <ul>
+            <li>
+              Bower has many similarities with NPM, including the commands:
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; bower init</code></pre></div>
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; bower install</code></pre></div>
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; bower install jquery --save</code></pre></div>
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; bower install qunit --save-dev</code></pre></div>
+              <div><pre class="bigger"><code style="background-color: black; color: white">&gt; ...</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="bower.json">
+          <h2>bower.json (1)</h2>
+          <ul>
+            <li>
+              the configuration file used for Bower is called <code class="hl">bower.json</code>:
+                <pre><code class="language-javascript">{
+  "name": "my-project",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "fontawesome": "*"
+  }
+}</code></pre>
+            </li>
+            <li>you can customize Bower with <code class="hl">.bowerrc</code>, e.g. changing default <code class="hl">bower_components</code> installation directory to <code class="hl">vendor</code>:
+                <pre><code class="language-javascript">{
+    "directory": "vendor"
+}
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>bower.json (2)</h2>
+          <ul>
+            <li>
+              screenshot:
+            </li>
+          </ul>
+          <img src="img/01_devtools/bower_jsonb.png" alt="" class="border" />
+        </section>
+        <section>
+          <h2>installing modules</h2>
+          <ul>
+            <li>
+              install modules manually (see commands) or from <code class="hl">bower.json</code> by running <code class="hl">bower install</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/bower_install.png" alt="" />
+          <ul>
+            <li class="arrow">note that libraries are cached</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Modules location</h2>
+          <ul>
+            <li>
+              A <code class="hl">vendor</code> folder is created containing installed dependencies; it should also be excluded from versioning:
+            </li>
+          </ul>
+          <img src="img/01_devtools/bower_json2.png" alt="" class="border" />
+          <ul>
+            <li class="arrow">distribute your projects without <code class="hl">vendor</code> folder but with <code class="hl">bower.json</code></li>
+            <li class="arrow">never change the contents of this folder</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Using bower modules</h2>
+          <ul>
+            <li>
+              To use the modules in your code, include resources like normally:
+            </li>
+          </ul>
+          <img src="img/01_devtools/no_autoload.png" alt="" />
+        </section>
+        <section>
+          <h2>Bower pitfalls</h2>
+          <ul>
+            <li>
+              Bower doesn't install subdependencies like NPM; this results in a flat tree (nice!) but leaves more responsability to you
+            </li>
+            <li>
+              Bower needs git:// port 9418 open; workaround with mod rewrite see <a href="http://stackoverflow.com/questions/4891527/git-protocol-blocked-by-company-how-can-i-get-around-that/10729634#10729634">git:// protocol blocked by company, how can I get around that?</a> (stackoverflow.com)
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>Composer</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>About Composer</h2>
+          <ul>
+            <li>
+              Composer specializes in PHP dependencies; install it <a href="https://getcomposer.org/download/">from here</a>.
+            </li>
+            <img src="img/01_devtools/composer.png" alt="" class="border" />
+          </ul>
+        </section>
+        <section data-toc-title="composer.json">
+          <h2>composer.json (1)</h2>
+          <ul>
+            <li>
+              The configuration file is called <code class="hl">composer.json</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/composer_json.png" alt="" />
+        </section>
+        <section data-toc-title="">
+          <h2>composer.json (2)</h2>
+          <ul>
+            <li>
+              Run <code class="hl">composer install</code> (the exact messages may differ):
+            </li>
+          </ul>
+          <img src="img/01_devtools/composer_install.png" alt="" />
+          <ul>
+            <li class="arrow">note: other necessary dependencies like Symfony are also downloaded</li>
+          </ul>
+        </section>
+        <section data-toc-title="composer.lock">
+          <h2>composer.lock (1)</h2>
+          <ul>
+            <li>
+              Composer uses the <code class="hl">vendor</code> folder by default
+            </li>
+            <li>
+              A <code class="hl">composer.lock</code> file is created:</a>
+            </li>
+          </ul>
+          <img src="img/01_devtools/composer_lock.png" alt="" class="border" />
+        </section>
+        <section data-toc-title="">
+          <h2>composer.lock (2)</h2>
+          <ul>
+            <li>
+              The <code class="hl">composer.lock</code> file contains <a href="https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file">the exact versions of the dependencies installed</a>
+            </li>
+            <li>
+              This file has precedence over <code class="hl">composer.json</code> when running <code class="hl">composer install</code>, i.e. it locks the project to those specific versions
+            </li>
+            <li>
+              To install <code class="hl">composer.json</code> instead (e.g. when updated), remove <code class="hl">composer.lock</code> or run <code class="hl">composer update</code>
+            </li>
+            <li class="arrow">you should git-version <code class="hl">composer.lock</code> and <code class="hl">composer.json</code></li>
+          </ul>
+        </section>
+        <section data-toc-title="Using composer modules">
+          <h2>Using composer modules (1)</h2>
+          <ul>
+            <li>
+              Using dependencies in <em>PHP</em> is as easy as it gets, thanks to the magic <code>autoload.php</code> generated by Composer:
+            </li>
+          </ul>
+          <img src="img/01_devtools/autoload.png" alt="" />
+        </section>
+        <section data-toc-title="">
+          <h2>Using composer modules (2)</h2>
+          <ul>
+            <li>
+              All you need to do is include <code>autoload.php</code>, and all classes become available. A basic twig example:
+            </li>
+          </ul>
+          <img src="img/01_devtools/autoload2.png" alt="" />
+        </section>
+        <section data-toc-title="">
+          <h2>Using composer modules (3)</h2>
+          <ul>
+            <li>
+              the result:
+            </li>
+          </ul>
+          <img src="img/01_devtools/twig_hello1.png" alt="" />
+          <img src="img/01_devtools/twig_hello2.png" alt="" />
+          <ul>
+            <li class="arrow">more details on Composer in Serverside Webscripting 2</li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>Code tools</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Preprocessors</h2>
+          <ul>
+            <li>
+              A preprocessor takes one type of data and converts it to another type. Popular examples are:
+              <ul>
+                <li><a href="http://stylus-lang.com/">Stylus</a>, <a href="http://sass-lang.com/">SASS</a>, <a href="http://lesscss.org/">LESS</a> etc... translates into CSS</li>
+                <li><a href="http://coffeescript.org/">Coffeescript</a>, <a href="https://github.com/mishoo/UglifyJS">Uglify</a> translates to Javascript</li>
+                <li><a href="http://haml.info/">Haml</a>, <a href="http://jade-lang.com/">Jade</a> is translated into HTML</li>
+              </ul>
+            </li>
+            <li>
+              Most are available as NPM package, some as a Ruby gem, so <a href="https://www.ruby-lang.org/en/documentation/installation/">install Ruby first</a>. Make sure to add the Ruby binary to your system's <code class="hl">PATH</code> variable, in Windows:<br>
+              <code class="hl">C:\Ruby21-x64\bin\;</code>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Preprocessors &ndash; SASS">
+          <h2>Preprocessors &ndash; SASS (1)</h2>
+          <ul>
+            <li>
+              <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#features">Syntactically Awesome StyleSheets</a> is an answer to some features badly missing in CSS:
+              <ul>
+                <li>nested selectors</li>
+                <li>operations</li>
+                <li>extending selectors</li>
+                <li>iterations, selections</li>
+                <li>...</li>
+              </ul>
+            </li>
+            <li>
+              Like with any tool, there's of course a learning curve; it's up to you do decide if it's worth the investment (many do). A nice starting point is <a href="http://sass-lang.com/guide">http://sass-lang.com/guide</a>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Preprocessors &ndash; SASS (2)</h2>
+          <ul>
+            <li>
+              Install SASS as a ruby gem with <code class="hl">gem install sass</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/sass_install.png" alt="" />
+        </section>
+        <section data-toc-title="">
+          <h2>Preprocessors &ndash; SASS (3)</h2>
+          <ul>
+            <li>
+              Create your .scss files; a good location is <code class="hl">/src/scss/</code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/sass_scss.png" alt="" class="border" />
+        </section>
+        <section data-toc-title="">
+          <h2>Preprocessors &ndash; SASS (4)</h2>
+          <ul>
+            <li>
+              Now SASS-parse your code with <code class="hl">sass <i>source</i> <i>destination</i></code>:
+            </li>
+          </ul>
+          <img src="img/01_devtools/sass_parse.png" alt="" />
+        </section>
+        <section>
+          <h2>Minifyers</h2>
+          <ul>
+            <li>
+              minifiers compress your HTML, CSS and/or JS resources with a bunch of tricks:
+              <ul>
+                <li>removing comments and unnecessary whitespaces</li>
+                <li>removing other unnecessary characters like block delimeters etc...</li>
+                <li>shortening names of variables, functions etc...</li>
+                <li>combining multiple files in one file (CSS &amp; JS)</li>
+              </ul>
+            </li>
+            <li>
+              minifying has its advantages:
+              <ul>
+                <li>reduces page load</li>
+                <li>less files means faster download times</li>
+                <li>may serve as some kind of code obfuscation</li>
+              </ul>
+            </li>
+            <li>
+              it is not the same as compression or encryption: the code is still immediately interpretable, without decompression or decryption.
+            </li>
+            <li class="arrow">I'm sure you can figure out how to get it working yourself</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Code quality checkers</h2>
+          <ul>
+            <li>
+              Code quality tools check the quality of your code. Some examples:
+              <ul>
+                <li><a href="https://github.com/brigade/scss-lint">SCSS Lint</a> (SCSS; Ruby gem)</li>
+                <li><a href="https://www.npmjs.com/package/gulp-csslint">CSS Lint</a> (CSS; Gulp plugin)</li>
+                <li><a href="http://eslint.org/docs/user-guide/getting-started">ESLint</a> (Javascript; NPM module)</li>
+              </ul>
+            </li>
+            <li class="arrow">I'm sure you can figure out how to get it working yourself</li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>Task runners &amp; installers</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Task automation">
+          <h2>Task automation (1)</h2>
+          <ul>
+            <li>
+              With a <code class="hl">.jshint</code> configuration file, git-required <code class="hl">readme.md</code> and a <code class="hl">.gitattributes</code> file solving line endings problems between Linux and Windows, our <em>boilerplate</em> is almost ready:
+            </li>
+          </ul>
+          <img src="img/01_devtools/gitattributes.png" alt="" class="border" />
+        </section>
+        <section data-toc-title="">
+          <h2>Task automation (2)</h2>
+          <ul>
+            <li>
+              We're still missing a tool to automate a bunch of tasks:
+              <ul>
+                <li>SASS parsing</li>
+                <li>minify</li>
+                <li>autoprefixing</li>
+                <li>jshinting</li>
+                <li>...</li>
+              </ul>
+            </li>
+            <li>
+              Several task automation tools exist, the most popular being <a href="http://gruntjs.com/">Grunt</a> and <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md">Gulp</a> (both available as NPM module).
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Task automation &ndash; Gulp">
+          <h2>Task automation &ndash; Gulp (1)</h2>
+          <ul>
+            <li>
+              Gulp or Grunt, both have their fanbase. An example for gulp:
+            </li>
+          </ul>
+          <img src="img/01_devtools/gulpfile.png" alt="" class="border" />
+        </section>
+        <section data-toc-title="">
+          <h2>Task automation &ndash; Gulp (2)</h2>
+          <ul>
+            <li>
+              Run gulp to sass-compile &amp; minify:
+            </li>
+          </ul>
+          <img src="img/01_devtools/gulp.png" alt="" class="border" />
+        </section>
+        <section>
+          <h2>Installer script</h2>
+          <ul>
+            <li>
+              Quite a few modules are used; you can speed up the process by installing them all in 1 line:
+<div><pre class="bigger"><code class="donthighlight" style="background-color: black; color: white; font-size: smaller" class="no">&gt; npm install gulp del gulp-minify-css gulp-notify gulp-rename gulp-ruby-sass --save-dev</code></pre></div>
+
+            </li>
+            <li>
+              Better still: write a shell script <code class="hl">install.sh</code>
+<div><pre class="bigger"><code class="donthighlight" style="background-color: black; color: white; font-size: smaller" class="no">#!/usr/bin/env bash
+
+if which bower >/dev/null; then
+  echo "Bower is required. Installing Bower…"
+  npm install -g bower
+  bower install
+else
+  bower install
+fi
+
+...
+</code></pre></div>
+
+            </li>
+            <li>
+              Run gulp to sass-compile &amp; minify:
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>DEVELOPMENT TOOLS</h1>
+          <h2>What's next?</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Vagrant</h2>
+          <ul>
+            <li>
+              We covered most development tools within a certain environment. There are a few questions unanswered though:
+              <ul>
+                <li>how can team members working on the same project share exactly the same environment?</li>
+                <li>how can you keep development and production environment synchronized?</li>
+                <li>how can you test your product on different environments?</li>
+              </ul>
+            </li>
+            <li>
+              You could of course share one or more virtual machines, but a very promising lightweight alternative is <a href="https://www.vagrantup.com/">Vagrant</a>. From their website:
+            </li>
+          </ul>
+          <blockquote>
+            With Vagrant you can create and configure lightweight, reproducible, and portable development environments.
+          </blockquote>
+          <ul>
+            <li class="arrow">Vagrant is outside the scope of this course, but I strongly advise you as a web professional to take a deep look into it</li>
+          </ul>
+        </section>
+      </section>
+
+
+			<section data-index-title="">
+				<section>
+					<h2>Questions?</h2>
+				</section>
+			</section>
+
+		</div>
+
+		<!-- ikdoeict.be Link -->
+		<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+		<!-- Index Link -->
+		<aside class="back">
+	      <nav>
+	        <p><a href="index.html">&larr; Back to index</a></p>
+	      </nav>
+		</aside>
+
+
+		<!-- bottomleft links -->
+		<ul id="extra">
+		</ul>
+
+	</div>
+
+	<script src="_lib/jquery.min.js"></script>
+	<script src="_lib/head.min.js"></script>
+	<script src="_lib/reveal/reveal.min.js"></script>
+	<script src="_lib/highlight/highlight.js"></script>
+	<script src="_lib/prefixfree.js"></script>
+	<script src="_lib/css-snippets.js"></script>
+	<script src="_lib/css-edit.js"></script>
+	<script src="_lib/incrementable.js"></script>
+	<script src="_lib/main.js"></script>
+
+</body>
+</html>

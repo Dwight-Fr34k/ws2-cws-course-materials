@@ -172,7 +172,7 @@ window.addEventListener('load', function()
     for(var i = 0, l = chapterIndex.length; i < l; i++)
     {
         var mainSection = chapterIndex[i];
-        chapterlistHTML += '<li><a href="#/' + mainSection.num + '">' + mainSection.title + '</a>';
+        chapterlistHTML += '<li><a href="#/' + mainSection.num + '">' + (i + 1) + '. <span class="title">' + mainSection.title + '</span></a>';
     }
 
     // replace on each ul with class 'chapterlist'
@@ -198,10 +198,10 @@ window.addEventListener('load', function()
         // highlight
         if(activeTitle != undefined)
         {
-            $(this).find('a').filter(function(i)
+            $(this).find('a .title').filter(function(i)
             {
                 return $(this).text().toLowerCase() == activeTitle.toLowerCase();
-            }).parent().addClass('active');
+            }).parent().parent().addClass('active');
         }
     });
 
