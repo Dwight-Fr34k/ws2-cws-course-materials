@@ -262,9 +262,10 @@ window.addEventListener('load', function()
         button.type = 'submit';
         button.value = 'Run';
         button.className = 'run';
+        var strUseStrict = jsBlock.className.match(new RegExp('(\\s|^)strict(\\s|$)')) ? "'use strict'; " : "";
         button.addEventListener('click', function()
         {
-            eval(stripHTML(this.parentNode.querySelector('code').innerHTML)); // Yeah, that's effin' dangerous!
+            eval(strUseStrict + stripHTML(this.parentNode.querySelector('code').innerHTML)); // Yeah, that's effin' dangerous!
         });
         jsBlock.parentNode.appendChild(button);
 
@@ -433,7 +434,6 @@ window.addEventListener('load', function()
     // show a blob of HTML inside an overlay
     var showInOverlay = function(codeBlock, html, url)
     {
-
         codeBlock.blur();
 
         var height = parseInt(codeBlock.getAttribute('data-overlay-height') || 460, 10);
