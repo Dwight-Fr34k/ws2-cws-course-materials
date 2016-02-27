@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Web components</title>
+  <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="_lib/reveal/css/reveal.min.css">
+	<link rel="stylesheet" href="_lib/reveal/css/theme/rogier.css" id="rogier">
+	<link rel="stylesheet" href="_lib/highlight/vs.css">
+	<link rel="stylesheet" href="css/common.css">
+  <style>
+
+    .reveal ul.chapterlist {
+      column-count: 2;
+      column-gap: 60px;
+      -moz-column-count: 2;
+      -moz-column-gap: 60px;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 60px;
+      padding-left: 20px;
+      padding-bottom: 30px;
+      display: block;
+      width: 680px;
+    }
+
+    .demolink {
+      margin-bottom: -20px !important;
+      margin-top: -10px !important;
+    }
+
+  </style>
+  <script>
+    'use strict'
+  </script>
+</head>
+
+<body>
+
+  <!-- SLIDES -->
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h1>Web components</h1>
+				<small>use the arrow keys to navigate; press space for slide overview<br />
+          examples will run best on <a href="https://www.google.nl/chrome/browser/canary.html" class="canary">Chrome Canary</a>
+        </small>
+				<figure>
+					<img src="img/03_webcomponents/polymer.png" alt="" width="180" />
+					<figcaption></figcaption>
+				</figure>
+
+				<footer>
+					<a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+				</footer>
+			</section>
+
+      <section>
+        <section>
+          <h1>Web components</h1>
+          <h2>Custom Elements</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="web components">
+          <h2>web components (1)</h2>
+          <ul>
+            <li>
+              especially in rich apps, we see this kind of <code>&lt;div&gt;</code> mess:
+            </li>
+          </ul>
+          <img src="img/03_webcomponents/google_mail.png" alt="" class="border" style="max-width: 80%" />
+        </section>
+        <section data-toc-title="">
+          <h2>web components (2)</h2>
+          <ul>
+            <li>
+              wouldn't it be nice if Gmail markup were like this (<a href="http://html5-demos.appspot.com/hangouts">online demo</a>)?
+              <div><pre class="bigger"><code class="language-html" contenteditable>&lt;hangout-module&gt;
+  &lt;hangout-chat from="Paul, Addy"&gt;
+    &lt;hangout-discussion&gt;
+      &lt;hangout-message from="Paul" profile="profile.png"
+          profile="118075919496626375791" datetime="2013-07-17T12:02"&gt;
+        &lt;p&gt;Feelin' this Web Components thing.&lt;/p&gt;
+        &lt;p&gt;Heard of it?&lt;/p&gt;
+      &lt;/hangout-message&gt;
+      &lt;hangout-message from="Addy" profile="profile2.png"
+          profile="118075919496626375791" datetime="2013-07-17T12:45"&gt;
+        &lt;p&gt;Totes amazing&lt;/p&gt;
+      &lt;/hangout-message&gt;
+      &lt;hangout-message from="Paul" profile="profile.png"
+          profile="118075919496626375791" datetime="2013-07-17T12:02"&gt;
+          ...
+      &lt;/hangout-message&gt;
+    &lt;/hangout-discussion&gt;
+  &lt;/hangout-chat&gt;
+  &lt;hangout-chat&gt;...&lt;/hangout-chat&gt;
+&lt;/hangout-module&gt;</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>web components (3)</h2>
+          <ul>
+            <li>
+              HTML5 offers some new elements (range input, video...)
+            </li>
+            <li>
+              but: no matter how many new elements the W3C comes up with, we'll always need more
+            </li>
+            <li>
+              what we need is a way to create <em>our own web components</em>
+              <ul>
+                <li>custom names</li>
+                <li>encapsulated styles and behaviour</li>
+                <li>reusable</li>
+                <li>extending other elements</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>web components (4)</h2>
+          <ul>
+            <li>
+              bad solutions:
+              <ul class="x-style">
+                <li>classic HTML/Javascript/CSS widgets (lack again semantics and no DOM encapsulation)</li>
+                <li>different technology like <code>&lt;canvas&gt;</code> (not accessible, not indexable...)</li>
+              </ul>
+            </li>
+            <li>
+              <a href="https://www.w3.org/TR/components-intro/">W3C's web components</a> to the rescue! Consists of four parts:
+              <ul>
+                <li><a href="https://www.w3.org/TR/custom-elements/">custom elements</a></li>
+                <li><a href="https://www.w3.org/TR/shadow-dom/">shadow DOM</a></li>
+                <li><a href="https://www.w3.org/TR/html-templates/">templates</a></li>
+                <li><a href="https://www.w3.org/TR/html-imports/">packaging</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Lack of encapsulation from the DOM means that your widget might accidentally be modified by a script or CSS, ID attributes might overlap etc...
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>unknown elements</h2>
+          <ul>
+            <li>
+              what happens if you just use an unknown element?
+              <div><pre class="bigger"><code class="language-css" data-caption contenteditable>randomtag {
+  display: inline-block;
+  min-width: 200px;
+  min-height: 30px;
+  border: 1px dashed #009;
+}
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption contenteditable>&lt;randomtag&gt;Lorem Ipsum&lt;/randomtag&gt;
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" data-caption contenteditable>document.querySelector('randomtag').addEventListener('click',
+  () => console.log('ok'));
+console.log(document.querySelector('randomtag').constructor.name);
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example1.html">demo</a></div>
+          <ul>
+            <li class="arrow">
+              falls back to <code class="hl">HtmlUnkownElement</code> type (meaning: what you do is illegal)
+            </li>
+            <li class="arrow">
+              you can still script and style it
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>custom elements</h2>
+          <ul>
+            <li>
+              to create a custom element type, you must register it:
+              <div><pre class="bigger"><code class="language-css" data-caption contenteditable>rogier-quote {
+  display: inline-block;
+  min-width: 200px;
+  min-height: 30px;
+  border: 1px dashed #009;
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption contenteditable>&lt;rogier-quote&gt;Lorem Ipsum&lt;/rogier-quote&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" data-caption contenteditable>// register your new element
+var RogierQuoteElement = document.registerElement('rogier-quote');
+console.log(document.querySelector('rogier-quote').constructor.name);
+
+// you can use its constructor now; e.g. create new quote
+var newRogierQuote = new RogierQuoteElement();
+newRogierQuote.innerHTML = 'sid amet';
+document.body.appendChild(newRogierQuote);
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example2.html">demo</a></div>
+          <ul>
+            <li class="arrow">
+              the custom name <i>must</i> contain a dash
+            </li>
+            <li class="arrow">
+              you may use an element before registering; it will <a href="#">resolve</a> once it is registered
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>unresolved elements</h2>
+          <ul>
+            <li>
+              an unregistered element is called <em>unresolved</em>
+            </li>
+            <li>
+              when registering, an element may be styled; to prevent a <a href="http://en.wikipedia.org/wiki/Flash_of_unstyled_content" title="flash of unstyled content">FOUC</a>, hide it till then with <code class="hl">:unregistered</code>:
+              <div><pre class="bigger"><code class="language-css" data-caption contenteditable>rogier-quote {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+rogier-quote:unresolved {
+  opacity: 0;
+}</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/fouc.html">demo</a></div>
+        </section>
+        <section>
+          <h2>custom element prototype</h2>
+          <ul>
+            <li>
+              to add custom methods and properties, define a prototype first:
+              <div><pre class="bigger"><code class="language-javascript" contenteditable>// define new prototype based on HTMLElement
+var RogierQuotePrototype = Object.create(HTMLElement.prototype);
+
+// define a property on this prototype
+Object.defineProperty(RogierQuotePrototype, 'hasQuotes', {
+  value: true,
+  writable : true
+});
+
+// define function on this prototype
+RogierQuotePrototype.setText = function(txt) {
+  this.innerHTML = this.hasQuotes ? '“' + txt + '”' : txt;
+}
+
+// register element with this prototype
+var RogierQuoteElement = document.registerElement('rogier-quote', {
+  prototype: RogierQuotePrototype
+});
+
+// create new quote
+var newRogierQuote = new RogierQuoteElement();
+newRogierQuote.hasQuotes = false;
+newRogierQuote.setText('sid amet');
+document.body.appendChild(newRogierQuote);
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example3.html">demo</a></div>
+        </section>
+        <section>
+          <h2>custom element callbacks</h2>
+          <ul>
+            <li>
+              there are a number of callbacks you can listen to:
+              <ul>
+                <li><em class="hl">createdCallback</em> – called when a custom element is created</li>
+                <li><em class="hl">attachedCallback</em> – Called when a custom element is inserted into the DOM</li>
+                <li><em class="hl">detachedCallback</em> – Called when a custom element is removed from the DOM</li>
+                <li><em class="hl">attributeChangedCallback</em>(attrName, oldValue, newValue) – Called when an attribute on a custom element changes</li>
+              </ul>
+              <div><pre class="bigger"><code class="language-javascript" contenteditable>...
+// quote is created callback
+RogierQuotePrototype.createdCallback = function() {
+  console.log('Rogier quote created');
+};
+...</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example3.html">demo</a></div>
+        </section>
+        <section data-toc-title="custom element examples">
+          <h2>custom element examples (1)</h2>
+          <ul>
+            <li>
+              example 1: custom quote
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Custom element &mdash; basic example&lt;/title&gt;
+  &lt;style&gt;
+    rogier-quote {
+      display: block;
+      min-width: 200px;
+      min-height: 30px;
+      border: 2px ridge #009;
+      background-color: #cce;
+      float: left;
+      clear: both;
+      margin: 10px 0;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;rogier-quote data-hasquotes&gt;&lt;/rogier-quote&gt;
+  &lt;rogier-quote&gt;&lt;/rogier-quote&gt;
+  &lt;rogier-quote data-nr="2"&gt;&lt;/rogier-quote&gt;
+  &lt;script&gt;
+    // define new prototype based on HTMLElement
+    var RogierQuotePrototype = Object.create(HTMLElement.prototype);
+
+    // define a property on this prototype
+    Object.defineProperty(RogierQuotePrototype, 'hasQuotes', {
+      value: true,
+      writable : true
+    });
+
+    // define function on this prototype
+    RogierQuotePrototype.setText = function(txt) {
+      this.innerHTML = this.hasQuotes ? '“' + txt + '”' : txt;
+    }
+
+    // callback function overload
+    RogierQuotePrototype.createdCallback = function() {
+      this.hasQuotes = this.hasAttribute('data-hasquotes');
+      console.log(this.hasQuotes);
+      var quotes = [
+        'beter één vogel in de hand dan 10 in andermans hand',
+        'men moet een gegeven paard niet op de bek slaan',
+        'hoe meer zielen, hoe zieliger'
+      ];
+      var nr = this.hasAttribute('data-nr') ?
+        +this.getAttribute('data-nr') % 3 : Math.floor(Math.random() * 3);
+      this.setText(quotes[nr]);
+    };
+
+    // register element with this prototype
+    var RogierQuoteElement = document.registerElement('rogier-quote', {
+      prototype: RogierQuotePrototype
+    });
+
+    // create new quote
+    var newRogierQuote = new RogierQuoteElement();
+    newRogierQuote.hasQuotes = false;
+    newRogierQuote.setText('sid amet');
+    document.body.appendChild(newRogierQuote);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example4.html">demo</a></div>
+        </section>
+        <section data-toc-title="">
+          <h2>custom element examples (2)</h2>
+          <ul>
+            <li>
+              example 2: custom button
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+  &lt;style&gt;
+
+    rogier-button button {
+      border: 0;
+      cursor: pointer;
+      background-color: #eaeff2;
+      text-transform: uppercase;
+      border-radius: 4px;
+      box-shadow: inset 0 -3px #bbbfc2;
+      color: #4d4e53;
+      line-height: 35px;
+      height: 35px;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    rogier-button button:active {
+      box-shadow: inset 0 -1px #bbbfc2;
+      position: relative;
+      top: 1px;
+    }
+
+    rogier-button img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;rogier-button data-text="Some Button" data-icon="v.png"&gt;&lt;/rogier-button&gt;
+  &lt;script&gt;
+
+    'use strict'
+
+    // define new element prototype based on HTMLElement prototype
+    var RogierButtonPrototype = Object.create(HTMLElement.prototype);
+
+    // create content and behaviour
+    RogierButtonPrototype.createdCallback = function() {
+      // create content
+      var btn = document.createElement('button');
+      var img = document.createElement('img');
+      img.src = this.getAttribute('data-icon');
+      var txt = document.createTextNode(this.getAttribute('data-text'));
+      btn.appendChild(img);
+      btn.appendChild(txt);
+
+      // create some behaviour
+      btn.addEventListener('click', function(e) {
+        if (confirm('are you sure you wanted to click me?')) {
+          alert('ok, here you go')
+        }
+        e.preventDefault()
+      });
+
+      // add content
+      this.appendChild(btn);
+    };
+
+    // register new element with tagname 'rogier-button'
+    var RogierButton = document.registerElement('rogier-button', {
+        prototype: RogierButtonPrototype
+    });
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example5.html">demo</a></div>
+        </section>
+        <section>
+          <h2>extending elements</h2>
+          <ul>
+            <li>
+              you can also extend existing elements, e.g. <code class="hl">&lt;img&gt;</code>:
+              <div><pre class="bigger"><code class="language-css" data-caption contenteditable>img[is=thumb-img] {
+  box-shadow: 10px 10px 10px rgba(100, 100, 100, 0.5);
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption contenteditable>&lt;img is="thumb-img" src="photo.jpg" alt="me"&gt; &lt;!-- note the 'is' attribute --&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" data-caption contenteditable>// extend HTMLImageElement
+var ThumbImageProto = Object.create(HTMLImageElement.prototype);
+
+// modify
+ThumbImageProto.createdCallback = function() {
+    this.width = '100';
+    this.height = '100';
+};
+
+// register 'thumb-img' as extension of 'img'
+var ThumbImage = document.registerElement('thumb-img', {
+    prototype: ThumbImageProto,
+    extends: 'img' overlayrun
+});
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example6.html">demo</a></div>
+        </section>
+        <section data-toc-title="extended element examples">
+          <h2>extended element examples (1)</h2>
+          <ul>
+            <li>
+              custom quote extended from <code class="hl">&lt;blockquote&gt;</code>:
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Custom element &mdash; basic example&lt;/title&gt;
+  &lt;style&gt;
+    blockquote[is=rogier-quote] {
+      display: block;
+      min-width: 200px;
+      min-height: 30px;
+      border: 2px ridge #009;
+      background-color: #cce;
+      float: left;
+      clear: both;
+      margin: 10px 0;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;blockquote is="rogier-quote" data-hasquotes&gt;&lt;/blockquote&gt;
+  &lt;blockquote is="rogier-quote"&gt;&lt;/blockquote&gt;
+  &lt;blockquote is="rogier-quote" data-nr="2"&gt;&lt;/blockquote&gt;
+  &lt;script&gt;
+    // define new prototype based on HTMLElement
+    var RogierQuotePrototype = Object.create(HTMLQuoteElement.prototype);
+
+    // define a property on this prototype
+    Object.defineProperty(RogierQuotePrototype, 'hasQuotes', {
+      value: true,
+      writable : true
+    });
+
+    // define function on this prototype
+    RogierQuotePrototype.setText = function(txt) {
+      this.innerHTML = this.hasQuotes ? '“' + txt + '”' : txt;
+    }
+
+    // callback function overload
+    RogierQuotePrototype.createdCallback = function() {
+      this.hasQuotes = this.hasAttribute('data-hasquotes');
+      var quotes = [
+        'beter één vogel in de hand dan 10 in andermans hand',
+        'men moet een gegeven paard niet op de bek slaan',
+        'hoe meer zielen, hoe zieliger'
+      ];
+      var nr = this.hasAttribute('data-nr') ?
+        +this.getAttribute('data-nr') % 3 : Math.floor(Math.random() * 3);
+      this.setText(quotes[nr]);
+    };
+
+    // register element with this prototype
+    var RogierQuoteElement = document.registerElement('rogier-quote', {
+      prototype: RogierQuotePrototype,
+      extends: 'blockquote'
+    });
+
+    // create new quote
+    var newRogierQuote = new RogierQuoteElement();
+    newRogierQuote.hasQuotes = false;
+    newRogierQuote.setText('sid amet');
+    document.body.appendChild(newRogierQuote);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example7.html">demo</a></div>
+        </section>
+        <section data-toc-title="">
+          <h2>extended element examples (2)</h2>
+          <ul>
+            <li>
+              custom button extended from <code class="hl">&lt;button&gt;</code>:
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+  &lt;style&gt;
+
+    button[is=rogier-button] {
+      border: 0;
+      cursor: pointer;
+      background-color: #eaeff2;
+      text-transform: uppercase;
+      border-radius: 4px;
+      box-shadow: inset 0 -3px #bbbfc2;
+      color: #4d4e53;
+      line-height: 35px;
+      height: 35px;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    button[is=rogier-button]:active {
+      box-shadow: inset 0 -1px #bbbfc2;
+      position: relative;
+      top: 1px;
+    }
+
+    button[is=rogier-button] img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button is="rogier-button" data-text="Some Label" data-icon="v.png"&gt;&lt;/button&gt;
+  &lt;script&gt;
+
+    'use strict'
+
+    // define new element prototype based on HTMLButtonElement prototype
+    var RogierButtonPrototype = Object.create(HTMLButtonElement.prototype);
+
+    // create content and behaviour
+    RogierButtonPrototype.createdCallback = function() {
+      // create content
+      var img = document.createElement('img');
+      img.src = this.getAttribute('data-icon');
+      var txt = document.createTextNode(this.getAttribute('data-text'));
+      this.appendChild(img);
+      this.appendChild(txt);
+
+      // add behaviour
+      this.addEventListener('click', function(e) {
+        if (confirm('are you sure you wanted to click me?')) {
+          alert('ok, here you go');
+        }
+        e.preventDefault();
+      });
+      console.log('ok');
+    };
+
+    // register the new element.
+    var RogierButton = document.registerElement('rogier-button', {
+      prototype: RogierButtonPrototype,
+      extends: 'button'
+    });
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="demolink"><a href="demos/03_webcomponents/custom_elements/example5.html">demo</a></div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Web components</h1>
+          <h2>Shadow DOM</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="encapsulation">
+          <h2>encapsulation (1)</h2>
+          <ul>
+            <li>
+              HTML elements are not encapsulated: their properties can be accessed by any script or stylesheet. Take a styled button:
+              <div><pre class="bigger"><code class="language-html" data-caption="our html" contenteditable style="height: 80px">&lt;button class="v-button"&gt;
+  &lt;img src="v.png" alt=""&gt;
+  &lt;span&gt;Some Text&lt;/span&gt;
+&lt;/button&gt;
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="our css" contenteditable style="height: 150px">.v-button {
+  border: 0;
+  cursor: pointer;
+  background-color: #eaeff2;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: inset 0 -3px #bbbfc2;
+  color: #4d4e53;
+  line-height: 35px;
+  height: 35px;
+  padding: 0 10px;
+  outline: none;
+  box-sizing: content-box;
+}
+
+.v-button:active {
+  box-shadow: inset 0 -1px #bbbfc2;
+  position: relative;
+  top: 1px;
+}
+
+.v-button img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+</code></pre></div>
+              <img src="img/03_webcomponents/styledbutton.png" alt="">
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>encapsulation (2)</h2>
+          <ul>
+            <li>
+              you typically cross your fingers and hope no-one overrides your styles or behaviour:
+              <div><pre class="bigger"><code class="language-css" data-caption="other css" contenteditable>#content button {
+  background-color: pink;
+  border: 5px solid purple;
+}
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" data-caption="other js" contenteditable>document.querySelector('button span').innerHTML = 'Aaargh!';</code></pre></div>
+              <img src="img/03_webcomponents/fuckedbutton.png" alt="">
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="shadow dom">
+          <h2>shadow dom (1)</h2>
+          <ul>
+            <li>
+              <em>Shadow DOM</em> allows you to encapsulate the inners of an element. It's simple: create a shadow root on it with <code class="hl">createShadowRoot()</code> and attach all code there:
+              <div><pre class="bigger"><code class="language-html overlayrun" contenteditable style="height: 250px;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+  &lt;style&gt;
+    p { color: red !important; } /* won't affect */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="shadow-host"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    // create shadow root and attach code
+    var shadowroot = document.querySelector('#shadow-host').createShadowRoot();
+    shadowroot.innerHTML = '&lt;style&gt;p { color: blue; }&lt;/style&gt;';
+    shadowroot.innerHTML += '&lt;p&gt;shadow element content&lt;/p&gt;';
+
+    // won't affect
+    document.querySelector('#shadow-host').innerHTML = 'Aaargh!';
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              the inners of <code class="hl">&lt;div id="shadow-host"&gt;</code> is now shielded
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>shadow dom (2)</h2>
+          <ul>
+            <li>
+              you can use the host content with <code class="hl">&lt;content&gt;&lt;/content&gt;</code>:
+              <div><pre class="bigger"><code class="language-html overlayrun" contenteditable style="height: 250px;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+  &lt;style&gt;
+    p { color: red !important; } /* won't affect */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="shadow-host"&gt;original content&lt;/div&gt;
+  &lt;script&gt;
+    // create shadow root and attach code
+    var shadowroot = document.querySelector('#shadow-host').createShadowRoot();
+    shadowroot.innerHTML = '&lt;style&gt;p { color: blue; }&lt;/style&gt;';
+    shadowroot.innerHTML += '&lt;p&gt;&lt;content&gt;&lt;/content&gt;&lt;/p&gt;';
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>shadow dom (3)</h2>
+          <ul>
+            <li>
+              Shadow DOM is already used to implement new elements like <code class="hl">&lt;video&gt;</code> <span style="font-size:smaller">(enable 'show user agent shadow DOM' in developer tools settings')</span>:
+              <img src="img/03_webcomponents/video_shadow.png" alt="" style="" class="border">
+            </li>
+            <li class="arrow">
+              the inners of <code class="hl">&lt;div id="shadow-host"&gt;</code> is now shielded
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>shadow dom (3)</h2>
+          <ul>
+            <li>
+              styled button example with shadow DOM:
+              <div><pre class="bigger"><code class="language-html overlayrun" contenteditable style="">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="shadow-button"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    var shadow = document.querySelector('#shadow-button').createShadowRoot();
+    shadow.innerHTML = `
+&lt;style&gt;
+  button {
+    border: 0;
+    cursor: pointer;
+    background-color: #eaeff2;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: inset 0 -3px #bbbfc2;
+    color: #4d4e53;
+    line-height: 35px;
+    height: 35px;
+    padding: 0 10px;
+    outline: none;
+    box-sizing: content-box;
+  }
+
+  button:active {
+    box-shadow: inset 0 -1px #bbbfc2;
+    position: relative;
+    top: 1px;
+  }
+
+  button img {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+&lt;/style&gt;
+&lt;button&gt;
+  &lt;img src="v.png" alt=""&gt;
+  &lt;span&gt;Some Text&lt;/span&gt;
+&lt;/button&gt;`;
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/shadow_dom/example3.html">demo</a></div>
+              <img src="img/03_webcomponents/shadow_button.png" alt="">
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="styling host from inside">
+          <h2>styling &mdash; host from shadow</h2>
+          <ul>
+            <li>
+              you can reach and style hosting elements from the shadow element with <code class="hl">:host(&lt;selector&gt;)</code> pseudo selector:
+              <div><pre class="bigger"><code class="language-html" data-caption="host html" contenteditable style="">&lt;div class="shadow-button"&gt;&lt;/div&gt;
+&lt;div class="shadow-button greenborder"&gt;&lt;/div&gt;
+&lt;p class="shadow-button"&gt;&lt;/p&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="shadow css" contenteditable style="">:host {
+  border: 2px dashed blue;
+  padding: 10px;
+  display: inline-block;
+}
+:host(.greenborder) {
+  border: 2px dotted green;
+}
+:host(p) {
+  border: 2px dashed orange;
+}
+:host(:hover) {
+  border-style: solid;
+}
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/shadow_dom/example5.html">demo</a></div>
+              <img src="img/03_webcomponents/css_host.png" alt="">
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="styling themes">
+          <h2>styling &mdash; theming</h2>
+          <ul>
+            <li>
+              <em>theming</em> = adapting shadow styles depending on the hosting context
+            </li>
+            <li>
+              you can theme a shadow element with <code class="hl">:host-context(&lt;selector&gt;)</code>, with &lt;selector&gt; matching any host ancestor:
+              <div><pre class="bigger"><code class="language-html" data-caption="host html" contenteditable style="">&lt;body class="my-theme"&gt;
+  ...
+  &lt;div class="shadow-button"&gt;&lt;/div&gt;
+  ...
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="shadow css" contenteditable style="">:host-context(.my-theme) span {
+  color: green;
+  font-weight: bold
+}
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/shadow_dom/example6.html">demo</a></div>
+              <img src="img/03_webcomponents/theme.png" alt="">
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="styling shadow from host">
+          <h2>styling &mdash; shadow from host (1)</h2>
+          <ul>
+            <li>
+              <del>pierce through the shadow DOM with <code class="hl">::shadow</code>:</del>
+              <div><pre class="bigger"><code class="language-css" data-caption="host css" contenteditable style="">.shadow-button::shadow span {
+  color: blue;
+  font-weight: bold
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption="host html" contenteditable style="">&lt;div class="shadow-button"&gt;&lt;/div&gt;</code></pre></div>
+              <div class="demolink"><a href="demos/03_webcomponents/shadow_dom/example7.html">demo</a></div>
+              <img src="img/03_webcomponents/css_shadow.png" alt="">
+            </li>
+            <li class="arrow">
+              alas, <code class="hl">::shadow</code> breaks encapsulation and is marked deprecated; solution: <em>CSS variables</em> (see next slide)
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>styling &mdash; shadow from host (2)</h2>
+          <ul>
+            <li>
+              create style hooks with CSS variables:
+              <div><pre class="bigger"><code class="language-css" data-caption="host css" contenteditable style="">.shadow-button {
+  --button-text-color: #990; /* override to yellow-green */
+  --button-text-weight: bold; /* override to bold */
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption="host html" contenteditable style="">&lt;div class="shadow-button"&gt;&lt;/div&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="shadow css" contenteditable style="">button {
+  color: var(--button-text-color, blue); /* default: blue */
+  font-weight: var(--button-text-weight, normal); /* default: normal */
+}</code></pre></div>
+              <div class="demolink"><a href="demos/03_webcomponents/shadow_dom/example8.html">demo</a></div>
+              <img src="img/03_webcomponents/css_variables.png" alt="">
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Web components</h1>
+          <h2>HTML templates</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Without templates">
+          <h2>Without templates (1)</h2>
+          <ul>
+            <li>
+              say you want to generate custom buttons; typical code would be:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable style="">&lt;p&gt;Image:
+  &lt;input type="radio" name="rbnImg" value="rbnImgV" checked&gt; v-style
+  &lt;input type="radio" name="rbnImg" value="rbnImgX"&gt; x-style
+&lt;/p&gt;
+&lt;p&gt;Text: &lt;input type="text" name="txt" value="" placeholder="button text"&gt;&lt;/p&gt;
+&lt;p&gt;Text color: &lt;input type="color" name="rbnImg" value="#000000"&gt;&lt;/p&gt;
+&lt;input type="button" value="generate button" id="btnGenerate"&gt;
+&lt;div id="buttons"&gt;&lt;/div&gt;
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" data-caption="js" contenteditable style="height: 200px">document.querySelector('#btnGenerate').addEventListener('click', () => {
+  let btn = document.createElement('button');
+  let img = document.createElement('img');
+  let span = document.createElement('span');
+  btn.className = 'my-button';
+  span.innerHTML = document.querySelector('input[name=txt]').value == '' ?
+    'default text' : document.querySelector('input[name=txt]').value;
+  span.style.color = document.querySelector('input[type=color]').value;
+  img.src = document.querySelector('input[value=rbnImgX]').checked ?
+    'x.png' : 'v.png';
+  btn.appendChild(img);
+  btn.appendChild(span);
+  document.querySelector('#buttons').appendChild(btn);
+  console.log('hurray! new button is born');
+});
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/templates/example1.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Without templates (2)</h2>
+          <ul>
+            <li>
+              there are a few issues with this solution:
+              <ul>
+                <li class="v-style">content is effectively hidden until used</li>
+                <li class="x-style">content should be written in HTML, not in Javascript</li>
+                <li class="x-style">code can get long and unreadable</li>
+              </ul>
+            </li>
+            <li>
+              a solution might be offscreen DOM (hidden block of HTML):
+              <ul>
+                <li class="v-style">it is DOM, not Javascript</li>
+                <li class="x-style">any nested Javascript is executed immediately</li>
+                <li class="x-style">search engines will still index the content</li>
+                <li class="x-style">nested images are still requested by the browser</li>
+              </ul>
+            </li>
+            <li>
+              other hacks exist (putting templates in comment tags, script tag overloading...), but what we need are <em>HTML templates</em>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>HTML templates</h2>
+          <ul>
+            <li>
+              creating a template is simple, with <code class="hl">&lt;template&gt;</code>:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable style="">&lt;template id="myButtonTemplate"&gt;
+  &lt;script&gt;console.log('hurray! new button is born');&lt;/script&gt;
+  &lt;button class="my-button"&gt;
+    &lt;img src="v.png" alt=""&gt;
+    &lt;span&gt;default text&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/template&gt;</code></pre></div>
+            </li>
+            <li>
+              customize its <code class="hl">content</code> and append to the DOM with <code class="hl">importNode</code>
+              <div><pre class="bigger"><code class="language-javascript" data-caption="js" contenteditable style="height: 150px">let template = document.querySelector('#myButtonTemplate');
+document.querySelector('#btnGenerate').addEventListener('click', () => {
+  // shortcuts
+  var content = template.content;
+  var inpTxt = document.querySelector('input[name=txt]');
+  var inpColor = document.querySelector('input[type=color]');
+  var chbX = document.querySelector('input[value=rbnImgX]');
+
+  // customize template content
+  if (inpTxt.value) content.querySelector('span').innerHTML = inpTxt.value;
+  content.querySelector('span').style.color = inpColor.value;
+  content.querySelector('img').src = chbX.checked ? 'x.png' : 'v.png';
+
+  // add to DOM
+  document.querySelector('#buttons').appendChild(
+    document.importNode(content, true)
+  );
+});</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/templates/example2.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              note how the nested Javascript is executed after each node import
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Web components</h1>
+          <h2>HTML imports</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Importing</h2>
+          <ul>
+            <li>
+              HTML imports would allow to import a complete HTML file:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable style="">&lt;head&gt;
+  ...
+  &lt;link rel="import" href="imports/my_imports.html"&gt;
+  ...
+&lt;/head&gt;;</code></pre></div>
+            </li>
+            <li>
+              this would be great for importing groups of scripts, styles and templates of a library at once (e.g.bootstrap):
+              <div><pre class="bigger"><code class="language-html" data-caption="my_imports.html" style="">&lt;link rel="stylesheet" href="my_basic_styles.css"&gt;
+&lt;link rel="stylesheet" href="my_theme.css"&gt;
+&lt;link rel="stylesheet" href="my_fonts.css"&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="my_ui_library.js"&gt;&lt;/script&gt;
+&lt;script src="my_library.js"&gt;&lt;/script&gt;
+...
+&lt;template&gt;
+  ...
+&lt;/template&gt;</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/templates/example2.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              note how the nested Javascript is executed after each node import
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Accessing</h2>
+          <ul>
+            <li>
+              the linked content is not automatically imported; you still need to call <code class="hl">import</code> and grab the DOM node you need:
+              <div><pre class="bigger"><code class="language-html" data-caption="warnings.html" contenteditable style="height: 100px">&lt;div class="warning"&gt;
+  &lt;style scoped&gt;
+    h3 { color: red; }
+  &lt;/style&gt;
+  &lt;h3&gt;Warning!&lt;/h3&gt;
+  &lt;p&gt;This page is under construction&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="outdated"&gt;
+  &lt;h3&gt;Heads up!&lt;/h3&gt;
+  &lt;p&gt;This content may be out of date&lt;/p&gt;
+&lt;/div&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-html" data-caption="index.html" style="height: 150px">&lt;head&gt;
+  &lt;link rel="import" href="warnings.html"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+  &lt;script&gt;
+    var link = document.querySelector('link[rel="import"]');
+    var content = link.import;
+
+    // Grab DOM from warning.html's document and append
+    var el = content.querySelector('.warning');
+    document.body.appendChild(el.cloneNode(true));
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/imports/example1.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Web components</h1>
+          <h2>Web components</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Mixing all together">
+          <h2>Mixing all together (1)</h2>
+          <ul>
+            <li>
+              Custom elements. shadow DOM, templates and imports can work nicely together to create <em>web components</em>.
+            </li>
+            <li>
+              Let's start from this template file:
+              <div><pre class="bigger"><code class="language-html" data-caption="my_button_template.html" contenteditable style="height: 200px">&lt;template id="myButtonTemplate"&gt;
+  &lt;style&gt;
+    button {
+      border: 0;
+      cursor: pointer;
+      background-color: #eaeff2;
+      text-transform: uppercase;
+      border-radius: 4px;
+      box-shadow: inset 0 -3px #bbbfc2;
+      color: #4d4e53;
+      line-height: 35px;
+      height: 35px;
+      padding: 0 10px;
+      outline: none;
+    }
+    button:active {
+      box-shadow: inset 0 -1px #bbbfc2;
+      position: relative;
+      top: 1px;
+    }
+    img {
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  &lt;/style&gt;
+  &lt;script&gt;console.log('hurray! new button is born');&lt;/script&gt;
+  &lt;button class="my-button"&gt;
+    &lt;img src="v.png" alt=""&gt;
+    &lt;span&gt;default text&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/template&gt;
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Mixing all together (2)</h2>
+          <ul>
+            <li>
+              mixing shadow DOM, templates and imports:
+              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;div data-text="Some Button" data-icon="v.png" id="myButton"&gt;&lt;/div&gt;
+&lt;script&gt;
+  // import template
+  var templateImport = document.querySelector('link[rel="import"]');
+  var template = templateImport.import.querySelector('#myButtonTemplate');
+
+  // create template clone
+  let target = document.querySelector('#myButton');
+  let clone = document.importNode(template.content, true);
+  if (target.hasAttribute('data-text')) clone.querySelector('span').innerHTML
+    = target.getAttribute('data-text');
+  if (target.hasAttribute('data-icon')) clone.querySelector('img').src
+    = target.getAttribute('data-icon');
+
+  // create a Shadow Root and append
+  let shadow = target.createShadowRoot();
+  shadow.appendChild(clone);
+&lt;/script&gt;
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/webcomponents/button_shadow_import_template.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Mixing all together (3)</h2>
+          <ul>
+            <li>
+              mixing custom elements, shadow DOM, templates and imports:
+              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;rogier-button data-text="Some Button" data-icon="v.png" id="myButton"&gt;
+&lt;/rogier-button&gt;
+&lt;script&gt;
+  // import template
+  let templateImport = document.querySelector('link[rel="import"]');
+  let template = templateImport.import.querySelector('#myButtonTemplate');
+
+  // define new element prototype based on HTMLButtonElement prototype
+  var RogierButtonPrototype = Object.create(HTMLElement.prototype);
+
+  // create content and behaviour
+  RogierButtonPrototype.createdCallback = function() {
+    // create template clone and modify
+    let clone = document.importNode(template.content, true);
+    if (this.hasAttribute('data-text')) clone.querySelector('span').innerHTML
+      = this.getAttribute('data-text');
+    if (this.hasAttribute('data-icon')) clone.querySelector('img').src
+      = this.getAttribute('data-icon');
+
+    // create shadow root and append
+    let shadow = this.createShadowRoot();
+    shadow.appendChild(clone);
+  }
+
+  // register the new element.
+  let RogierButton = document.registerElement('rogier-button', {
+    prototype: RogierButtonPrototype
+  });
+&lt;/script&gt;
+</code></pre></div>
+          <div class="demolink"><a href="demos/03_webcomponents/webcomponents/button_shadow_import_template_custom.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Polymer">
+          <h2>Platform.js</h2>
+          <ul>
+            <li>
+              shaky browser support of <a href="http://caniuse.com/#search=custom%20elements">custom elements</a>, <a href="http://caniuse.com/#search=shadow%20dom">shadow dom</a>, <a href="http://caniuse.com/#search=templates">templates</a> and <a href="http://caniuse.com/#search=imports">imports</a> would make web components unusable
+            </li>
+            <li>
+              A basic polyfill is <code class="hl">platform.js</code> polyfill. Install it with Bower:
+              <div><pre class="bigger"><code class="language-html" style="background-color: black; color: white">bower install --save Polymer/platform</code></pre></div>
+              include it:
+              <div><pre class="bigger"><code class="language-html" style="">&lt;script src="bower_components/platform/platform.js"&gt;&lt;/script&gt;</code></pre></div>
+            </li>
+            <li class="arrow">
+              now this presentation's demos should run in modern browsers
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Polymer">
+          <h2>Polymer (1)</h2>
+          <ul>
+            <li>
+              Google's <a href="https://www.polymer-project.org/1.0/">Polymer</a> (<a href="https://www.polymer-project.org/1.0/docs/start/getting-the-code.html">install with Bower</a>) is a set of polyfills and pre-made web components built on top of <code>platform.js</code>. An example from their website:
+              <div class="clearfix">
+              <div style="width: 70%; float: left"><pre class="bigger"><code class="language-html" contenteditable>&lt;!-- Polyfill Web Components support for older browsers --&gt;
+&lt;script src="components/webcomponentsjs/webcomponents-lite.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- import element --&gt;
+&lt;link rel="import" href="components/google-map/google-map.html"&gt;
+
+&lt;!-- use element --&gt;
+&lt;google-map latitude="37.790" longitude="-122.390"&gt;&lt;/google-map&gt;</code></pre></div>
+              <img src="img/03_webcomponents/polymer_ex1.png" alt="" class="border" style="float: right" />
+            </div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Polymer (2)</h2>
+          <ul>
+            <li>
+              Polymer <a href="https://www.polymer-project.org/1.0/resources/compatibility.html">supports</a> IE10+, Chrome, FF, Safari8+ and Chrome for Android. Android native browser is not supported.
+            </li>
+            <li>
+              You can choose between <code class="hl">webcomponents.js</code> (uses/emulates shadow dom) and <code class="hl">webcomponents-lite.js</code> (uses/emulates <a href="https://www.polymer-project.org/1.0/articles/shadydom.html">shady dom</a>). In production, use <em>webcomponents-lite.js</em>:
+              <ul>
+                <li>emulating shadow dom seems too hard without serious performance cost</li>
+                <li class="v-style">it will render in shadow DOM when available</li>
+                <li class="x-style">you can't work with shadow DOM directly but must use the Shady DOM API</li>
+                <li class="x-style">exposes details and doesn't encapsulate CSS (unless you work through the Shady DOM API only)</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>X-tag</h2>
+          <ul>
+            <li>
+              Microsoft's <a href="http://x-tag.github.io/">X-Tag</a>, also built on top of <code>platform.js</code>, is just a wrapper library, without premade web components. Example:
+              <div><pre class="bigger"><code class="language-html" contenteditable>&lt;x-clock text-shadow=""&gt;&lt;/x-clock&lt;
+&lt;script&gt;
+  xtag.register('x-clock', {
+    lifecycle: {
+      created: function(){
+        this.start();
+      }
+    },
+    methods: {
+      start: function(){
+        this.update();
+        this.xtag.interval = setInterval(this.update.bind(this), 1000);
+      },
+      stop: function(){
+        this.xtag.interval = clearInterval(this.xtag.interval);
+      },
+      update: function(){
+        this.textContent = new Date().toLocaleTimeString();
+      }
+    },
+    events: {
+      tap: function(){
+        if (this.xtag.interval) this.stop();
+        else this.start();
+      }
+    }
+  });
+&lt;/script&gt;</code></pre></div>
+              <div class="demolink"><a href="http://x-tag.github.io/">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Mozilla Brick</h2>
+          <ul>
+            <li>
+              Mozilla also develops its library, <a href="https://brick.readme.io/">Mozilla Brick</a>. It used to rely on X-Tag, but it now <a href="https://brick.readme.io/v2.0/blog/welcome-to-mozilla-brick#section-on-x-tag">uses standards-based API's directly</a>. It comes with a (yet limited) <a href="http://brick.mozilla.io/docs/">set of components</a> (example: <a href="http://mozbrick.github.io/brick-tabbar/">brick-tabbar</a>)
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Final notes</h2>
+          <ul>
+            <li>
+              Some possible discussion items (summary from <a href="https://css-tricks.com/modular-future-web-components/">css-tricks.com</a>):
+              <ul>
+                <li>
+                  <em>XML is back</em><br>
+                  OMG! It looks like XML! Yes, this freaks some people out (see <a href="https://groups.google.com/forum/#!searchin/polymer-dev/xml/polymer-dev/lzvaDViB_Ow/VtbeIqX0Ap0J">this discussion</a>). However, again, the alternative is our <code class="hl">&lt;div&gt;</code> soup.
+                </li>
+                <li>
+                  <em>SEO</em><br>
+                   The Polymer FAQ states:
+                   <p><i>"Search engines have been dealing with heavy AJAX based application for some time now. Moving away from JS and being more declarative is a good thing and will generally make things better."</i></p>
+                   Google announced that the Google crawler <a href="http://googlewebmastercentral.blogspot.com/2014/05/understanding-web-pages-better.html">will execute JavaScript on your page before indexing it</a>. Use a tool like <a href="http://googlewebmastercentral.blogspot.com/2014/05/rendering-pages-with-fetch-as-google.html">Fetch as Google</a> to see what the crawler sees as it parses your site.
+                </li>
+                <li>
+                  <em>Accessibility</em><br>
+                   Screen readers and other assistive technologies seem to access shadow DOM without problems; <a href="http://blog.paciellogroup.com/2012/07/notes-on-web-components-aria/">full discussion here</a>.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+			<section data-index-title="">
+				<section>
+					<h2>Questions?</h2>
+          <ul>
+            <li>
+              References:
+              <ul>
+                <li><a href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements/">html5rocks.com &mdash; custom elements</a></li>
+                <li><a href="http://www.html5rocks.com/en/tutorials/webcomponents/template/">html5rocks.com &mdash; html templates</a></li>
+                <li><a href="https://css-tricks.com/modular-future-web-components/">css-tricks.com &mdash; a guide to web components</a></li>
+              </ul>
+            </li>
+          </ul>
+				</section>
+			</section>
+
+		</div>
+
+		<!-- ikdoeict.be Link -->
+		<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+		<!-- Index Link -->
+		<aside class="back">
+	      <nav>
+	        <p><a href="index.html">&larr; Back to index</a></p>
+	      </nav>
+		</aside>
+
+
+		<!-- bottomleft links -->
+		<ul id="extra">
+		</ul>
+
+	</div>
+
+	<script src="_lib/jquery.min.js"></script>
+	<script src="_lib/head.min.js"></script>
+	<script src="_lib/reveal/reveal.min.js"></script>
+	<script src="_lib/highlight/highlight.js"></script>
+	<script src="_lib/prefixfree.js"></script>
+	<script src="_lib/css-snippets.js"></script>
+	<script src="_lib/css-edit.js"></script>
+	<script src="_lib/incrementable.js"></script>
+	<script src="_lib/main.js"></script>
+
+</body>
+</html>

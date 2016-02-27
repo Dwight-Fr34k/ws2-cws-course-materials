@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link rel="import" href="my_button_template.html">
+</head>
+<body>
+	<div data-text="Some Button" data-icon="v.png" id="myButton"></div>
+	<script>
+
+		'use strict'
+
+		// import template
+		var templateImport = document.querySelector('link[rel="import"]');
+		var template = templateImport.import.querySelector('#myButtonTemplate');
+
+		// create template clone
+		let target = document.querySelector('#myButton');
+		let clone = document.importNode(template.content, true);
+		if (target.hasAttribute('data-text')) clone.querySelector('span').innerHTML = target.getAttribute('data-text');
+		if (target.hasAttribute('data-icon')) clone.querySelector('img').src = target.getAttribute('data-icon');
+
+		// create a Shadow Root and append
+		let shadow = target.createShadowRoot();
+		shadow.appendChild(clone);
+
+	</script>
+</body>
+</html>

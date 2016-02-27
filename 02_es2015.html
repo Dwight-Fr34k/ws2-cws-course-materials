@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Javascript &mdash; Advanced Syntax</title>
+	<title>Javascript &mdash; ES2015</title>
   <meta name="author" content="Rogier van der Linde - ikdoeict.be">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="_lib/reveal/css/reveal.min.css">
@@ -221,8 +221,8 @@ console.log(z) // 10
 var test = function() {
   var y = 2; // y is local
 };
-console.log(x) // 1
-console.log(y) // error: y only lives within the function scope
+console.log(x); // 1
+console.log(y); // error: y only lives within the function scope
 </code></pre></div>
 
             </li>
@@ -242,9 +242,9 @@ console.log(y) // error: y only lives within the function scope
 for (let y = 0; y &lt; 4; y++) { // y is local
   let z = 10; // z is local
 }
-console.log(x) // 1
-console.log(y) // error!
-console.log(z) // error!
+console.log(x); // 1
+console.log(y); // error!
+console.log(z); // error!
 </code></pre></div>
           </ul>
         </section>
@@ -418,8 +418,8 @@ console.log(test(1, 2, "hello", true, 7)); // 9</code></pre></div>
               spread an array or string into individual elements:
               <div><pre class="bigger"><code class="language-javascript" contenteditable>var str = "hello";
 var chars = [ ...str ]; // ["h", "e", "l", "l", "o"]</code></pre></div>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>var options = [ "green", true, 7 ]
-var extendedOptions = [1, 2, ...params]; // [ 1, 2, "green", true, 7 ]</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript" contenteditable>var options = ["green", true, 7];
+var extendedOptions = [1, 2, ...params]; // [1, 2, "green", true, 7]</code></pre></div>
             </li>
             <li>
               example: easy array concatenation
@@ -486,7 +486,7 @@ console.log(c); // 'hello'</code></pre></div>
           <ul>
             <li>
               return multiple values:
-              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>var func = function()
+              <div><pre class="bigger"><code class="language-javascript strict overlayrun" contenteditable>var func = function()
 {
     return [1, true, 'hello', {}]; // return multiple values
 }
@@ -503,7 +503,7 @@ console.log(b); // 'hello'</code></pre></div>
           <ul>
             <li>
               Destructuring an object into variables (shorthand version):
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>var test = {
+              <div><pre class="bigger"><code class="language-javascript strict overlayrun" contenteditable>var test = {
   name: 'Rogier',
   address: {
     street: 'Kerkstraat',
@@ -515,10 +515,8 @@ console.log(b); // 'hello'</code></pre></div>
 var { name, address } = test; // object destructuring
 
 console.log(name); // Rogier
-console.log(address); // {street: "Kerkstraat", number: 33}</code></pre></div>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>console.log(name); // Rogier
-console.log(address.number); // 33
-</code></pre></div>
+console.log(address); // {street: "Kerkstraat", number: 33}
+console.log(address.number); // 33</code></pre></div>
             </li>
           </ul>
         </section>
@@ -541,10 +539,7 @@ var { name: n, address: {street: s}, age: a } = test; // object destructuring
 
 console.log(n); // Rogier
 console.log(s); // 'Kerkstraat'
-console.log(a); // 33
-</code></pre></div>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>console.log(name); // Rogier
-console.log(address.number); // 33
+console.log(a); // 42
 </code></pre></div>
             </li>
           </ul>
@@ -587,13 +582,13 @@ console.log(Math.sign(-7)) // -1
           <ul>
             <li>
               shorthand notation for functions (like C# lambda expressions)
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>// no parameters
+              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>// no parameters
 var sayHello = () => console.log('hello');
 sayHello(); // hello </code></pre></div>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>// single parameter
+              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>// single parameter
 var double = a => a * 2;
 console.log(double(4)); // 8</code></pre></div>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>// multiple parameters
+              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>// multiple parameters
 var sum = (a, b) => a + b;
 console.log(sum(2,4)); // 6</code></pre></div>
             </li>
@@ -757,13 +752,10 @@ while(!next.done) {
           <h2>for...of (1)</h2>
           <ul>
             <li>
-              Iterates over values instead of over keys:
+              Iterates arrays over values instead of over keys:
               <div><pre class="bigger"><code class="language-javascript" contenteditable>var arr = ['hello', 111];
 
-var obj = {
-  a: 'bye',
-  b: 222
-}
+var obj = { a: 'bye', b: 222 };
 
 for (let i in arr) {
   if (!arr.hasOwnProperty(i)) continue;
@@ -833,6 +825,30 @@ for (let value of x) {
 }</code></pre></div>
             </li>
             <li class="arrow">
+              other methods are <code>clear()</code>, <code>forEach()</code>, <code>values()</code>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Maps</h2>
+          <ul>
+            <li>
+              Little bit like objects, but anything can be key:
+              <div><pre class="bigger"><code class="language-javascript overlayrun strict" contenteditable>let x = new Map([
+  [new Date(), function today () {}],
+  [y => y * 2, { pony: 'foo' }],
+  ['items', [1, 2]]
+]);
+
+x.delete('items');
+x.set('author', 'Rogier');
+
+// iteration
+for (let [key, value] of x) {
+  console.log(`${key}: ${value}`);
+}</code></pre></div>
+            </li>
+            <li class="arrow">
               other methods are <code>clear()</code>, <code>forEach()</code>, <code>values()</code>, <code>keys()</code>
             </li>
           </ul>
@@ -898,7 +914,7 @@ map.set({}, 222); // doesn't make sense</code></pre></div>
             </li>
             <li>
               It returns a value <code class="hl">{value: ..., done: ...}</code>
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>var foo = {
+              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>var foo = {
   [Symbol.iterator]: () => ({
     items: ['alice', 'bob', 'clive', 'dave'],
     next: function next () {
@@ -926,7 +942,7 @@ for (let item of foo) {
           <ul>
             <li>
               A fibonacci example:
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>let fibonacci = {
+              <div><pre class="bigger"><code class="language-javascript overlayrun" contenteditable>let fibonacci = {
     [Symbol.iterator]() {
         let pre = 0, cur = 1;
         return {
@@ -935,7 +951,7 @@ for (let item of foo) {
                return { done: false, value: cur };
            }
         };
-    };
+    }
 };
 
 for (let n of fibonacci) {
@@ -950,7 +966,7 @@ for (let n of fibonacci) {
           <ul>
             <li>
               An example using priorities:
-              <div><pre class="bigger"><code class="language-javascript" contenteditable>var custom_collection = {
+              <div><pre class="bigger"><code class="language-javascriptoverlayrun" contenteditable>var custom_collection = {
   elements: [
     {val: 111, priority: 1},
     {val: 222, priority: 2},
@@ -1018,7 +1034,7 @@ for(var i of custom_collection)
             </li>
             <li>
               ES6:
-              <div><pre class="bigger"><code class="language-javascript right" contenteditable>class Shape {
+              <div><pre class="bigger"><code class="language-javascript right overlayrun" contenteditable>class Shape {
   constructor (id, x, y) {
     this.id = id;
     this.move(x, y);
@@ -1077,15 +1093,15 @@ Circle.prototype.constructor = Circle;</code></pre></div>
               ES6:
               <div><pre class="bigger"><code class="language-javascript right" contenteditable>class Rectangle extends Shape {
   constructor (id, x, y, width, height) {
-    super(id, x, y)
-    this.width  = width
-    this.height = height
+    super(id, x, y);
+    this.width  = width;
+    this.height = height;
   }
 }
 class Circle extends Shape {
   constructor (id, x, y, radius) {
-    super(id, x, y)
-    this.radius = radius
+    super(id, x, y);
+    this.radius = radius;
   }
 }</code></pre></div>
             </li>
@@ -1164,7 +1180,7 @@ console.log(v2);
 // in Swedish, "ä" sorts after "z"
 var list = [ "ä", "a", "z" ];
 var beCollator = new Intl.Collator("be");
-var svCollator = new Intl.Collator("be");
+var svCollator = new Intl.Collator("sv");
 console.log(beCollator.compare("ä", "z")); // -1;
 console.log(svCollator.compare("ä", "z")); // 1;
 console.log(list.sort(beCollator.compare)) // [ "a", "ä", "z" ];

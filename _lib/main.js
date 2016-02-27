@@ -254,6 +254,17 @@ window.addEventListener('load', function()
         // Local reference
         var jsBlock = jsBlocks[i];
 
+        // add caption
+        if (jsBlock.hasAttribute('data-caption')) {
+            var caption = document.createElement('p');
+            caption.innerHTML = jsBlock.getAttribute('data-caption') == '' ? 'JS' : jsBlock.getAttribute('data-caption');
+            caption.style.position = 'absolute';
+            caption.style.right = '15px';
+            caption.style.top = '2px';
+            caption.className = 'caption';
+            jsBlock.parentNode.appendChild(caption);
+        }
+
         // may we add the run button to it?
         if(!jsBlock.className.match(new RegExp('(\\s|^)overlayrun(\\s|$)'))) continue;
 
@@ -311,7 +322,7 @@ window.addEventListener('load', function()
         var arrParts = strCss.split('}')
         for(var i = 0; i < arrParts.length; i++) arrParts[i] = strSelector + ' ' + arrParts[i] + '}';
         arrParts.length = arrParts.length - 1; // remove last
-    var strInjectCss = '/* ' + strSelector + ' */' + arrParts.join('') + '/* /' + strSelector + ' */';
+        var strInjectCss = '/* ' + strSelector + ' */' + arrParts.join('') + '/* /' + strSelector + ' */';
         // remove existing style
         var rex = new RegExp('\\/\\* ' + strSelector + ' \\*\\/[^\\/]*\\/\\* \\/' + strSelector + ' \\*\\/');
         demostyles.innerHTML = demostyles.innerHTML.replace(rex, '');
@@ -319,12 +330,25 @@ window.addEventListener('load', function()
         demostyles.innerHTML += strInjectCss;
     }
 
-    var cssBlocks = document.querySelectorAll('code.language-css[contenteditable]');
+    var cssBlocks = document.querySelectorAll('code.language-css');
     for(var i = 0; i < cssBlocks.length; i++)
     {
 
         // local reference
         var cssBlock = cssBlocks[i];
+
+        // add caption
+        if (cssBlock.hasAttribute('data-caption')) {
+            var caption = document.createElement('p');
+            caption.innerHTML = cssBlock.getAttribute('data-caption') == '' ? 'CSS' : cssBlock.getAttribute('data-caption');
+            caption.style.position = 'absolute';
+            caption.style.right = '15px';
+            caption.style.top = '2px';
+            caption.className = 'caption';
+            cssBlock.parentNode.appendChild(caption);
+        }
+
+        if (!cssBlock.hasAttribute('contenteditable')) continue;
 
         // css block only contains properties
         if(cssBlock.hasAttribute('data-subject'))
@@ -365,10 +389,24 @@ window.addEventListener('load', function()
      *
      */
 
-     var htmlBlocks = document.querySelectorAll('code.language-html[contenteditable]');
+     var htmlBlocks = document.querySelectorAll('code.language-html');
      for(var i = 0, len = htmlBlocks.length; i < len; i++)
      {
         var htmlBlock = htmlBlocks[i];
+
+        // add caption
+        if (htmlBlock.hasAttribute('data-caption')) {
+            var caption = document.createElement('p');
+            caption.innerHTML = htmlBlock.getAttribute('data-caption') == '' ? 'HTML' : htmlBlock.getAttribute('data-caption');
+            caption.style.position = 'absolute';
+            caption.style.right = '15px';
+            caption.style.top = '2px';
+            caption.className = 'caption';
+            htmlBlock.parentNode.appendChild(caption);
+        }
+
+        if (!htmlBlock.hasAttribute('contenteditable')) continue;
+
         new Incrementable(htmlBlock);
 
         htmlBlock.addEventListener('keydown', function(evt)
