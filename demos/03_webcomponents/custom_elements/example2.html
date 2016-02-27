@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom element &mdash; basic example</title>
+	<style>
+		rogier-quote {
+			display: inline-block;
+			min-width: 200px;
+			min-height: 30px;
+			border: 1px dashed #009;
+		}
+	</style>
+</head>
+<body>
+	<rogier-quote>Lorem Ipsum</rogier-quote>
+	<script>
+		var RogierQuoteElement = document.registerElement('rogier-quote');
+		console.log(document.querySelector('rogier-quote').constructor.name);
+
+		// create new quote
+		var newRogierQuote = new RogierQuoteElement();
+		newRogierQuote.innerHTML = 'sid amet';
+		document.body.appendChild(newRogierQuote);
+	</script>
+</body>
+</html>

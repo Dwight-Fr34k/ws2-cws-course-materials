@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom elements</title>
+	<style>
+		randomtag {
+			display: inline-block;
+			min-width: 200px;
+			min-height: 30px;
+			border: 1px dashed #009;
+		}
+	</style>
+</head>
+<body>
+	<randomtag>lorem ipsum</randomtag>
+	<script>
+		document.querySelector('randomtag').addEventListener('click', () => console.log('ok'));
+		console.log(document.querySelector('randomtag').constructor.name);
+	</script>
+</body>
+</html>

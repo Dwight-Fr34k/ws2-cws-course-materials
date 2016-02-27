@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+		img[is=thumb-img] {
+			box-shadow: 10px 10px 10px rgba(100, 100, 100, 0.5);
+		}
+	</style>
+</head>
+<body>
+	<img is="thumb-img" src="photo.jpg" alt="me">
+	<script>
+
+		'use strict'
+
+		// define new element prototype based on HTMLButtonElement prototype
+		var ThumbImageProto = Object.create(HTMLImageElement.prototype);
+
+		// content and behaviour
+		ThumbImageProto.createdCallback = function() {
+			this.width = '100';
+			this.height = '100';
+		};
+
+		// register the new element.
+		var ThumbImage = document.registerElement('thumb-img', {
+			prototype: ThumbImageProto,
+			extends: 'img'
+		});
+
+	</script>
+</body>
+</html>

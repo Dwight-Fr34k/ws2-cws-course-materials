@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+		p {
+			color: red !important; /* won't affect */
+		}
+
+	</style>
+</head>
+<body>
+	<div id="shadow-host"></div>
+	<script>
+		var shadowroot = document.querySelector('#shadow-host').createShadowRoot();
+		shadowroot.innerHTML = '<style>p { color: #009; }</style>';
+		shadowroot.innerHTML += '<p>shadow element content</p>';
+
+		// won't affect
+		document.querySelector('#shadow-host').innerHTML = 'Aaargh!';
+	</script>
+</body>
+</html>

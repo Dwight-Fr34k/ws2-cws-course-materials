@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+
+		.my-button {
+			display: block;
+			border: 0;
+			cursor: pointer;
+			background-color: #eaeff2;
+			text-transform: uppercase;
+			border-radius: 4px;
+			box-shadow: inset 0 -3px #bbbfc2;
+			color: #4d4e53;
+			line-height: 35px;
+			height: 35px;
+			padding: 0 20px;
+			outline: none;
+		}
+
+		.my-button img {
+			vertical-align: middle;
+			margin-right: 5px;
+		}
+
+		#buttons {
+			padding: 10px 0;
+		}
+
+	</style>
+</head>
+<body>
+	<p>Image: <input type="radio" name="rbnImg" value="rbnImgV" checked> v-style <input type="radio" name="rbnImg" value="rbnImgX"> x-style </p>
+	<p>Text: <input type="text" name="txt" value="" placeholder="button text"></p>
+	<p>Text color: <input type="color" name="rbnImg" value="#000000"></p>
+	<input type="button" value="generate button" id="btnGenerate">
+	<div id="buttons"></div>
+	<script>
+
+		'use strict'
+
+		document.querySelector('#btnGenerate').addEventListener('click', () => {
+			let btn = document.createElement('button');
+			let img = document.createElement('img');
+			let span = document.createElement('span');
+			btn.className = 'my-button';
+			span.innerHTML = document.querySelector('input[name=txt]').value == '' ? 'default text' : document.querySelector('input[name=txt]').value;
+			span.style.color = document.querySelector('input[type=color]').value;
+			img.src = document.querySelector('input[value=rbnImgX]').checked ? 'x.png' : 'v.png';
+			btn.appendChild(img);
+			btn.appendChild(span);
+			document.querySelector('#buttons').appendChild(btn);
+			console.log('hurray! new button is born');
+		});
+
+
+	</script>
+</body>
+</html>
