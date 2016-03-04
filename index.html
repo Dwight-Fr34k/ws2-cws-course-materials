@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Webscripting2 &mdash; Clientside Webscripting</title>
+    <meta name="description" content="Webscripting2 &mdash; Clientside Webscripting">
+    <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <style>
+
+        /* clearfix */
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        /* fonts */
+        @font-face {
+            font-family: 'League Gothic';
+            src: url('fonts/leaguegothic/league_gothic-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* general */
+        body {
+            background-color: #faf5e6;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            padding: 20px 0px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        h1, h1 + p {
+            margin: 0 0 20px 0;
+            color: #000;
+            font-family: 'League Gothic', sans-serif;
+            line-height: 0.9em;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        h1, a h1 {
+            text-shadow: 0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 20px 20px rgba(0,0,0,.15);
+            color: #000;
+            text-decoration: none;
+        }
+
+        .wrapper > header h1 {
+            font-size: 136px
+        }
+
+        .wrapper > header h1 + p {
+            text-shadow: 0px 0px 6px rgba(0,0,0,0.2);
+            font-size: 56px;
+        }
+
+        #ikdoeict {
+            display: block;
+            width: 100px;
+            height: 59px;
+            text-indent: -999px;
+            overflow: hidden;
+            text-decoration: none;
+            position: absolute;
+            top: 0;
+            right: 7px;
+            background: transparent url(img/ikdoeict.png) no-repeat;
+            opacity: 0.75;
+        }
+
+        #ikdoeict:hover {
+            opacity: 1;
+        }
+
+        .wrapper > footer a {
+            color: #8b743d;
+            text-decoration: none;
+            font-family: Lato, TrebuchetMS, Times, 'Times New Roman', serif;
+            font-size: 125%;
+        }
+
+        .wrapper > footer a:hover {
+            color: #c0a86e;
+        }
+
+        /* thumbs */
+
+        .thumbs {
+            width: 100%;
+            padding: 0;
+            margin: 0 auto 50px;
+            list-style: none;
+        }
+
+        .thumbs article {
+            width: 200px;
+            height: 150px;
+            overflow: hidden;
+            border: 4px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            -webkit-transition: all .2s linear;
+            -moz-transition: all .2s linear;
+            -ms-transition: all .2s linear;
+            -o-transition: all .2s linear;
+            transition: all .2s linear;
+            font-size: 10px;
+            background-color: #e1d9c0;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+
+        .thumbs article:hover {
+            border-color: #c0a86e;
+        }
+        .thumbs h1 {
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 0.5em;
+        }
+
+        .thumbs img {
+            margin: 0 auto;
+            max-width: 20%;
+        }
+
+        .thumbs a {
+            text-decoration: none;
+        }
+
+        .thumbs footer {
+            position: absolute;
+            bottom: 1em;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        .thumbs footer p {
+            font-size: 0.8em;
+            font-family: Lato, TrebuchetMS, Times, 'Times New Roman', serif;
+            color: #8b743d;
+            margin: 0;
+        }
+
+        .thumbs li {
+            width: 20%;
+            float: left;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* aside */
+
+        aside {
+            position: fixed;
+            height: 415px;
+            right: 0;
+            bottom: 25px;
+            overflow: hidden;
+            width: 30px;
+            padding: 15px 0 0 20px;
+            box-shadow: -10px 0px 25px #1c1e20;
+            z-index: 99999;
+            background: rgba(46,49,51,0.9);
+        }
+
+        aside:hover {
+            width: 240px;
+        }
+
+        aside p {
+            font-size: 15px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            text-align: left;
+            opacity: 0.8;
+            width: 230px;
+            font-family: Lato, TrebuchetMS, Times, 'Times New Roman', serif;
+            color: rgb(245, 245, 245);
+        }
+
+        aside a {
+            color: #e1d9c0;
+            text-decoration: none;
+        }
+
+        aside a:hover {
+            color: #faf5e6;
+        }
+
+        .wrapper > header h1, .wrapper > header h1 + p, aside {
+            -webkit-transition: all .2s ease;
+               -moz-transition: all .2s ease;
+                -ms-transition: all .2s ease;
+                 -o-transition: all .2s ease;
+                    transition: all .2s ease;
+        }
+
+        @media (max-width: 1330px) {
+            .wrapper > header h1 {
+                font-size: 100px;
+            }
+            .wrapper > header h1 + p {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            aside {
+                height: auto;
+                position: static;
+                width: 90%;
+                margin: 25px auto 25px;
+                padding: 15px;
+            }
+            aside:hover {
+                width: 90%;
+            }
+            aside p {
+                width: 100%;
+                margin-bottom: 12px;
+            }
+            ul.thumbs li {
+                width: 25%;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .wrapper > header h1 {
+                font-size: 80px;
+            }
+            .wrapper > header h1 + p {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 960px) {
+            ul.thumbs li {
+                width: 33%;
+            }
+        }
+
+        @media (max-width: 870px) {
+            .wrapper > header h1 {
+                font-size: 100px;
+            }
+            .wrapper > header h1 + p {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            ul.thumbs li {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .wrapper > header h1 {
+                margin-top: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper > header h1 {
+                font-size: 80px;
+            }
+            .wrapper > header h1 + p {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 460px) {
+
+            ul.thumbs li {
+                width: 100%;
+            }
+            .wrapper > footer {
+                font-size: 50%;
+            }
+            aside p {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .wrapper > header h1 {
+                font-size: 60px;
+            }
+            .wrapper > header h1 + p {
+                font-size: 20px;
+            }
+            .wrapper > footer {
+                font-size: 40%;
+            }
+            aside {
+                width: 80%;
+            }
+            aside p {
+                font-size: 13px;
+            }
+        }
+
+        li.notyet {
+            opacity: 0.35;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Clientside Webscripting 2</h1>
+            <p>Professional Bachelor ICT &mdash; 2015-2016</p>
+            <a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+        </header>
+        <ul class="thumbs clearfix">
+            <li>
+                <a href="00_intro.html" title="intro">
+                    <article>
+                        <h1>INTRO</h1>
+                        <img src="img/00_intro/intro.png" alt="" />
+                        <footer>
+                            <p>ikdoeict.be &mdash; rogier.vanderlinde@odisee.be</p>
+                        </footer>
+                    </article>
+                </a>
+            </li>
+            <li>
+                <a href="01_devtools.html" title="devtools">
+                  <article>
+                      <h1>DEVTOOLS</h1>
+                      <img src="img/01_devtools/devtools.png" alt="" />
+                      <footer>
+                          <p>ikdoeict.be &mdash; rogier.vanderlinde@odisee.be</p>
+                      </footer>
+                  </article>
+                </a>
+            </li>
+            <li>
+                <a href="02_es2015.html" title="es6">
+                  <article>
+                      <h1>ES2015</h1>
+                      <img src="img/02_es2015/syntax.png" alt="" />
+                      <footer>
+                          <p>ikdoeict.be &mdash; rogier.vanderlinde@odisee.be</p>
+                      </footer>
+                  </article>
+                </a>
+            </li>
+            <li>
+                <a href="03_webcomponents.html" title="web components">
+                  <article>
+                      <h1>WEB COMPONENTS</h1>
+                      <img src="img/03_webcomponents/polymer.png" alt="" />
+                      <footer>
+                          <p>ikdoeict.be &mdash; rogier.vanderlinde@odisee.be</p>
+                      </footer>
+                  </article>
+                </a>
+            </li>
+        </ul>
+        <footer>
+            <a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+        </footer>
+        <aside>
+            <p>This collection of slides form the course materials for the <strong>Webscripting2 &mdash; Clientside Webscripting</strong> course, part of the <a href="http://www.ikdoeict.be/">Professional Bachelor ICT</a> study programme, taught at <a href="http://www.odisee.be/">Odisee</a>, Ghent, Belgium.</p>
+            <p>The materials were developed by Rogier van der Linde, lecturer ICT at KaHo Sint-Lieven.</p>
+            <p>The materials may be used freely, as long as credit to Rogier van der Linde is present and the top right graphical link to <a href="http://www.ikdoeict.be/">ikdoeict.be</a> remains in place.</p>
+            <p>Suggestions and additions may be mailed to Rogier, or sent via <a href="https://github.com/rogiervdl/ws2-cws-course-materials">a pull request on GitHub</a>.</p>
+        </aside>
+    </div>
+</body>
+</html>

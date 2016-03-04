@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+
+		rogier-quote p {
+			color: blue;
+		}
+
+	</style>
+</head>
+<body>
+	<rogier-quote data-nr="1"></rogier-quote>
+	<rogier-quote data-nr="3"></rogier-quote>
+	<rogier-quote data-nr="2"></rogier-quote>
+	<script>
+
+		'use strict'
+
+		// define new element based on HTMLQuoteElement
+		class RogierQuoteElement extends HTMLQuoteElement {
+
+			// call parent constructor
+			constructor() {
+				super();
+			}
+
+			// create content
+			createdCallback(){
+				var quotes = [
+					'beter één vogel in de hand dan 10 in andermans hand',
+					'men moet een gegeven paard niet op de bek slaan',
+					'hoe meer zielen, hoe zieliger'
+				];
+				var nr = this.hasAttribute('data-nr') ? +this.getAttribute('data-nr') % 3 : Math.floor(Math.random() * 3);
+				this.innerHTML = '<p>' + quotes[nr] + '</p>';
+			}
+		}
+
+		// register new element with tagname 'rogier-quote'
+		document.registerElement('rogier-quote', RogierQuoteElement);
+
+	</script>
+</body>
+</html>

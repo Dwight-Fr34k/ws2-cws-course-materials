@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+
+		.v-button {
+			border: 0;
+			cursor: pointer;
+			background-color: #eaeff2;
+			text-transform: uppercase;
+			border-radius: 4px;
+			box-shadow: inset 0 -3px #bbbfc2;
+			color: #4d4e53;
+			line-height: 35px;
+			height: 35px;
+			padding: 0 10px;
+			outline: none;
+			box-sizing: content-box;
+		}
+
+		.v-button:active {
+			box-shadow: inset 0 -1px #bbbfc2;
+			position: relative;
+			top: 1px;
+		}
+
+		.v-button img {
+			vertical-align: middle;
+			margin-right: 5px;
+		}
+
+		#body button {
+		  background-color: pink;
+		  border: 5px solid purple;
+		}
+	</style>
+</head>
+<body id="body">
+	<button class="v-button">
+		<img src="v.png" alt="">
+		<span>Some Text</span>
+	</button>
+	<script>
+		document.querySelector('button span').innerHTML = 'Aaargh!';
+	</script>
+</body>
+</html>

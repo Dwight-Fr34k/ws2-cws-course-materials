@@ -1,0 +1,58 @@
+.reveal .columns {
+  width: 100%;
+  overflow: hidden;
+}
+
+.reveal .columns .column-13 {
+  width: 33.33%;
+  float: left;
+  font-size: 50%;
+}
+
+.reveal .columns .column-13 img {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+
+.reveal .small {
+  font-size: smaller;
+}
+
+.reveal li.arrow {
+  font-size: smaller;
+}
+
+.reveal li.arrow:first-of-type {
+  margin-top: 0.3em;
+}
+
+.reveal li.warning {
+  color: #600;
+}
+
+.reveal section > img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 90%;
+  border-radius: 0;
+}
+
+.reveal section > img.border {
+  border: 1px solid #ccc;
+}
+
+.reveal code.highlight, .reveal code.hl {
+  background-color: rgba(100, 100, 100, 0.1);
+  font-size: smaller;
+}
+
+pre .black  {
+  background-color: black;
+  color: #ffe;
+}
+
+.reveal blockquote {
+  margin: 1em auto;
+}
+

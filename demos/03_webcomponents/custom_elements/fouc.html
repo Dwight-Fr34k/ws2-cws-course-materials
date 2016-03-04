@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom element &mdash; basic example</title>
+	<style>
+		rogier-quote:unresolved {
+			opacity: 0;
+		}
+		rogier-quote {
+			opacity: 1;
+			transition: opacity 1000ms;
+			display: inline-block;
+			min-width: 200px;
+			min-height: 30px;
+			border: 1px dashed #009;
+		}
+	</style>
+</head>
+<body>
+	<rogier-quote>Lorem Ipsum</rogier-quote>
+	<script>
+		setTimeout(
+			() => {
+				var RogierQuoteElement = document.registerElement('rogier-quote');
+				console.log(document.querySelector('rogier-quote').constructor.name);
+			},
+			1000
+		)
+	</script>
+</body>
+</html>

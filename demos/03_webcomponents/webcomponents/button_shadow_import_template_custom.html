@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link rel="import" href="my_button_template.html">
+</head>
+<body>
+
+	<rogier-button data-text="Some Button" data-icon="v.png" id="myButton"></rogier-button>
+	<script>
+
+		'use strict'
+
+		// import template
+		let templateImport = document.querySelector('link[rel="import"]');
+		let template = templateImport.import.querySelector('#myButtonTemplate');
+
+		// define new element prototype based on HTMLButtonElement prototype
+		var RogierButtonPrototype = Object.create(HTMLElement.prototype);
+
+		// create content and behaviour
+		RogierButtonPrototype.createdCallback = function() {
+			// create template clone and modify
+			let clone = document.importNode(template.content, true);
+			if (this.hasAttribute('data-text')) clone.querySelector('span').innerHTML = this.getAttribute('data-text');
+			if (this.hasAttribute('data-icon')) clone.querySelector('img').src = this.getAttribute('data-icon');
+
+			// create shadow root and append
+			let shadow = this.createShadowRoot();
+			shadow.appendChild(clone);
+		}
+
+		// register the new element.
+		let RogierButton = document.registerElement('rogier-button', {
+			prototype: RogierButtonPrototype
+		});
+
+	</script>
+</body>
+</html>

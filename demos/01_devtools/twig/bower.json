@@ -1,0 +1,10 @@
+{
+  "name": "my-project",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "fontawesome": "*"
+  },
+  "devDependencies": {
+    "jquery-mockjax": "~1.5.2"
+  }
+}

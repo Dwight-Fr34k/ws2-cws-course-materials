@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Javascript &mdash; comments window</title>
+	<meta name="author" content="Rogier van der Linde - ikdoeict.be" />
+	<link rel="stylesheet" href="css/comments.css" />
+	<script>
+		window.highlightComment = function(id)
+		{
+			// remove highlights
+			var highlightedComments = document.querySelectorAll('body > div.highlighted');
+			for(var i = 0; i < highlightedComments.length; i++)
+			{
+				highlightedComments[i].className = highlightedComments[i].className.replace(/(?:^|\s)highlighted(?!\S)/g , '');
+			}
+
+			// highlight comment
+			var highlightComment = document.getElementById(id);
+			if(highlightComment) highlightComment.className += ' highlighted';
+
+			// scroll into view
+			highlightComment.scrollIntoView();
+      }
+
+		window.addEventListener('load', function()
+		{
+			window.opener.buildPopupComments();
+		})
+
+	</script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+
+		button[is=rogier-button] {
+			border: 0;
+			cursor: pointer;
+			background-color: #eaeff2;
+			text-transform: uppercase;
+			border-radius: 4px;
+			box-shadow: inset 0 -3px #bbbfc2;
+			color: #4d4e53;
+			line-height: 35px;
+			height: 35px;
+			padding: 0 10px;
+			outline: none;
+		}
+
+		button[is=rogier-button]:active {
+			box-shadow: inset 0 -1px #bbbfc2;
+			position: relative;
+			top: 1px;
+		}
+
+		button[is=rogier-button] img {
+			vertical-align: middle;
+			margin-right: 5px;
+		}
+
+	</style>
+</head>
+<body>
+	<button is="rogier-button" data-text="Some Label" data-icon="v.png"></button>
+	<script>
+
+		'use strict'
+
+		// define new element prototype based on HTMLButtonElement prototype
+		var RogierButtonPrototype = Object.create(HTMLButtonElement.prototype);
+
+		// create content and behaviour
+		RogierButtonPrototype.createdCallback = function() {
+			// create content
+			var img = document.createElement('img');
+			img.src = this.getAttribute('data-icon');
+			var txt = document.createTextNode(this.getAttribute('data-text'));
+			this.appendChild(img);
+			this.appendChild(txt);
+
+			// add behaviour
+			this.addEventListener('click', function(e) {
+				if (confirm('are you sure you wanted to click me?')) {
+					alert('ok, here you go');
+				}
+				e.preventDefault();
+			});
+			console.log('ok');
+		};
+
+		// register the new element.
+		var RogierButton = document.registerElement('rogier-button', {
+			prototype: RogierButtonPrototype,
+			extends: 'button'
+		});
+
+	</script>
+</body>
+</html>

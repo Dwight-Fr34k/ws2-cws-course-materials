@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+		.shadow-button {
+			--button-text-color: #990;
+			--button-text-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="shadow-button"></div>
+	<script>
+		var shadow = document.querySelector('.shadow-button').createShadowRoot();
+		shadow.innerHTML = `
+<style>
+	button {
+		color: var(--button-text-color, blue);
+		font-weight: var(--button-text-weight, normal);
+	}
+
+	button {
+		border: 0;
+		cursor: pointer;
+		background-color: #eaeff2;
+		text-transform: uppercase;
+		border-radius: 4px;
+		box-shadow: inset 0 -3px #bbbfc2;
+		line-height: 35px;
+		height: 35px;
+		padding: 0 10px;
+		outline: none;
+		box-sizing: content-box;
+	}
+
+	button:active {
+		box-shadow: inset 0 -1px #bbbfc2;
+		position: relative;
+		top: 1px;
+	}
+
+	button img {
+		vertical-align: middle;
+		margin-right: 5px;
+	}
+</style>
+<button>
+  <img src="v.png" alt="">
+  <span>Some Text</span>
+</button>`;
+
+	</script>
+</body>
+</html>

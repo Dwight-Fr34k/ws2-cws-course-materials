@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom element &mdash; basic example</title>
+	<style>
+		rogier-quote {
+			display: block;
+			min-width: 200px;
+			min-height: 30px;
+			border: 2px ridge #009;
+			background-color: #cce;
+			float: left;
+			clear: both;
+			margin: 10px 0;
+			padding: 5px 10px;
+			border-radius: 10px;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<rogier-quote data-hasquotes></rogier-quote>
+	<rogier-quote></rogier-quote>
+	<rogier-quote data-nr="2"></rogier-quote>
+	<script>
+		// define new prototype based on HTMLElement
+		var RogierQuotePrototype = Object.create(HTMLElement.prototype);
+
+		// define a property on this prototype
+		Object.defineProperty(RogierQuotePrototype, 'hasQuotes', {
+			value: true,
+			writable : true
+		});
+
+		// define function on this prototype
+		RogierQuotePrototype.setText = function(txt) {
+		  this.innerHTML = this.hasQuotes ? '“' + txt + '”' : txt;
+		}
+
+		// callback function overload
+		RogierQuotePrototype.createdCallback = function() {
+			this.hasQuotes = this.hasAttribute('data-hasquotes');
+			console.log(this.hasQuotes);
+			var quotes = [
+				'beter één vogel in de hand dan 10 in andermans hand',
+				'men moet een gegeven paard niet op de bek slaan',
+				'hoe meer zielen, hoe zieliger'
+			];
+			var nr = this.hasAttribute('data-nr') ? +this.getAttribute('data-nr') % 3 : Math.floor(Math.random() * 3);
+			this.setText(quotes[nr]);
+		};
+
+		// register element with this prototype
+		var RogierQuoteElement = document.registerElement('rogier-quote', {prototype: RogierQuotePrototype});
+
+		// create new quote
+		var newRogierQuote = new RogierQuoteElement();
+		newRogierQuote.hasQuotes = false;
+		newRogierQuote.setText('sid amet');
+		document.body.appendChild(newRogierQuote);
+	</script>
+</body>
+</html>
