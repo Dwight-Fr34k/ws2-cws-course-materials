@@ -241,6 +241,40 @@ window.addEventListener('load', function()
 
     /**
      *
+     * Code blocks: add caption
+     *
+     */
+
+     var codeBlocks = document.querySelectorAll('code');
+     for(var i = 0; i < codeBlocks.length; i++)
+     {
+
+        // Local reference
+        var codeBlock = codeBlocks[i];
+
+        // add caption
+        if (codeBlock.hasAttribute('data-caption')) {
+            // find type
+            var classList = codeBlock.classList;
+            for (var j = 0; j < classList.length; j++) {
+                // type found; add caption
+                if (classList[j].indexOf('language-') == 0) {
+                    var type = classList[j].substring(9);
+                    var caption = document.createElement('p');
+                    caption.innerHTML = codeBlock.getAttribute('data-caption') == '' ? type : codeBlock.getAttribute('data-caption');
+                    caption.style.position = 'absolute';
+                    caption.style.right = codeBlock.scrollHeight > codeBlock.clientHeight ? '25px' : '5px';
+                    caption.style.top = '2px';
+                    caption.className = 'caption';
+                    codeBlock.parentNode.appendChild(caption);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     *
      * Javascript blocks: add run buttons + make incrementable (
      *
      * To use add class 'overlayrun' to the code container
@@ -253,17 +287,6 @@ window.addEventListener('load', function()
 
         // Local reference
         var jsBlock = jsBlocks[i];
-
-        // add caption
-        if (jsBlock.hasAttribute('data-caption')) {
-            var caption = document.createElement('p');
-            caption.innerHTML = jsBlock.getAttribute('data-caption') == '' ? 'JS' : jsBlock.getAttribute('data-caption');
-            caption.style.position = 'absolute';
-            caption.style.right = '15px';
-            caption.style.top = '2px';
-            caption.className = 'caption';
-            jsBlock.parentNode.appendChild(caption);
-        }
 
         // may we add the run button to it?
         if(!jsBlock.className.match(new RegExp('(\\s|^)overlayrun(\\s|$)'))) continue;
@@ -336,18 +359,6 @@ window.addEventListener('load', function()
 
         // local reference
         var cssBlock = cssBlocks[i];
-
-        // add caption
-        if (cssBlock.hasAttribute('data-caption')) {
-            var caption = document.createElement('p');
-            caption.innerHTML = cssBlock.getAttribute('data-caption') == '' ? 'CSS' : cssBlock.getAttribute('data-caption');
-            caption.style.position = 'absolute';
-            caption.style.right = '15px';
-            caption.style.top = '2px';
-            caption.className = 'caption';
-            cssBlock.parentNode.appendChild(caption);
-        }
-
         if (!cssBlock.hasAttribute('contenteditable')) continue;
 
         // css block only contains properties
@@ -393,18 +404,6 @@ window.addEventListener('load', function()
      for(var i = 0, len = htmlBlocks.length; i < len; i++)
      {
         var htmlBlock = htmlBlocks[i];
-
-        // add caption
-        if (htmlBlock.hasAttribute('data-caption')) {
-            var caption = document.createElement('p');
-            caption.innerHTML = htmlBlock.getAttribute('data-caption') == '' ? 'HTML' : htmlBlock.getAttribute('data-caption');
-            caption.style.position = 'absolute';
-            caption.style.right = '15px';
-            caption.style.top = '2px';
-            caption.className = 'caption';
-            htmlBlock.parentNode.appendChild(caption);
-        }
-
         if (!htmlBlock.hasAttribute('contenteditable')) continue;
 
         new Incrementable(htmlBlock);

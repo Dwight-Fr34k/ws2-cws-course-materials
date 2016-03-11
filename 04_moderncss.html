@@ -1,0 +1,1843 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Modern CSS</title>
+  <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="library/reveal/css/reveal.min.css">
+	<link rel="stylesheet" href="library/reveal/css/theme/rogier.css" id="rogier">
+	<link rel="stylesheet" href="library/highlight/styles/vs.css">
+	<link rel="stylesheet" href="css/common.css">
+  <style>
+
+    .reveal ul.chapterlist {
+      column-count: 2;
+      column-gap: 60px;
+      -moz-column-count: 2;
+      -moz-column-gap: 60px;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 60px;
+      padding-left: 20px;
+      padding-bottom: 30px;
+      display: block;
+      width: 680px;
+    }
+
+    .demolink {
+      margin-bottom: -20px !important;
+      margin-top: -10px !important;
+    }
+
+  </style>
+  <script>
+    'use strict'
+  </script>
+</head>
+
+<body>
+
+  <!-- SLIDES -->
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h1>Modern CSS</h1>
+				<small>use the arrow keys to navigate; press space for slide overview
+        </small>
+				<figure>
+					<img src="img/04_moderncss/mdl.png" alt="" width="300" />
+					<figcaption></figcaption>
+				</figure>
+
+				<footer>
+					<a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+				</footer>
+			</section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Vanilla CSS</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Vanilla CSS</h2>
+          <ul>
+            <li>
+              'vanilla' means without any frameworks or libraries
+            </li>
+            <li>
+              let's talk about:
+              <ul>
+                <li>variables</li>
+                <li>calculations</li>
+                <li>class selectors</li>
+                <li>naming conventions</li>
+                <li>other good practices</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              The term 'vanilla' is just a running gag for framework-loving people who think you always NEED a framework. Like vanilla ice-cream is basically plain, in slang 'vanilla' means 'plain or boring'. And the <a href="http://vanilla-js.com/">vanilla-js.com</a> 'platform' is a joke too.
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>CSS variables</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>CSS variables</h2>
+          <ul>
+            <li>
+              changing color and font scheme requires lots of replacements
+            </li>
+            <li>
+              the answer would be CSS variables
+              <div><pre class="bigger"><code class="language-css" data-caption="css">:root { /* other selectors like body or .my-theme work as well */
+  --primary-color: #801515;
+  --secondary-color: #D46A6A;
+  --tertiary-color: #AA3939;
+  --basefont-family: Verdana, Arial;
+  --titlefont-family: Georgia;
+}
+
+button, a {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+h1 {
+  color: var(--tertiary-color);
+  font-family; var(--tertiary-color);
+}</code></pre></div>
+            </li>
+            <li class="arrow">
+              alas, browser vendors seem to have troubles implementing it (performance issues apparently); support is <a href="http://caniuse.com/#search=css%20variables">lamentable</a>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Calc()</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>calc &mdash; use case 1</h2>
+          <ul>
+            <li>
+              calculate values, e.g. to create a full-height content area under a fixed height header:
+              <div><pre class="bigger"><code class="language-html" data-caption>&lt;div class="body-wrapper"&gt;
+  &lt;header class="body-header padded"&gt;
+    ...
+  &lt;/header&gt;
+  &lt;section class="body-content padded"&gt;
+    ...
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption style="max-height: 200px;">...
+.body-header {
+  ...
+  height: 100px;
+}
+.body-content {
+  ...
+  height: calc(100% - 100px);
+}</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/calc1.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>calc &mdash; use case 2</h2>
+          <ul>
+            <li>
+              example 2: make your code easier to read
+              <div><pre class="bigger"><code class="language-css wrong" style="max-height: 200px;">.column-1-7 {
+   width: 14.2857%
+}
+.column-2-7 {
+   width: 28.5714%
+}
+...
+</code></pre></div>
+            </li>
+              <div><pre class="bigger"><code class="language-css right" style="max-height: 200px;">.column-1-7 {
+   width: calc(100% / 7);
+}
+.column-2-7 {
+   width: calc(100% / 7 * 2);
+}
+...
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>calc &mdash; use case 3</h2>
+          <ul>
+            <li>
+              example 3: fixed gutter width between columns
+              <div><pre class="bigger"><code class="language-html" style="max-height: 200px;">&lt;section class="col col-3"&gt;
+  ...
+&lt;/section&gt;
+&lt;section class="col col-3"&gt;
+  ...
+&lt;/section&gt;
+&lt;section class="col col-3"&gt;
+  ...
+&lt;/section&gt;
+</code></pre></div>
+            </li>
+              <div><pre class="bigger"><code class="language-css" style="max-height: 200px;">.col {
+  float: left;
+}
+.col-3 {
+  ...
+  width: calc((100% - 2rem) / 3);
+}
+.col-3 + .col-3 {
+  margin-left: 1rem;
+}</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/calc3.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              browser support is actually <a href="http://caniuse.com/#search=calc">very good</a>
+            </li>
+            <li class="arrow">
+              beware however of <a href="http://caniuse.com/#search=calc">sub pixel differences</a> in browsers
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Selector performance</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Selector parsing speed</h2>
+          <ul>
+            <li>
+              keep your selectors performant; some facts:
+              <ul>
+                <li>
+                  selector types (roughly), from fast to slow:
+                  <ul>
+                    <li>id selector, e.g. <code class="hl">#content</code> (fast)</li>
+                    <li>class selector, e.g. <code class="hl">.button-ok</code> (fast)</li>
+                    <li>tag selector, e.g. <code class="hl">div</code> (slow)</li>
+                    <li>universal selector, e.g. <code class="hl">*</code>, <code class="hl">[title="test"]</code> (really slow)</li>
+                  </ul>
+                </li>
+                <li class="arrow">
+                  also slow are adjacent, child and nested selector, e.g. <code class="hl">li > a</code>, <code class="hl">h1 + p</code>, <code class="hl">header p</code>
+                </li>
+                <li>browsers parse selectors from right to left => the <em>right part should be fast</em></li>
+                <li>every step is checked, so keep selectors <em>as short as possible</em></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Quote from <a href="http://csswizardry.com/2011/09/writing-efficient-css-selectors/">csswizardry.com</a>:
+              <blockquote>
+                It’s more efficient for a browser to start at the right-most element (the one it knows it wants to style) and work its way back up the DOM tree than it is to start high up the DOM tree and take a journey down that might not even end up at the right-most selector–also known as the key selector.
+              </blockquote>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Overqualification; classes</h2>
+          <ul>
+            <li>
+              avoid unnecessary checks; don't overqualify selectors
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>div#content { }
+p.message { }
+span.message { }
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>#content { }
+.p-message { }
+.span-message { }</code></pre></div>
+            </li>
+            <li>
+              class selectors are faster and more versatile
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>#social_links a { }
+input[type=button].ok { }
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>.link-social
+.button-ok { }</code></pre></div>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Some explanations:
+              <ul>
+                <li><code class="hl">div#content</code>: it performs an unnecessary check to see if it is a <code class="hl">div</code></li>
+                <li><code class="hl">#social_links a</code>: it needs to grab <i>all</i> links in the DOM, and then check the context of each one</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Short &amp; inherited</h2>
+          <ul>
+            <li>
+              use inheritance where-ever possible
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>#mytable td { color: blue; }</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>#mytable { color: blue; }</code></pre></div>
+            </li>
+            <li>
+              keep your selectors short
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>nav #mainmenu li a { }
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>#mainmenu a { }
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              keeping selectors short also has the advantage of keeping selector weight in hand, making future styles cascading easier
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Avoid universal selectors</h2>
+          <ul>
+            <li>
+              avoid ending with a tag or universal selector
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>#mainmenu a { }
+input[type=submit]</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>.menu-link { }
+.button-submit { }
+</code></pre></div>
+            </li>
+            <li>
+              is all this necessary?
+              <ul>
+                <li>small mostly static sites: probably not</li>
+                <li>sites with lots of dynamic css: probably</li>
+                <li>the next Amazon or Facebook website: definitely</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              <p>Note that clean CSS often conflicts with clean HTML. Compare the first example</p>
+<pre><code>&lt;ul id="mainmenu"&gt;
+  &lt;li&gt;&lt;a href="#"&gt;item 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;item 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;item 3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;item 4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>with the second:</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#" class="menu-link"&gt;item 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" class="menu-link"&gt;item 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" class="menu-link"&gt;item 3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" class="menu-link"&gt;item 4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Class selectors</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Advantages</h2>
+          <ul>
+            <li>
+              Id attributes in HTML are fine and sometimes necessary for Javascript. For CSS however, <em>class attributes are preferred</em>:
+              <ul>
+                <li>performance difference is almost non-existent</li>
+                <li>ID attributes makes cascading styles more difficult due to increased specificity</li>
+                <li>styles attached to ID attributes cannot be reused</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              let's illustrate this with an example
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Example 1">
+          <h2>Example 1 (1)</h2>
+          <ul>
+            <li>
+              typical HTML/CSS for a horizontal menu:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable>&lt;nav id="mainmenu"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;link1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;link2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;link3&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" contenteditable>#mainmenu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#mainmenu li {
+  display: inline-block;
+  margin-left: 10px;
+}</code></pre></div>
+            </li>
+            <li class="arrow">
+              can we rewrite this in a more generic, reusable way?
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Example 1 (2)</h2>
+          <ul>
+            <li>
+              rewritten with generic class names:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable>&lt;nav&gt;
+  &lt;ul class="l-grid"&gt;
+    &lt;li class="l-grid-col"&gt;&lt;a href="#"&gt;link1&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="l-grid-col"&gt;&lt;a href="#"&gt;link2&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="l-grid-col"&gt;&lt;a href="#"&gt;link3&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" contenteditable>.l-grid {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.l-grid-col {
+  display: inline-block;
+  margin-left: 10px;
+}</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/modularity/grid.html">demo</a></div>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              The <code class="hl">l-</code> prefix is used here to indicate it's a layout style, but isn't necessary.
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>Example 1 (3)</h2>
+          <ul>
+            <li>
+              What did we win / lose:
+              <ul>
+                <li class="v-style">our <code class="hl">.l-grid</code> style can be applied to any container with a horizontal layout</li>
+                <li class="v-style">using class- instead of id-attributes reduces specificity</li>
+                <li class="v-style">applying styles to your HTML is much easier</li>
+                <li class="v-style">styles are instantly visible in your HTML</li>
+                <li class="x-style">you need a few extra bytes for the class attributes</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              all major CSS frameworks are built this way (Bootstrap, Foundation...)
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Example 2">
+          <h2>Example 2 (1)</h2>
+          <ul>
+            <li>
+              typical example with buttons:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable>&lt;form id="frm1"&gt;
+  ...
+  &lt;button type="submit"&gt;Ok&lt;/button&gt;
+  &lt;button type="button"&gt;Cancel&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" contenteditable style="height: 200px">#frm1 button[type=submit] {
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #0275d8;
+  border-radius: .25rem;
+  color: #fff;
+  background-color: #0275d8;
+}
+
+#frm1 button[type=button] {
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  color: #373a3c;
+  background-color: #fff;
+}</code></pre></div>
+            </li>
+            <li class="arrow">
+              what can be improved?
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              answer:
+              <ul>
+                <li>lots of double code</li>
+                <li>can only be used in the context of this form</li>
+                <li>can only be applied to buttons</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>Example 2 (2)</h2>
+          <ul>
+            <li>
+              let's rewrite this more OO-style, with classes and subclasses:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable>&lt;form&gt;
+  ...
+  &lt;button type="submit" class="btn btn-primary"&gt;Ok&lt;/button&gt;
+  &lt;button type="button" class="btn btn-secondary"&gt;Cancel&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" contenteditable style="height: 200px">.btn {
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: .25rem;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Arial;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8;
+}
+
+.btn-secondary {
+  color: #373a3c;
+  background-color: #fff;
+  border-color: #ccc;
+}</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/modularity/buttons2.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              less code and easier to read
+            </li>
+            <li class="arrow">
+              applying styles to your HTML is much easier
+            </li>
+            <li class="arrow">
+              greater flexibility: also works with <code class="hl">&lt;a&gt;</code> or<code class="hl">&lt;input type="..."&gt;</code>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              FYI: this fragment comes from Bootstrap
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>Example 2 (3)</h2>
+          <ul>
+            <li>
+              you can even create customized versions with sub-subclasses:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable>&lt;form&gt;
+  ...
+  &lt;button type="submit" class="btn btn-primary btn-primary-minimal"&gt;Ok&lt;/button&gt;
+  &lt;button type="button" class="btn btn-secondary btn-secondary-minimal"&gt;
+    Cancel
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" contenteditable style="height: 200px">...
+
+.btn-primary-minimal {
+  color: #0275d8;
+  background-color: transparent;
+  border-width: 2px;
+  line-height: 1.2;
+}
+
+.btn-secondary-minimal {
+  background-color: transparent;
+  border-width: 2px;
+  line-height: 1.2;
+}</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/modularity/minimal.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              to create a modified version, use an extra class
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Summing it up</h2>
+          <ul>
+            <li>
+              to sum things up, pro's &amp; cons of class selectors:
+              <ul class="v-style">
+                <li>fast</li>
+                <li>can be reused</li>
+                <li>reduce specificity, thus making style cascading easier</li>
+                <li>allows writing modular / inherited CSS</li>
+                <li>with proper class naming, styles are instantly visible in your HTML</li>
+                <li class="x-style">presentational classnames in HTML break separation content&ndash;presentation</li>
+                <li class="x-style">slightly bloated HTML code due to many classnames</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              still, pro's outweight the cons; start thinking in class selectors
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Naming conventions</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Naming conventions</h2>
+          <ul>
+            <li>
+              ok, so we mainly use classes &mdash; but how do we name them?
+            </li>
+            <li>
+              classnames are traditionally in dash notation, e.g. <code class="hl">.card-title</code>, <code class="hl">.btn-group-vertical</code> etc...
+            </li>
+            <li>
+              several naming conventions exist, all more or less following the parent-child-theme structure, the most important being:
+              <ul>
+                <li><a href="http://getbem.com/introduction/">BEM</a>: Block Element Modifier</li>
+                <li><a href="https://smacss.com/">SMACSS</a>: Scalable and Modular Architecture for CSS</li>
+                <li>OOCSS: Object Oriented CSS</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              whichever system you choose isn't important, as long as it is consistent
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Why dashes and not underscores? There isn't a clear answer, but some suggestions:
+              <ul>
+                <li>in CSS1, underscores technically needed to be escaped, e.g. <code class="hl">p.urgent\_note {color: maroon;}</code></li>
+                <li>dashes are also used elsewhere in CSS, e.g. :first-child</li>
+                <li>dashes are also used in URL's as Google SEO treats word separated by dashes as separate words; maybe this has also bled in CSS naming conventions?</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>BEM</h2>
+          <ul>
+            <li>
+              BEM (Block, Element, Modifier) is the mother of all naming conventions: <code class="hl">.block__element--modifier</code>
+              <ul>
+                <li><em>Block</em>: parent; top level element</li>
+                <li><em>Element</em>: child; is only relevant within the parent</li>
+                <li><em>Modifier</em>: state or theme</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>BEM example 1</h2>
+          <ul>
+            <li>
+              illustration found on <a href="http://codepen.io/team/css-tricks/pen/226a65c8f7d64615aabd45048d1d3b6d">this codepen</a>:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" style="max-height: 150px;">&lt;a href="#" class="btn"&gt;
+  &lt;span class="btn__text"&gt;Standard button&lt;/span&gt;
+&lt;/a&gt;
+
+&lt;a href="#" class="btn btn--orange btn--big"&gt;
+  &lt;span class="btn__price"&gt;$3&lt;/span&gt;
+  &lt;span class="btn__text"&gt;Big button&lt;/span&gt;
+&lt;/a&gt;
+
+&lt;a href="#" class="btn btn--blue btn--big"&gt;
+  &lt;span class="btn__price"&gt;$4&lt;/span&gt;
+  &lt;span class="btn__text"&gt;Big button&lt;/span&gt;
+&lt;/a&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="css" style="max-height: 150px;">/* Block */
+.btn { ... }
+
+/* Elements */
+.btn__price  { ... }
+.btn__text  { ... }
+
+/* Modifiers */
+.btn--big  { ... }
+.btn--blue  { ... }
+.btn--orange  { ... }
+</code></pre></div>
+            </li>
+          </ul>
+          <img src="img/04_moderncss/bem_buttons.png" alt="" class="border" style="max-width: 80%" />
+        </section>
+        <section>
+          <h2>BEM example 2</h2>
+          <ul>
+            <li>
+              another illustration found on <a href="http://codepen.io/team/css-tricks/pen/EaJEBZ">this codepen</a>:
+              <div><pre class="bigger"><code class="language-html" data-caption="html" style="max-height: 150px;">&lt;div class="accordion"&gt;
+  &lt;div class="accordion__item"&gt;
+    &lt;h3 class="accordion__title js-title"&gt;Real Lorem Ipsum by 37signals&lt;/h3&gt;
+    &lt;p class="accordion__content accordion__content--open js-content"&gt;
+      content here...
+    &lt;/p&gt;
+  &lt;/div&gt;
+  ...
+&lt;/div&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-js" data-caption="javascript" style="max-height: 150px;">// interesting idea: separate classnames for scripts
+var $title = $('.js-title');
+var copy   = '.js-copy';
+// rest of scripts here
+// ...
+</code></pre></div>
+              <div style="overflow: hidden">
+              <div style="width: 50%; float: left"><pre class="bigger"><code class="language-css" data-caption="css" style="max-height: 150px;">/* Block */
+.accordion { ... }
+
+/* Element */
+.accordion__title { ... }
+.accordion__text { ... }
+
+/* Element-Modifier */
+.accordion__text--open { ... }
+</code></pre></div>
+              <img src="img/04_moderncss/bem_accordeon.png" alt="" class="border" style="max-height: 166px; float: right" />
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>BEM pro's and cons</h2>
+          <ul>
+            <li>
+              BEM has some nice pro's:
+              <ul class="v-style">
+                <li>quickly see which modifiers and children styles already exist for a block</li>
+                <li>quickly see which element is dependent on another</li>
+                <li>consistent naming => easier communication in a team</li>
+                <li>everything is a class, nothing is nested => fast and flat CSS with low specificity</li>
+              </ul>
+            </li>
+            <li class="no-style">
+              and some con's too:
+              <ul class="x-style">
+                <li>double dashes and underscores might not be everyone's liking</li>
+                <li>you'll need lots of class attributes cluttering your HTML</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              more BEM examples on <a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/">csswizardry.com</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Other naming conventions</h2>
+          <ul>
+            <li>
+              you don't need to like BEM; an alternative could be:
+              <div><pre class="bigger"><code class="language-css" data-caption="css">/* element */
+.product { ... }
+
+/* child */
+.product-title { ... }
+.product-btnOrder { ... }
+
+/* modifier, generic */
+.product-btnOrder.blue { ... }
+.product-btnOrder.orange { ... }
+
+/* modifier, specific */
+.product_highlighted { ... }
+.product_unavailable { ... }
+
+/* state */
+.product.is-selected { ... }
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              at least use <i>some</i> set of rules (with focus on flat CSS and class selectors)
+            </li>
+            <li class="arrow">
+              don't get paranoïa, they're only guidelines; you can still use other types of selectors (contextual, tag etc...) in specific situations
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>Other good practices</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="'Best' practices">
+          <h2>'Best' practices (1)</h2>
+          <ul>
+            <li>
+              you'll find lots of best practices on the web, many of them questionable or obsolete
+            </li>
+            <li>
+              csslint for example <a href="https://github.com/CSSLint/csslint/wiki/Require-fallback-colors">suggests a fallback color</a> for <a href="http://caniuse.com/#search=rgba">older browsers</a>:
+              <div><pre class="bigger"><code class="language-css" contenteditable>.box {
+  background: #000;
+  color: blue; /* fallback color for IE8 and lower */
+  color: rgba(100, 100, 200, 0.5);
+}
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              it's safe to ignore anything below IE9 / IE10
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Unless you insist on making your site 100% compatible with IE7-, you don't need hacks. Hacks are generally a sign of poor CSS skills. Don't compensate an error by adding another.
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>'Best' practices (2)</h2>
+          <ul>
+            <li>
+              csslint will also warn against zero values with unit <a href="https://github.com/CSSLint/csslint/wiki/Disallow-units-for-zero-values">because it saves bytes</a> (aww c'mon!)
+              <div><pre class="bigger"><code class="language-css" contenteditable>.mybox1 {
+  padding: 10px 0px; /* plays nicely with de- and increment in webdev tools */
+}
+.mybox2 {
+    width: 0%; /* same here */
+}
+</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" contenteditable>.mybox1 {
+  padding: 10px 0; /* you saved 2 bytes, big deal */
+}
+.mybox2 {
+    width: 0; /* you saved 1 byte, wow, really */
+}
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              use zeros with or without units, as you like
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Unless you insist on making your site 100% compatible with IE7-, you don't need hacks. Hacks are generally a sign of poor CSS skills. Don't compensate an error by adding another.
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>don't use hacks</h2>
+          <ul>
+            <li>
+              Unless you insist on making your site 100% compatible with IE7-, you don't need hacks. Hacks are generally a sign of poor CSS skills. Don't compensate an error or bug by adding another.
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>.mybox {
+  border: 1px solid black;
+  padding: 5px;
+  width: 100px;
+  _width: 200px; /* IE7- only */
+}
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Use shorthand notation</h2>
+          <ul>
+            <li>
+              shorthand notation reduces file size and improves overall readability
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>#mybox {
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-css right" contenteditable>#mybox {
+  margin: 20px 10px;
+}</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>avoid !important</h2>
+          <ul>
+            <li>
+              don't use <code class="hl">!important</code> to artificially increase specificity:
+              <div><pre class="bigger"><code class="language-css wrong" contenteditable>.mybox {
+    color: red !important;
+}</code></pre></div>
+            </li>
+            <li>
+              two acceptable cases:
+              <ul class="v-style">
+                <li>to overrule inline CSS, e.g. generated by Javascript (no alternative there)</li>
+                <li>to tweak an existing theme, e.g. Wordpress</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Using <code class="hl">!important</code> is usually an indication that the specificity of the entire CSS has gotten a bit out of control and needs to be refactored.
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>more good practices</h2>
+          <ul>
+            <li>
+              other advices:
+              <ul>
+                <li class="x-style">do <b>not</b> use a CSS framework like Bootstrap or Foundation to hide poor CSS skills; be a Vanilla CSS expert at all times</li>
+                <li class="v-style">favor class selectors over id, tag or other selectors</li>
+                <li class="v-style">minify and concatenate your CSS files</li>
+                <li class="v-style">
+                  find a way to organize your stylesheets, e.g. top-down
+                  <ul>
+                    <li>generic styles (clearfix, html fontsize...)</li>
+                    <li>general styles (body, a, p...)</li>
+                    <li>
+                      header
+                      <ul>
+                        <li>layout</li>
+                        <li>logo</li>
+                        <li>menu</li>
+                        <li>...</li>
+                      </ul>
+                    </li>
+                    <li>
+                      etc...
+                    </li>
+                  </ul>
+                </li>
+                <li class="arrow">comment each block</li>
+                <li class="arrow">consider separating skin (fonts, colors...) from structure in separate files</li>
+                <li class="arrow">above all: be consistent</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>SASS</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>About SASS</h2>
+          <ul>
+            <li>
+              Sass (Syntactically Awesome Style Sheets) enhances Vanilla CSS:
+              <ul>
+                <li>calculations (actually currently better in Vanilla CSS)</li>
+                <li>variables (bad native browser support and performance issues in Vanilla CSS)</li>
+                <li>imports (<code class="hl">@import</code> in Vanilla CSS has performance issues due to HTTP requests)</li>
+                <li>mixins (not considered in Vanilla CSS, probably performance issues)</li>
+                <li>selector nesting (doesn't exist in Vanilla CSS)</li>
+                <li><code class="hl">if-else</code> &amp; <code class="hl">for</code> (doesn't exist in Vanilla CSS)</li>
+                <li>...</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              in Sass, values are calculated at <em>compile time</em>, which has pro's (e.g. performance) and con's (not dynamic: think Javascript, values like 100% - 20px etc...)
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>SASS or SCSS syntax</h2>
+          <ul>
+            <li>
+              older <em>SASS</em> syntax:
+              <div><pre class="bigger"><code class="language-scss" data-caption="sass" style="height: 150px">nav
+  li
+    float: left
+
+    + li::before
+      content: " | "
+
+    a
+      display: block
+      line-height: 1.3
+      padding: 0 0.5rem
+</code></pre></div>
+            </li>
+            <li>
+              newer <em>SCSS</em> syntax:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="height: 150px">nav {
+  li {
+    float: left;
+
+    + li::before {
+      content: " | ";
+    }
+
+    a {
+      display: block;
+      line-height: 1.3;
+      padding: 0 0.5rem;
+    }
+  }
+}
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              SCSS syntax is an extension of CSS (recommended)
+            </li>
+            <li class="arrow">
+              tip: try your SCSS out on the <a href="http://www.sassmeister.com/">online scss compiler</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>nesting</h2>
+          <ul>
+            <li>
+              <em>nesting</em> in SCSS creates contextual selectors:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="height: 150px">nav {
+  li {
+    float: left;
+
+    + li::before {
+      content: " | ";
+    }
+
+    a {
+      display: block;
+      line-height: 1.3;
+      padding: 0 0.5rem;
+    }
+  }
+}
+</code></pre></div>
+            </li>
+            <li>
+              rendered:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css" style="height: 150px">nav li {
+  float: left;
+}
+nav li + li::before {
+  content: " | ";
+}
+nav li a {
+  display: block;
+  line-height: 1.3;
+  padding: 0 0.5rem;
+}
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>nesting &mdash; ampersand &amp;</h2>
+          <ul>
+            <li>
+              <em>&amp;</em> refers to the parent selector:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="height: 150px">a {
+  text-decoration: none;
+  &amp;:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  border: 1px solid;
+  &amp;-primary {
+    border-color: #0275d8;
+  }
+  &amp;-secondary {
+    border-color: #ccc;
+  }
+}
+</code></pre></div>
+            </li>
+            <li>
+              rendered:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css" style="height: 150px">a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  border: 1px solid;
+}
+button-primary {
+  border-color: #0275d8;
+}
+button-secondary {
+  border-color: #ccc;
+}
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>variables</h2>
+          <ul>
+            <li>
+              reusable <em>variables</em> in SCSS:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss">$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: $font-stack;
+  color: $primary-color;
+}
+input[type=button], button {
+  border: 1px solid $primary-color;
+}
+</code></pre></div>
+            </li>
+            <li>
+              rendered:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css">body {
+  font: Helvetica, sans-serif;
+  color: #333;
+}
+
+input[type=button], button {
+  border: 1px solid #333;
+}
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>control structures</h2>
+          <ul>
+            <li>
+              control structures like <code class="hl">@if</code>, <code class="hl">@for</code>... in SCSS:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss">$theme: ocean;
+
+p {
+  @if $theme == ocean {
+    color: blue;
+  } @else if $theme == desert {
+    color: red;
+  } @else if $theme == jungle {
+    color: green;
+  } @else {
+    color: black;
+  }
+}</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="partials &amp; imports">
+          <h2>partials &amp; imports (1)</h2>
+          <ul>
+            <li>
+              a <em>partial</em> is just a SCSS file prefixed with an underscore:
+              <div><pre class="bigger"><code class="language-scss" data-caption="_reset.scss">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-scss" data-caption="_tables.scss">table {
+  border: 1px solid;
+  ...
+}
+...
+</code></pre></div>
+            </li>
+            <li>
+              including partials:
+              <div><pre class="bigger"><code class="language-scss" data-caption="styles.scss">@import 'reset';
+@import 'tables';
+
+/* rest of styles here */
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>partials &amp; imports (2)</h2>
+          <ul>
+            <li>
+              use partials to organize your CSS in separate files:
+              <div><pre class="bigger"><code class="language-text" data-caption="folder structure" style="max-height: 200px">partials/
+  |-- mixins/
+    |-- _animations.scss
+    |-- _clearfix.scss
+    |-- _gradients.scss
+    |-- ...
+  |-- _base.scss
+  |-- _forms.scss
+  |-- _grids.scss
+  |-- _icons.scss
+  |-- _menus.scss
+  |-- _messages.scss
+  |-- _panes.scss
+  |-- _reset.scss
+  |-- _typography.scss
+  `-- ...
+</code></pre></div>
+            </li>
+            <li>
+              your main file is kept extremely clean:
+              <div><pre class="bigger"><code class="language-scss" data-caption="styles.scss">// modules and variables
+@import "partials/base";
+
+// partials
+@import "partials/reset";
+@import "partials/typography";
+@import "partials/icons";
+// ...
+</code></pre></div>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              You could theoretically also use CSS's native <code class="hl">@import</code> but this generates an extra HTTP request. As a modern site will easily need dozens of imports, this is detrimental for your site performance.
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>mixins</h2>
+          <ul>
+            <li>
+              a <em>mixin</em> is a reusable function generating a block of SCSS:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="height: 200px">@mixin my_links($link, $hover, $size: 1.4rem) {
+  a {
+    color: $link;
+    font-size: $size;
+    &amp;:hover {
+      color: $hover;
+    }
+  }
+}
+
+nav {
+  @include my_links(#333, #999);
+}
+
+footer {
+  @include my_links(#eee, #ccc, 1.2rem);
+}
+</code></pre></div>
+            </li>
+            <li>
+              rendered:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css" style="height: 200px">nav a {
+  color: #333;
+  font-size: 1.4rem;
+}
+nav a:hover {
+  color: #999;
+}
+
+footer a {
+  color: #eee;
+  font-size: 1.2rem;
+}
+footer a:hover {
+  color: #ccc;
+}
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>@extend</h2>
+          <ul>
+            <li>
+              inherit properties from another selector with <em>@extend</em>:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="height: 200px">.btn {
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid;
+  border-radius: .25rem;
+}
+
+.btn-ok {
+  @extend .btn;
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8;
+}
+
+.btn-cancel {
+  @extend .btn;
+  color: #373a3c;
+  background-color: #fff;
+  border-color: #ccc;
+}</code></pre></div>
+            </li>
+            <li>
+              rendered:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css" style="height: 200px">.btn, .btn-ok, .btn-cancel {
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid;
+  border-radius: .25rem;
+}
+
+.btn-ok {
+  color: #fff;
+  background-color: #0275d8;
+  border-color: #0275d8;
+}
+
+.btn-cancel {
+  color: #373a3c;
+  background-color: #fff;
+  border-color: #ccc;
+}</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>calculations</h2>
+          <ul>
+            <li>
+              SCSS offers basic calculations:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss">.container {
+  width: 600px / 960px * 100%; /* 62.5% */
+}</code></pre></div>
+            </li>
+            <li>
+              note: like all preprocessors, it can only calculate static values:
+              <div><pre class="bigger"><code class="language-scss" data-caption="css">.container {
+  width: 100% - 2rem; /* will throw an error */
+}</code></pre></div>
+            </li>
+            <li class="arrow">
+              SCSS has more: custom functions, interpolations etc..., see <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">documentation</a>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Pitfalls">
+          <h2>Pitfalls (1)</h2>
+          <ul>
+            <li>
+              you'll often see SCSS code like this, compiling nicely to BEM:
+              <div><pre class="bigger"><code class="language-scss wrong" data-caption="scss" style="max-height: 150px">.product {
+  &amp;--highlight {
+    background-color: #ffc;
+  }
+  &amp;__btnOrder {
+    border-color: #9f9;
+    &amp;--minimal {
+      background-color: transparent;
+    }
+  }
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="compiled css" style="max-height: 150px">.product--highlight {
+  background-color: #ffc;
+}
+.product__btnOrder {
+  border-color: #9f9;
+}
+.product__btnOrder--minimal {
+  background-color: transparent;
+}
+</code></pre></div>
+            </li>
+            <li class="arrow">
+              your code is not searcheable anymore for e.g. <code class="hl">.product__btnOrder</code>
+            </li>
+            <li class="arrow">
+              don't use <code class="hl">&amp;</code> to generate new class names
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Pitfalls">
+          <h2>Pitfalls (2)</h2>
+          <ul>
+            <li>
+              beware of deep nesting:
+              <div><pre class="bigger"><code class="language-scss" data-caption="scss" style="max-height: 150px">.nav {
+  float: right;
+  ul {
+    overflow: hidden;
+    li {
+      display: inline-block;
+      .nav-link {
+        text-decoration: none;
+        &amp;:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}</code></pre></div>
+              <div><pre class="bigger"><code class="language-css" data-caption="compiled css" style="max-height: 150px">...
+.nav ul li .nav-link:hover {
+  text-decoration: underline;
+}</code></pre></div>
+            </li>
+            <li class="arrow">
+              the compiled CSS selectors are long and inefficient (slow)
+            </li>
+            <li class="arrow">
+              keep your SCSS flat and simple, just like CSS
+            </li>
+            <li class="arrow">
+              how would you correct this?
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              <p>Answer:</p>
+              <pre><code>.nav {
+  float: right;
+  ul {
+    overflow: hidden;
+  }
+  li {
+    display: inline-block;
+  }
+  .nav-link {
+    text-decoration: none;
+    &amp;:hover {
+      text-decoration: underline;
+    }
+  }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modern CSS</h1>
+          <h2>CSS frameworks</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Frontend Frameworks</h2>
+          <ul>
+            <li>
+              frontend frameworks offer methodology and/or rich components:
+              <ul>
+                <li>
+                  <em>CSS frameworks</em> focus on design; Javascript is mostly used for component behaviour (e.g. accordeon) -> <a href="http://getbootstrap.com/components/">Bootstrap</a>, <a href="http://zurb.com/building-blocks">Foundation</a>, <a href="https://www.getmdl.io/components/index.html">MDL</a>
+                </li>
+                <li><em>Javascript frameworks</em> focus on coding methodology; design is left to the programmer -> <a href="https://angular.io/">Angular</a>, <a href="https://facebook.github.io/react/">React</a></li>
+                <li><em>full frontend frameworks</em> offer design and methodology, e.g. <a href="polymer-project.org">Polymer</a>
+              </ul>
+            </li>
+            <li>
+              when choosing a framework, watch out for
+              <ul>
+                <li>popularity (tutorials, user base, third party code), is it future-proof?</li>
+                <li>maturity; how likely are major changes?</li>
+                <li>specificity (learning curve)</li>
+                <li>good documentation</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              <p>Still, chosing a future-proof framework is a hit and miss. Backbone was the golden standard a few years ago, but today it's obsolete. The immensely popular Angular completely overthrew its syntax in version 2, which is not compatible with version 1.</p>
+              <p>As for specificity: that's why SCSS is better than SASS. It extends the CSS syntax instead of creating its own like SASS, resulting in a smoother learning curve.</p>
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="Bootstrap">
+          <h2>Bootstrap (1)</h2>
+          <ul>
+            <li>
+              Bootstrap is no doubt the most popular CSS framework today.
+            </li>
+            <li>
+              It allows you to throw together a standard interface in just minutes:
+              <ol style="list-style:decimal">
+                <li>
+                  install bootstrap <a href="http://v4-alpha.getbootstrap.com/getting-started/download/#bower">with Bower</a> or via <a href="http://v4-alpha.getbootstrap.com/getting-started/introduction/#quick-start">Bootstrap CDN</a>
+                </li>
+                <li>
+                  start with this <a href="http://v4-alpha.getbootstrap.com/getting-started/introduction/#starter-template">basic template</a> or from <a href="http://v4-alpha.getbootstrap.com/examples/">these examples</a>
+                </li>
+                <li>
+                  create your responsive <a href="http://v4-alpha.getbootstrap.com/layout/grid/">grid</a> (based on 12 columns)
+                </li>
+                <li>
+                  toss in the <a href="http://v4-alpha.getbootstrap.com/components/buttons/">components</a> you need
+                </li>
+                <li>
+                  choose a <a href="http://themes.getbootstrap.com/">theme</a>, <a href="https://pikock.github.io/bootstrap-magic/app/index.html#!/editor">create one</a>, <a href="https://www.smashingmagazine.com/2013/03/customizing-bootstrap/">customize</a> or <a href="http://www.sitepoint.com/sass-semantically-extend-bootstrap/">extend</a> the SCSS
+                </li>
+              </ol>
+            </li>
+            <li>
+              be sure to use <a href="http://v4-alpha.getbootstrap.com/">Bootstrap 4</a> (in alpha now), not <a href="http://getbootstrap.com/">Bootstrap 3</a>:
+              <ul>
+                <li>uses SCSS instead of LESS</li>
+                <li>uses rem instead of px</li>
+                <li>improved grid system</li>
+                <li>...</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Bootstrap (2)</h2>
+          <ul>
+            <li>
+              Bootstrap's most important feature is without any doubt its responsive grid system
+            </li>
+            <li>
+              Bootstrap 4 uses 5 viewport widths:
+              <ul>
+                 <li><code class="hl">-xs-</code>: &lt;544px</li>
+                 <li><code class="hl">-sm-</code>: ≥544px</li>
+                 <li><code class="hl">-md-</code>: ≥768px</li>
+                 <li><code class="hl">-lg-</code>: ≥992px</li>
+                 <li><code class="hl">-xl-</code>: ≥1200px</li>
+               </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Bootstrap (3)</h2>
+          <ul>
+            <li>
+              grid example (see <a href="http://v4-alpha.getbootstrap.com/layout/grid/">more grid examples</a>):
+              <div><pre class="bigger"><code class="language-html" data-caption>&lt;div class="row"&gt;
+  &lt;!-- full width on extra small screens, 2/3 on medium screens --&gt;
+  &lt;div class="col-xs-12 col-md-8"&gt;.col-xs-12 .col-md-8&lt;/div&gt;
+  &lt;!-- half width on extra small screens, 1/3 on medium screens --&gt;
+  &lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+  &lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+  &lt;div class="col-xs-6 col-md-4"&gt;.col-xs-6 .col-md-4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="col-xs-6"&gt;.col-xs-6&lt;/div&gt;
+  &lt;div class="col-xs-6"&gt;.col-xs-6&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/bootstrap1.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Bootstrap (4)</h2>
+          <ul>
+            <li>
+              full example (see <a href="http://v4-alpha.getbootstrap.com/examples/">more full examples</a>):
+              <div><pre class="bigger"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;Template for Bootstrap&lt;/title&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+  &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+  &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav class="navbar navbar-static-top navbar-dark bg-inverse"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Project name&lt;/a&gt;
+    &lt;ul class="nav navbar-nav"&gt;
+      &lt;li class="nav-item active"&gt;
+        &lt;a class="nav-link" href="#"&gt;Home &lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link" href="#"&gt;About&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;!-- Main jumbotron for a primary marketing message or call to action --&gt;
+  &lt;div class="jumbotron"&gt;
+    &lt;div class="container"&gt;
+      &lt;h1 class="display-3"&gt;Hello, world!&lt;/h1&gt;
+      &lt;p&gt;This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.&lt;/p&gt;
+      &lt;p&gt;&lt;a class="btn btn-primary btn-lg" href="#" role="button"&gt;Learn more &raquo;&lt;/a&gt;&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="container"&gt;
+    &lt;!-- Example row of columns --&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;h2&gt;Heading&lt;/h2&gt;
+        &lt;p&gt;Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. &lt;/p&gt;
+        &lt;p&gt;&lt;a class="btn btn-secondary" href="#" role="button"&gt;View details &raquo;&lt;/a&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;h2&gt;Heading&lt;/h2&gt;
+        &lt;p&gt;Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. &lt;/p&gt;
+        &lt;p&gt;&lt;a class="btn btn-secondary" href="#" role="button"&gt;View details &raquo;&lt;/a&gt;&lt;/p&gt;
+     &lt;/div&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;h2&gt;Heading&lt;/h2&gt;
+        &lt;p&gt;Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
+        &lt;p&gt;&lt;a class="btn btn-secondary" href="#" role="button"&gt;View details &raquo;&lt;/a&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;footer&gt;
+      &lt;p&gt;&copy; Company 2015&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt; &lt;!-- /container --&gt;
+  &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"&gt;&lt;/script&gt;
+  &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/bootstrap2.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Material Design">
+          <h2>Material Design (1)</h2>
+          <ul>
+            <li>
+              <a href="https://www.google.com/design/spec/material-design/introduction.html#introduction-principles">Material Design</a> is not a CSS framework, but a design philosophy
+            </li>
+            <li>
+              MD is meant to be the de facto standard for Google products (e.g. maps) and Android apps
+            </li>
+            <li>
+              MD is arguably the most comprehensive design guideline today:
+              <ul>
+                <li>
+                  guidelines about basically everything: colors, animations, layout, components...
+                </li>
+                <li>
+                  lightning/shadows, surface, movements etc. are based on based on paper properties (not always possible, e.g. expanding areas)
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (2)</h2>
+          <ul>
+            <li>
+              to illustrate, let's zoom in on one of the many aspects of MD: <a href="https://www.google.com/design/spec/what-is-material/material-properties.html#">material properties</a>
+            </li>
+            <li>
+              rule 1: material has a fixed thickness
+            </li>
+          </ul>
+          <img src="img/04_moderncss/md1.png" alt="" class="border" style="max-width: 60%" />
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (3)</h2>
+          <ul>
+            <li>
+              rule 2: no bending or folding
+            </li>
+          </ul>
+          <video src="https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0B6Okdz75tqQsMXhFNUo2WmJrLWc/whatismaterial-materialprop-transformingmaterial-PaperBendFold_xhdpi_006.webm"
+             controls
+             width="530" height="334" style="border: 1px solid red; border-bottom-width: 10px">
+          you need to be online to view this video
+          </video>
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (4)</h2>
+          <ul>
+            <li>
+              rule 3: material cannot pass through another material
+            </li>
+          </ul>
+          <video src="https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0B6Okdz75tqQsekRnTGVlVEQzNXc/whatismaterial_properties_physical_07_xhdpi_009.webm"
+             controls
+             width="700" height="334" style="border: 1px solid red; border-bottom-width: 10px">
+          you need to be online to view this video
+          </video>
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (5)</h2>
+          <ul>
+            <li>
+              rule 4: material can split and heal
+            </li>
+          </ul>
+          <video src="https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0B6Okdz75tqQsQV9PS2Q0anFoZzg/whatismaterial-materialprop-transformingmaterial-PaperSplitHeal_xhdpi_005.webm"
+             controls
+             width="530" height="334" style="border: 1px solid green; border-bottom-width: 10px">
+          you need to be online to view this video
+          </video>
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (6)</h2>
+          <ul>
+            <li>
+              rule 5: elevation is decided by its function and state
+            </li>
+          </ul>
+          <img src="img/04_moderncss/md_elevation.png" alt="" class="border" style="max-width: 100%" />
+        </section>
+        <section data-toc-title="">
+          <h2>Material Design (7)</h2>
+          <ul>
+            <li>
+              Many frameworks are based on Material Design:
+              <ul>
+                <li><a href="http://materializecss.com/">Materialize</a>: CSS framework; feels like Bootstrap</li>
+                <li><a href="https://www.getmdl.io/">Material Design Lite</a>: CSS framework; BEM-based</li>
+                <li><a href="https://www.polymer-project.org/1.0/">Google Polymer</a>: frontend framework</li>
+                <li><a href="https://material.angularjs.org/latest/">Angular Material</a>: frontend framework; Angular's implementation of MD; <a href="https://github.com/angular/material2">version for Angular 2</a> not ready yet</li>
+              </ul>
+            </li>
+            <li class="arrow">
+              great comparison between Material Design Lite and Bootstrap (3) on <a href="http://tutorialzine.com/2015/07/comparing-bootstrap-with-mdl/">tutorialzine.com</a> with <a href="http://demo.tutorialzine.com/2015/07/comparing-bootstrap-with-mdl/?grid">many code examples</a>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Material Design Lite">
+          <h2>Material Design Lite (1)</h2>
+          <ul>
+            <li>
+              MDL grid example:
+              <div><pre class="bigger"><code class="language-html" style="max-height: 250px">&lt;div class="mdl-grid"&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--4-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 50% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--4-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 50% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--8-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 100% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--5-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 62.5% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--3-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 37.5% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+  &lt;div class="mdl-cell mdl-cell--2-col-phone mdl-cell--8-col-tablet mdl-cell--2-col-desktop"&gt;
+      50% phone &lt;/br&gt; 100% tablet &lt;/br&gt; 16.6% desktop
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>
+              <div class="demolink"><a href="demos/04_moderncss/mdl1.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              more on MDL grids on <a href="http://webdesign.tutsplus.com/tutorials/learning-material-design-lite-the-grid--cms-24531">tutsplus.com</a>
+            </li>
+            <li class="arrow">
+              full examples see <a href="https://getmdl.io/templates/index.html">MDL templates</a>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Final thoughts</h2>
+          <ul>
+            <li>
+              You'll have noticed some striking limitations and differences in Bootstrap's and MDL's grid system:
+              <ul>
+                <li>both have fixed breakpoint values</li>
+                <li>Bootstrap has 5 breakpoints, MDL 3</li>
+                <li>MDL has a 8px gutter between cells, Bootstrap doesn't</li>
+                <li>Bootstrap uses the concept of rows, MDL doesn't</li>
+              </ul>
+            </li>
+            <li>
+              A CSS framework has a certain style. Don't hack or fight it.
+            </li>
+          </ul>
+          <blockquote style="margin-top: 10px; padding: 10px; text-align: center; width: 100%; background-color: #ffe; color: #600">
+             apart from basic theming, don't twist or bend a framework; embrace it's style, choose another or use Vanilla CSS; for custom tailored designs, a framework is probably <u>not</u> the answer
+          </blockquote>
+        </section>
+      </section>
+
+			<section data-index-title="">
+				<section>
+					<h2>Questions?</h2>
+          <ul>
+            <li>
+              Some great CSS learning resources and references:
+              <ul>
+                <li><a href="https://css-tricks.com/">css-tricks.com</a></li>
+                <li><a href="http://www.sitepoint.com/">sitepoint.com</a></li>
+                <li><a href="http://tutorialzine.com/">tutorialzine.com</a></li>
+              </ul>
+            </li>
+          </ul>
+				</section>
+			</section>
+
+		</div>
+
+		<!-- ikdoeict.be Link -->
+		<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+		<!-- Index Link -->
+		<aside class="back">
+	      <nav>
+	        <p><a href="index.html">&larr; Back to index</a></p>
+	      </nav>
+		</aside>
+
+
+		<!-- bottomleft links -->
+		<ul id="extra">
+		</ul>
+
+	</div>
+
+	<script src="library/jquery.min.js"></script>
+	<script src="library/head.min.js"></script>
+	<script src="library/reveal/reveal.min.js"></script>
+	<script src="library/highlight/highlight.pack.js"></script>
+	<script src="library/prefixfree.js"></script>
+	<script src="library/css-snippets.js"></script>
+	<script src="library/css-edit.js"></script>
+	<script src="library/incrementable.js"></script>
+	<script src="library/main.js"></script>
+
+</body>
+</html>

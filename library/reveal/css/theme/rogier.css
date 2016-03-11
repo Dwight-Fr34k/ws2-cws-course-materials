@@ -649,6 +649,17 @@ aside.back {
   padding: 0;
 }
 
+.reveal .tooltip pre {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reveal .tooltip pre code {
+  font-size: 12px;
+  padding-bottom: 14px;
+}
+
 .reveal .info.singleline div {
   min-width: 0;
   white-space: nowrap;
