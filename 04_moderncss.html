@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="library/reveal/css/reveal.min.css">
 	<link rel="stylesheet" href="library/reveal/css/theme/rogier.css" id="rogier">
-	<link rel="stylesheet" href="library/highlight/styles/vs.css">
+  <link rel="stylesheet" href="library/highlight/styles/vs.css">
 	<link rel="stylesheet" href="css/common.css">
   <style>
 
@@ -368,7 +368,7 @@ input[type=submit]</code></pre></div>
       <section>
         <section>
           <h1>Modern CSS</h1>
-          <h2>Class selectors</h2>
+          <h2>Using class selectors</h2>
           <ul class="chapterlist">
             <!-- to be filled by Javascript -->
           </ul>
@@ -833,11 +833,6 @@ var copy   = '.js-copy';
               it's safe to ignore anything below IE9 / IE10
             </li>
           </ul>
-          <div class="tooltip">
-            <div>
-              Unless you insist on making your site 100% compatible with IE7-, you don't need hacks. Hacks are generally a sign of poor CSS skills. Don't compensate an error by adding another.
-            </div>
-          </div>
         </section>
         <section data-toc-title="">
           <h2>'Best' practices (2)</h2>
@@ -863,11 +858,6 @@ var copy   = '.js-copy';
               use zeros with or without units, as you like
             </li>
           </ul>
-          <div class="tooltip">
-            <div>
-              Unless you insist on making your site 100% compatible with IE7-, you don't need hacks. Hacks are generally a sign of poor CSS skills. Don't compensate an error by adding another.
-            </div>
-          </div>
         </section>
         <section data-toc-title="">
           <h2>don't use hacks</h2>
@@ -1572,7 +1562,7 @@ footer a:hover {
           <ul>
             <li>
               full example (see <a href="http://v4-alpha.getbootstrap.com/examples/">more full examples</a>):
-              <div><pre class="bigger"><code class="language-html">&lt;!DOCTYPE html&gt;
+              <div><pre class="bigger"><code class="language-html" style="max-height: 250px;">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;title&gt;Template for Bootstrap&lt;/title&gt;
@@ -1634,6 +1624,9 @@ footer a:hover {
 &lt;/html&gt;
 </code></pre></div>
               <div class="demolink"><a href="demos/04_moderncss/bootstrap2.html">demo</a></div>
+            </li>
+            <li class="arrow">
+              you also might want to check <a href="https://bootstrapstudio.io/">Bootstrap Studio</a> or <a href="http://pingendo.com/">Pingendo</a> (free)
             </li>
           </ul>
         </section>
@@ -1789,7 +1782,7 @@ footer a:hover {
             </li>
           </ul>
           <blockquote style="margin-top: 10px; padding: 10px; text-align: center; width: 100%; background-color: #ffe; color: #600">
-             apart from basic theming, don't twist or bend a framework; embrace it's style, choose another or use Vanilla CSS; for custom tailored designs, a framework is probably <u>not</u> the answer
+             apart from basic theming, don't twist or bend a framework; embrace it's style, choose another or use Vanilla CSS; for custom tailored designs, a CSS framework is probably <u>not</u> the answer
           </blockquote>
         </section>
       </section>
