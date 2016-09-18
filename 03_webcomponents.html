@@ -402,7 +402,7 @@ RogierQuotePrototype.createdCallback = function() {
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;rogier-button data-text="Some Button" data-icon="v.png"&gt;&lt;/rogier-button&gt;
+  &lt;rogier-button data-text="Some Button" data-icon="demos/v.png"&gt;&lt;/rogier-button&gt;
   &lt;script&gt;
 
     'use strict'
@@ -590,7 +590,7 @@ var ThumbImage = document.registerElement('thumb-img', {
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;button is="rogier-button" data-text="Some Label" data-icon="v.png"&gt;&lt;/button&gt;
+  &lt;button is="rogier-button" data-text="Some Label" data-icon="demos/v.png"&gt;&lt;/button&gt;
   &lt;script&gt;
 
     'use strict'
@@ -647,7 +647,7 @@ var ThumbImage = document.registerElement('thumb-img', {
             <li>
               HTML elements are not encapsulated: their properties can be accessed by any script or stylesheet. Take a styled button:
               <div><pre class="bigger"><code class="language-html" data-caption="our html" contenteditable style="height: 80px">&lt;button class="v-button"&gt;
-  &lt;img src="v.png" alt=""&gt;
+  &lt;img src="demos/v.png" alt=""&gt;
   &lt;span&gt;Some Text&lt;/span&gt;
 &lt;/button&gt;
 </code></pre></div>
@@ -814,7 +814,7 @@ var ThumbImage = document.registerElement('thumb-img', {
   }
 &lt;/style&gt;
 &lt;button&gt;
-  &lt;img src="v.png" alt=""&gt;
+  &lt;img src="demos/v.png" alt=""&gt;
   &lt;span&gt;Some Text&lt;/span&gt;
 &lt;/button&gt;`;
 
@@ -948,7 +948,7 @@ var ThumbImage = document.registerElement('thumb-img', {
     'default text' : document.querySelector('input[name=txt]').value;
   span.style.color = document.querySelector('input[type=color]').value;
   img.src = document.querySelector('input[value=rbnImgX]').checked ?
-    'x.png' : 'v.png';
+    'demos/x.png : 'demos/v.png';
   btn.appendChild(img);
   btn.appendChild(span);
   document.querySelector('#buttons').appendChild(btn);
@@ -992,7 +992,7 @@ var ThumbImage = document.registerElement('thumb-img', {
               <div><pre class="bigger"><code class="language-html" data-caption="html" contenteditable style="">&lt;template id="myButtonTemplate"&gt;
   &lt;script&gt;console.log('hurray! new button is born');&lt;/script&gt;
   &lt;button class="my-button"&gt;
-    &lt;img src="v.png" alt=""&gt;
+    &lt;img src="demos/v.png" alt=""&gt;
     &lt;span&gt;default text&lt;/span&gt;
   &lt;/button&gt;
 &lt;/template&gt;</code></pre></div>
@@ -1010,7 +1010,7 @@ document.querySelector('#btnGenerate').addEventListener('click', () => {
   // customize template content
   if (inpTxt.value) content.querySelector('span').innerHTML = inpTxt.value;
   content.querySelector('span').style.color = inpColor.value;
-  content.querySelector('img').src = chbX.checked ? 'x.png' : 'v.png';
+  content.querySelector('img').src = chbX.checked ? 'demos/x.png : 'demos/v.png';
 
   // add to DOM
   document.querySelector('#buttons').appendChild(
@@ -1144,7 +1144,7 @@ document.querySelector('#btnGenerate').addEventListener('click', () => {
   &lt;/style&gt;
   &lt;script&gt;console.log('hurray! new button is born');&lt;/script&gt;
   &lt;button class="my-button"&gt;
-    &lt;img src="v.png" alt=""&gt;
+    &lt;img src="demos/v.png" alt=""&gt;
     &lt;span&gt;default text&lt;/span&gt;
   &lt;/button&gt;
 &lt;/template&gt;
@@ -1157,7 +1157,7 @@ document.querySelector('#btnGenerate').addEventListener('click', () => {
           <ul>
             <li>
               mixing shadow DOM, templates and imports:
-              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;div data-text="Some Button" data-icon="v.png" id="myButton"&gt;&lt;/div&gt;
+              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;div data-text="Some Button" data-icon="demos/v.png" id="myButton"&gt;&lt;/div&gt;
 &lt;script&gt;
   // import template
   var templateImport = document.querySelector('link[rel="import"]');
@@ -1185,7 +1185,7 @@ document.querySelector('#btnGenerate').addEventListener('click', () => {
           <ul>
             <li>
               mixing custom elements, shadow DOM, templates and imports:
-              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;rogier-button data-text="Some Button" data-icon="v.png" id="myButton"&gt;
+              <div><pre class="bigger"><code class="language-html" contenteditable style="">&lt;rogier-button data-text="Some Button" data-icon="demos/v.png" id="myButton"&gt;
 &lt;/rogier-button&gt;
 &lt;script&gt;
   // import template
