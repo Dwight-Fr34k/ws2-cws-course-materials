@@ -219,7 +219,7 @@ html .reveal .slides, body .reveal .slides {
 }
 
 .reveal .plus-style {
-  list-style-image: url('../../img/list_style_plus.jpg');
+  list-style-image: url('../../img/list_style_plus.png');
 }
 
 .reveal .x-style {
@@ -291,43 +291,6 @@ html .reveal .slides, body .reveal .slides {
 
 .reveal #ikdoeict:hover {
   opacity: 1;
-}
-
-/* bottom left menu */
-
-.reveal #extra {
-  position: fixed;
-  left: 10px;
-  bottom: 20px;
-  font-size: 14px;
-  line-height: 20px;
-  z-index: 10;
-}
-
-.reveal #extra ul, .reveal #extra li {
-  list-style: none;
-}
-
-.reveal #extra .codelink {
-  background-position: top left;
-  background-repeat: no-repeat;
-  padding-left: 20px;
-  background-image: url(../../img/rar.png);
-}
-
-.reveal #extra .a:hover {
-  background: transparent url(../../img/rar.png) top left !important;
-}
-
-/* endmenu */
-
-.reveal #endmenu {
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
-  font-size: 16px;
-  line-height: 1.1em;
-  list-style: none;
 }
 
 /***********************************************
@@ -576,16 +539,6 @@ aside.back {
   right: 85px;
 }
 
-.reveal .info {
-  display: inline-block;
-  position: relative;
-  top: -10px;
-  background-image: url(../../img/commentsS.png);
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 16px;
-}
-
 .reveal .tooltip div, .reveal .info div {
   text-align: left;
   display: none;
@@ -718,13 +671,13 @@ aside.back {
 }
 
 .reveal pre code.wrong {
-  background-image: url(../../img/redcross.png) !important;
+  background-image: url(../../img/code_wrong.png) !important;
   background-position: top right !important;
   background-repeat: no-repeat !important;
 }
 
 .reveal pre code.right {
-  background-image: url(../../img/greenv.png) !important;
+  background-image: url(../../img/code_right.png) !important;
   background-position: top right !important;
   background-repeat: no-repeat !important;
 }
@@ -779,4 +732,12 @@ aside.back {
 
 .comments {
   display: none;
+}
+
+/*********************************************
+ * TABLES
+ *********************************************/
+
+.reveal table th {
+    text-shadow: none;
 }

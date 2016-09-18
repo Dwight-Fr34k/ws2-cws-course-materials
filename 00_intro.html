@@ -1,743 +1,743 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Javascript &mdash; Intro CWS2</title>
-  <meta name="author" content="Rogier van der Linde - ikdoeict.be">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="library/reveal/css/reveal.min.css">
-	<link rel="stylesheet" href="library/reveal/css/theme/rogier.css" id="rogier">
-	<link rel="stylesheet" href="library/highlight/styles/vs.css">
-  <link rel="stylesheet" href="css/common.css">
+   <meta charset="utf-8">
+   <title>Clientside Development &mdash; Intro</title>
+   <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <link rel="stylesheet" href="library/reveal/css/reveal.min.css">
+   <link rel="stylesheet" href="library/reveal/css/theme/rogier.css" id="rogier">
+   <link rel="stylesheet" href="library/highlight/styles/vs.css">
+   <link rel="stylesheet" href="css/common.css">
 </head>
 
 <body>
 
-    <!-- SLIDES -->
-	<div class="reveal">
+   <!-- SLIDES -->
+   <div class="reveal">
 
-		<!-- Any section element inside of this container is displayed as a slide -->
-		<div class="slides">
-			<section>
-				<h1>INTRO CWS2</h1>
-				<small>use the arrow keys to navigate; press space for slide overview<br /></small>
-				<figure>
-					<img src="img/00_intro/intro.png" alt="" width="100" />
-					<figcaption></figcaption>
-				</figure>
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+         <section>
+            <h1>INTRO CLIENTSIDE DEVELOPMENT</h1>
+            <small>use the arrow keys to navigate; press space for slide overview<br /></small>
+            <figure>
+               <img src="img/00_intro/intro.png" alt="" width="100" />
+               <figcaption></figcaption>
+            </figure>
 
-				<footer>
-					<a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
-				</footer>
-			</section>
+            <footer>
+               <a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+            </footer>
+         </section>
 
-			<section>
-        <section>
-					<h1>INTRO CWS1</h1>
-					<h2>Before we start</h2>
-					<ul class="chapterlist">
-						<!-- to be filled by Javascript -->
-					</ul>
-				</section>
-        <section data-toc-title="Prerequisites">
-          <h2>Prerequisites (1)</h2>
-          <ul>
-            <li>
-              HTML5
-              <ul>
-                <li>base document structure</li>
-                <li>correct use of elements and attributes</li>
-                <li>HTML markup for forms</li>
-                <li>correct sectioning &amp; header numbering (outliner tool)</li>
-                <li>new HTML5 features</li>
-              </ul>
-            </li>
-            <li>
-              CSS3
-              <ul>
-                <li>full spectrum of selectors and techniques</li>
-                <li>em/rem based layout</li>
-                <li>layout techniques</li>
-                <li>resonsive layout with media queries</li>
-                <li>new CSS3 features</li>
-              </ul>
-            </li>
-          </ul>
-          <div class="tooltip">
-            <div>
-              CSS checklist
-              <ul>
-                <li>
-                  best practices
-                  <ul>
-                    <li>consistent CSS files structure with comments</li>
-                    <li>class attributes prefered over id attributes</li>
-                    <li>short selectors, i.e. <code>#mainmenu <del>ul li</del> a</code></li>
-                  </ul>
-                </li>
-                <li>
-                  selectors
-                  <ul>
-                    <li>basic selectors (tag, .class, #id)</li>
-                    <li>pseudo class selectors (<code>:first-child</code>, <code>:hover</code>...)</li>
-                    <li>pseudo element selectors (<code>::first-letter</code>, <code>::after</code>...)</li>
-                    <li>grouped selectors (A, B)</li>
-                    <li>contextual selectors (A B)</li>
-                    <li>CSS 2.1 selectors (*, A > B, A + B...)</li>
-                    <li>attribute selectors (A[a], A[a=x], A[a~=x]...)</li>
-                  </ul>
-                </li>
-                <li>
-                  properties &amp; fonts
-                  <ul>
-                    <li>em/rem</li>
-                    <li>priority and inheritance</li>
-                    <li>Google fonts, webfonts</li>
-                  </ul>
-                </li>
-                <li>
-                  layout
-                  <ul>
-                    <li>box model, <code>box-sizing</code></li>
-                    <li>absolute/relative/fixed/static</li>
-                    <li>float/clear/clearfix</li>
-                    <li><del>table</del> &rarr; not ready yet</li>
-                    <li><del>flexbox</del> &rarr; not ready yet</li>
-                  </ul>
-                </li>
-                <li>
-                  CSS3
-                  <ul>
-                    <li>new selectors (<code>nth-of-type</code>, <code>nth-child</code>...)</li>
-                    <li>background sizes, color definitions, gradients</li>
-                    <li>transforms, transitions, animations</li>
-                    <li>box (<code>box-shadow</code>, <code>border-radius</code>, <code>box-sizing</code>...)</li>
-                  </ul>
-                </li>
-                <li>
-                  responsive &amp; media queries
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="tooltip">
-            <div>
-              HTML checklist
-              <ul>
-                <li>
-                  code conventions
-                  <ul>
-                    <li>lowercase tags, i.e. <del><code>&lt;TABLE&gt;</code></del> &rarr; <code>&lt;table&gt;</code></li>
-                    <li>double quotes around attributes</li>
-                    <li>proper nesting</li>
-                    <li>close all non empty tags, i.e. <code>&lt;li&gt;...&lt;/li&gt;</code></li>
-                    <li>allowed: open empty tags, i.e. <code>&lt;br&gt;</code> or <code>&lt;br /&gt;</code></li>
-                    <li>allowed: attribute minimalization, i.e. <br><code>&lt;input selected="selected" ...&gt;</code> or <br><code>&lt;input selected ...&gt;</code></li>
-                  </ul>
-                </li>
-                <li>
-                  base document
-                  <ul>
-                    <li><code>&lt;!doctype html&gt;</code></li>
-                    <li><code>&lt;title&gt;</code> provided</li>
-                    <li><code>&lt;meta charset="..."&gt;</code> provided</li>
-                  </ul>
-                </li>
-                <li>
-                  classic HTML elements <code>&lt;p&gt;</code>, <code>&lt;img&gt;</code> etc...
-                </li>
-                <li>
-                  forms
-                  <ul>
-                    <li>general HTML structure with <code>&lt;dl&gt;</code>'s or <code>&lt;p&gt;</code>'s, checkboxes and radiobuttons nested inside <code>&lt;label&gt;</code></li>
-                    <li><code>for</code> and <code>name</code> attributes</li>
-                  </ul>
-                </li>
-                <li>
-                  sectioning
-                  <ul>
-                    <li>correct use of <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>...</li>
-                    <li>correct numbering of <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>... (see outline)</li>
-                  </ul>
-                </li>
-                <li>
-                  HTML5
-                  <ul>
-                    <li>new input types <code>date</code>, <code>color</code>, <code>email</code>, <code>range</code>...</li>
-                    <li>HTML5 elements (<code>&lt;figure&gt;</code>, <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code>)</li>
-                    <li>attributes (<code>contenteditable</code>, <code>data-*</code>)</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-        <section data-toc-title="">
-          <h2>Prerequisites (2)</h2>
-          <ul>
-            <li>
-              MySQL
-              <ul>
-                <li>basic CRUD actions (<code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code>)</li>
-                <li>subqueries &amp; joins (<code>LEFT</code>, <code>RIGHT</code>, <code>INNER</code>)</li>
-                <li>searches (<code>LIKE</code>, <code>MATCH...AGAINST</code>, <code>FULLTEXT</code>)</li>
-                <li>options (<code>ORDER</code>, <code>LIMIT</code>)</li>
-                <li>basic administration with PhpMyAdmin or alike</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Prerequisites (3)</h2>
-          <ul>
-            <li>
-              PHP
-              <ul>
-                <li>basic syntax</li>
-                <li>client-server</li>
-                <li>classes</li>
-                <li>forms (GET/POST, formchecking, processing, file uploads)</li>
-                <li>files and folders (looping, read/write, file info)</li>
-                <li>databases with PDO (connecting, CRUD, prepared statements, fetching results)</li>
-                <li>templates with Twig (displaying, filters, loops, options, master/parent...)</li>
-                <li>persistence (cookies, sessions, login forms)</li>
-              </ul>
-            </li>
-            <li class="no-style">
-              <ul>
-                <li class="arrow">
-                  summaries in <a href="https://github.com/mjoris/ws1-sws-course-materials">serverside webscripten 1 course materials (Git)</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Prerequisites (4)</h2>
-          <ul>
-            <li>
-              Javascript
-              <ul>
-                <li>basic syntax (incl. anonymous functions &amp; objects, object &amp; array literals, scope, closures)</li>
-                <li>initializing scripts (window load event, encapsulation)</li>
-                <li>DOM tree (finding and manipulating elements &amp; properties/CSS)</li>
-                <li>event handling (attaching/removing, bubbling, target, preventing defaults)</li>
-                <li>jQuery basics</li>
-                <li>AJAX (creating/consuming PHP API, JSON)</li>
-                <li>integrating and consuming external libraries and API's</li>
-              </ul>
-            </li>
-            <li class="no-style">
-              <ul>
-                <li class="arrow">
-                  <a href="http://www.ikdoeict.be/leercentrum/index.html">clientside webscripten 1 course materials (ikdoeict.be)</a>
-                </li>
-                <li class="arrow">
-                  <a href="http://www.w3schools.com/jsref/">w3schools DOM reference</a>
-                </li>
-                <li class="arrow">
-                  <a href="https://api.jquery.com/">jQuery</a> and <a href="http://jqueryui.com/">jQueryui</a> documentation
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Prerequisites (5)</h2>
-          <ul>
-            <li>
-              Programming
-              <ul>
-                <li>
-                  iterations (<code>for</code>) &amp; selections (<code>if</code>, <code>if - else</code>)
-                </li>
-                <li>
-                  arrays
-                </li>
-                <li>
-                  functions
-                </li>
-                <li>
-                  basic OO concepts:
-                  <ul>
-                    <li>classes</li>
-                    <li>constructors</li>
-                    <li>instances</li>
-                    <li>properties</li>
-                    <li>inheritance</li>
-                    <li>static v.s. non-static (and when to use which)</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Prerequisites (6)</h2>
-          <ul>
-            <li>
-              General
-              <ul>
-                <li>
-                  proper coding style
-                  <ul>
-                    <li>layout</li>
-                    <li>consistency</li>
-                    <li>efficiency</li>
-                  </ul>
-                </li>
-                <li>
-                  proper documentation
-                  <ul>
-                    <li>consistent commenting, Javadoc-inspired</li>
-                    <li>readme.md</li>
-                  </ul>
-                </li>
-                <li>
-                  web development tools
-                  <ul>
-                    <li>Git</li>
-                    <li>CPanel, FTP client</li>
-                    <li>PHPMyAdmin</li>
-                    <li>Xampp or Wampserver or MAMP</li>
-                    <li>Chrome: advanced use of webdeveloper tools, Postman plugin</li>
-                    <li>text editor/IDE pro user: shortcuts, blind typing, package management...</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div class="tooltip">
-            <div>
-              Webdeveloper checklist
-              <ul>
-                <li>
-                  Shift-Ctrl-I or F12
-                </li>
-                <li>
-                  code inspection
-                  <ul>
-                    <li>DOM window</li>
-                    <li>styles windows (rules, properties, box model)</li>
-                    <li>live edit, copy, delete...</li>
-                  </ul>
-                </li>
-                <li>
-                  console
-                  <ul>
-                    <li>console.log</li>
-                    <li>Javascript errors</li>
-                    <li>HTTP errors (code >= 400)</li>
-                    <li>statement execution</li>
-                  </ul>
-                </li>
-                <li>
-                  network
-                  <ul>
-                    <li>requests &amp; responses inspection</li>
-                  </ul>
-                </li>
-                <li>
-                  resources
-                  <ul>
-                    <li>cookies, local storage, Web SQL...</li>
-                  </ul>
-                </li>
-                <li>
-                  debugger
-                  <ul>
-                    <li>adding breakpoints (sources tab)</li>
-                    <li>variable inspection</li>
-                    <li>step into/out/over</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-        <section>
-          <h2>Software</h2>
-          <ul>
-            <li>
-              You'll need these:
-              <ul>
-                <li>Git</li>
-                <li>Chrome (we'll need the webdeveloper tools and Postman plugin)</li>
-                <li>an AMP stack (<a href="https://www.apachefriends.org/index.html">XAMPP</a>/<a href="http://www.wampserver.com/">Wampserver</a>/<a href="https://www.mamp.info/en/mamp-pro/">MAMP pro</a>) incl. PHPMyAdmin</li>
-                <li><a href="https://nodejs.org/en/">NodeJS</a></li>
-                <li><a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby</a></li>
-                <li>Gulp (task automation; install via <abbr title="Node Package Manager">NPM</abbr>)</li>
-                <li>Bower (Javascript dependency management; install via <abbr title="Node Package Manager">NPM</abbr>)</li>
-                <li><a href="https://getcomposer.org/">Composer</a>  (PHP dependency management)</li>
-                <li>
-                  A decent text editor
-                  <ul>
-                    <li>
-                      Javascript: <a href="https://www.jetbrains.com/webstorm/">WebStorm</a> and <a href="https://www.sublimetext.com/">SublimeText</a> are by far the <a href="http://www.javaworld.com/article/2094847/enterprise-java/review-10-javascript-editors-and-ides-put-to-the-test.html?page=3">best options </a>
-                    </li>
-                    <li>
-                      PHP: <a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a>, <a href="http://www.zend.com/">ZendStudio</a>, Netbeans or Aptana Studio are all decent.
-                    </li>
-                  </ul>
-                </li>
-                <li class="arrow">
-                  <a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a> (= WebStorm + PHP + DB/SQL) may be the best choice overall
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div class="tooltip">
-            <div>
-              Text editor checklist
-              <ul>
-                <li>
-                  basic features
-                  <ul>
-                    <li>syntax highlighting</li>
-                    <li>autocompletion</li>
-                    <li>on-the-fly syntax check</li>
-                    <li>plugins / packages management</li>
-                  </ul>
-                </li>
-                <li>
-                  recommended extra's
-                  <ul>
-                    <li>EditorConfig support</li>
-                    <li>FTP/SFTP support</li>
-                    <li>bower / composer support</li>
-                  </ul>
-                </li>
-                <li>
-                  optional extra's
-                  <ul>
-                    <li>GIT integration</li>
-                    <li>Vagrant integration</li>
-                    <li>Emmet Zen Coding</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-			</section>
+         <section>
+            <section>
+               <h1>INTRO CD</h1>
+               <h2>Before we start</h2>
+               <ul class="chapterlist">
+                  <!-- to be filled by Javascript -->
+               </ul>
+            </section>
+            <section data-toc-title="Prerequisites">
+               <h2>Prerequisites (1)</h2>
+               <ul>
+                  <li>
+                     HTML5
+                     <ul>
+                        <li>base document structure</li>
+                        <li>correct use of elements and attributes</li>
+                        <li>HTML markup for forms</li>
+                        <li>correct sectioning &amp; header numbering (outliner tool)</li>
+                        <li>new HTML5 features</li>
+                     </ul>
+                  </li>
+                  <li>
+                     CSS3
+                     <ul>
+                        <li>full spectrum of selectors and techniques</li>
+                        <li>em/rem based layout</li>
+                        <li>layout techniques</li>
+                        <li>resonsive layout with media queries</li>
+                        <li>new CSS3 features</li>
+                     </ul>
+                  </li>
+               </ul>
+               <div class="tooltip">
+                  <div>
+                     CSS checklist
+                     <ul>
+                        <li>
+                           best practices
+                           <ul>
+                              <li>consistent CSS files structure with comments</li>
+                              <li>class attributes prefered over id attributes</li>
+                              <li>short selectors, i.e. <code>#mainmenu <del>ul li</del> a</code></li>
+                           </ul>
+                        </li>
+                        <li>
+                           selectors
+                           <ul>
+                              <li>basic selectors (tag, .class, #id)</li>
+                              <li>pseudo class selectors (<code>:first-child</code>, <code>:hover</code>...)</li>
+                              <li>pseudo element selectors (<code>::first-letter</code>, <code>::after</code>...)</li>
+                              <li>grouped selectors (A, B)</li>
+                              <li>contextual selectors (A B)</li>
+                              <li>CSS 2.1 selectors (*, A > B, A + B...)</li>
+                              <li>attribute selectors (A[a], A[a=x], A[a~=x]...)</li>
+                           </ul>
+                        </li>
+                        <li>
+                           properties &amp; fonts
+                           <ul>
+                              <li>em/rem</li>
+                              <li>priority and inheritance</li>
+                              <li>Google fonts, webfonts</li>
+                           </ul>
+                        </li>
+                        <li>
+                           layout
+                           <ul>
+                              <li>box model, <code>box-sizing</code></li>
+                              <li>absolute/relative/fixed/static</li>
+                              <li>float/clear/clearfix</li>
+                              <li><del>table</del> &rarr; not ready yet</li>
+                              <li><del>flexbox</del> &rarr; not ready yet</li>
+                           </ul>
+                        </li>
+                        <li>
+                           CSS3
+                           <ul>
+                              <li>new selectors (<code>nth-of-type</code>, <code>nth-child</code>...)</li>
+                              <li>background sizes, color definitions, gradients</li>
+                              <li>transforms, transitions, animations</li>
+                              <li>box (<code>box-shadow</code>, <code>border-radius</code>, <code>box-sizing</code>...)</li>
+                           </ul>
+                        </li>
+                        <li>
+                           responsive &amp; media queries
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="tooltip">
+                  <div>
+                     HTML checklist
+                     <ul>
+                        <li>
+                           code conventions
+                           <ul>
+                              <li>lowercase tags, i.e. <del><code>&lt;TABLE&gt;</code></del> &rarr; <code>&lt;table&gt;</code></li>
+                              <li>double quotes around attributes</li>
+                              <li>proper nesting</li>
+                              <li>close all non empty tags, i.e. <code>&lt;li&gt;...&lt;/li&gt;</code></li>
+                              <li>allowed: open empty tags, i.e. <code>&lt;br&gt;</code> or <code>&lt;br /&gt;</code></li>
+                              <li>allowed: attribute minimalization, i.e. <br><code>&lt;input selected="selected" ...&gt;</code> or <br><code>&lt;input selected ...&gt;</code></li>
+                           </ul>
+                        </li>
+                        <li>
+                           base document
+                           <ul>
+                              <li><code>&lt;!doctype html&gt;</code></li>
+                              <li><code>&lt;title&gt;</code> provided</li>
+                              <li><code>&lt;meta charset="..."&gt;</code> provided</li>
+                           </ul>
+                        </li>
+                        <li>
+                           classic HTML elements <code>&lt;p&gt;</code>, <code>&lt;img&gt;</code> etc...
+                        </li>
+                        <li>
+                           forms
+                           <ul>
+                              <li>general HTML structure with <code>&lt;dl&gt;</code>'s or <code>&lt;p&gt;</code>'s, checkboxes and radiobuttons nested inside <code>&lt;label&gt;</code></li>
+                              <li><code>for</code> and <code>name</code> attributes</li>
+                           </ul>
+                        </li>
+                        <li>
+                           sectioning
+                           <ul>
+                              <li>correct use of <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>...</li>
+                              <li>correct numbering of <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>... (see outline)</li>
+                           </ul>
+                        </li>
+                        <li>
+                           HTML5
+                           <ul>
+                              <li>new input types <code>date</code>, <code>color</code>, <code>email</code>, <code>range</code>...</li>
+                              <li>HTML5 elements (<code>&lt;figure&gt;</code>, <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code>)</li>
+                              <li>attributes (<code>contenteditable</code>, <code>data-*</code>)</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </section>
+            <section data-toc-title="">
+               <h2>Prerequisites (2)</h2>
+               <ul>
+                  <li>
+                     MySQL
+                     <ul>
+                        <li>basic CRUD actions (<code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code>)</li>
+                        <li>subqueries &amp; joins (<code>LEFT</code>, <code>RIGHT</code>, <code>INNER</code>)</li>
+                        <li>searches (<code>LIKE</code>, <code>MATCH...AGAINST</code>, <code>FULLTEXT</code>)</li>
+                        <li>options (<code>ORDER</code>, <code>LIMIT</code>)</li>
+                        <li>basic administration with PhpMyAdmin or alike</li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Prerequisites (3)</h2>
+               <ul>
+                  <li>
+                     PHP
+                     <ul>
+                        <li>basic syntax</li>
+                        <li>client-server</li>
+                        <li>classes</li>
+                        <li>forms (GET/POST, formchecking, processing, file uploads)</li>
+                        <li>files and folders (looping, read/write, file info)</li>
+                        <li>databases with PDO (connecting, CRUD, prepared statements, fetching results)</li>
+                        <li>templates with Twig (displaying, filters, loops, options, master/parent...)</li>
+                        <li>persistence (cookies, sessions, login forms)</li>
+                     </ul>
+                  </li>
+                  <li class="no-style">
+                     <ul>
+                        <li class="arrow">
+                           summaries in <a href="https://github.com/mjoris/ws1-sws-course-materials">serverside webscripten 1 course materials (Git)</a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Prerequisites (4)</h2>
+               <ul>
+                  <li>
+                     Javascript
+                     <ul>
+                        <li>basic syntax (incl. anonymous functions &amp; objects, object &amp; array literals, scope, closures)</li>
+                        <li>initializing scripts (window load event, encapsulation)</li>
+                        <li>DOM tree (finding and manipulating elements &amp; properties/CSS)</li>
+                        <li>event handling (attaching/removing, bubbling, target, preventing defaults)</li>
+                        <li>jQuery basics</li>
+                        <li>AJAX (creating/consuming PHP API, JSON)</li>
+                        <li>integrating and consuming external libraries and API's</li>
+                     </ul>
+                  </li>
+                  <li class="no-style">
+                     <ul>
+                        <li class="arrow">
+                           <a href="http://www.ikdoeict.be/leercentrum/index.html">clientside webscripten 1 course materials (ikdoeict.be)</a>
+                        </li>
+                        <li class="arrow">
+                           <a href="http://www.w3schools.com/jsref/">w3schools DOM reference</a>
+                        </li>
+                        <li class="arrow">
+                           <a href="https://api.jquery.com/">jQuery</a> and <a href="http://jqueryui.com/">jQueryui</a> documentation
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Prerequisites (5)</h2>
+               <ul>
+                  <li>
+                     Programming
+                     <ul>
+                        <li>
+                           iterations (<code>for</code>) &amp; selections (<code>if</code>, <code>if - else</code>)
+                        </li>
+                        <li>
+                           arrays
+                        </li>
+                        <li>
+                           functions
+                        </li>
+                        <li>
+                           basic OO concepts:
+                           <ul>
+                              <li>classes</li>
+                              <li>constructors</li>
+                              <li>instances</li>
+                              <li>properties</li>
+                              <li>inheritance</li>
+                              <li>static v.s. non-static (and when to use which)</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Prerequisites (6)</h2>
+               <ul>
+                  <li>
+                     General
+                     <ul>
+                        <li>
+                           proper coding style
+                           <ul>
+                              <li>layout</li>
+                              <li>consistency</li>
+                              <li>efficiency</li>
+                           </ul>
+                        </li>
+                        <li>
+                           proper documentation
+                           <ul>
+                              <li>consistent commenting, Javadoc-inspired</li>
+                              <li>readme.md</li>
+                           </ul>
+                        </li>
+                        <li>
+                           web development tools
+                           <ul>
+                              <li>Git</li>
+                              <li>CPanel, FTP client</li>
+                              <li>PHPMyAdmin</li>
+                              <li>Xampp or Wampserver or MAMP</li>
+                              <li>Chrome: advanced use of webdeveloper tools, Postman plugin</li>
+                              <li>text editor/IDE pro user: shortcuts, blind typing, package management...</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+               <div class="tooltip">
+                  <div>
+                     Webdeveloper checklist
+                     <ul>
+                        <li>
+                           Shift-Ctrl-I or F12
+                        </li>
+                        <li>
+                           code inspection
+                           <ul>
+                              <li>DOM window</li>
+                              <li>styles windows (rules, properties, box model)</li>
+                              <li>live edit, copy, delete...</li>
+                           </ul>
+                        </li>
+                        <li>
+                           console
+                           <ul>
+                              <li>console.log</li>
+                              <li>Javascript errors</li>
+                              <li>HTTP errors (code >= 400)</li>
+                              <li>statement execution</li>
+                           </ul>
+                        </li>
+                        <li>
+                           network
+                           <ul>
+                              <li>requests &amp; responses inspection</li>
+                           </ul>
+                        </li>
+                        <li>
+                           resources
+                           <ul>
+                              <li>cookies, local storage, Web SQL...</li>
+                           </ul>
+                        </li>
+                        <li>
+                           debugger
+                           <ul>
+                              <li>adding breakpoints (sources tab)</li>
+                              <li>variable inspection</li>
+                              <li>step into/out/over</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </section>
+            <section>
+               <h2>Software</h2>
+               <ul>
+                  <li>
+                     You'll need these:
+                     <ul>
+                        <li>Git</li>
+                        <li>Chrome (we'll need the webdeveloper tools and Postman plugin)</li>
+                        <li>an AMP stack (<a href="https://www.apachefriends.org/index.html">XAMPP</a>/<a href="http://www.wampserver.com/">Wampserver</a>/<a href="https://www.mamp.info/en/mamp-pro/">MAMP pro</a>) incl. PHPMyAdmin</li>
+                        <li><a href="https://nodejs.org/en/">NodeJS</a></li>
+                        <li><a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby</a></li>
+                        <li>Gulp (task automation; install via <abbr title="Node Package Manager">NPM</abbr>)</li>
+                        <li>Bower (Javascript dependency management; install via <abbr title="Node Package Manager">NPM</abbr>)</li>
+                        <li><a href="https://getcomposer.org/">Composer</a>  (PHP dependency management)</li>
+                        <li>
+                           A decent text editor
+                           <ul>
+                              <li>
+                                 Javascript: <a href="https://www.jetbrains.com/webstorm/">WebStorm</a> and <a href="https://www.sublimetext.com/">SublimeText</a> are by far the <a href="http://www.javaworld.com/article/2094847/enterprise-java/review-10-javascript-editors-and-ides-put-to-the-test.html?page=3">best options </a>
+                              </li>
+                              <li>
+                                 PHP: <a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a>, <a href="http://www.zend.com/">ZendStudio</a>, Netbeans or Aptana Studio are all decent.
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="arrow">
+                           <a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a> (= WebStorm + PHP + DB/SQL) may be the best choice overall
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+               <div class="tooltip">
+                  <div>
+                     Text editor checklist
+                     <ul>
+                        <li>
+                           basic features
+                           <ul>
+                              <li>syntax highlighting</li>
+                              <li>autocompletion</li>
+                              <li>on-the-fly syntax check</li>
+                              <li>plugins / packages management</li>
+                           </ul>
+                        </li>
+                        <li>
+                           recommended extra's
+                           <ul>
+                              <li>EditorConfig support</li>
+                              <li>FTP/SFTP support</li>
+                              <li>bower / composer support</li>
+                           </ul>
+                        </li>
+                        <li>
+                           optional extra's
+                           <ul>
+                              <li>GIT integration</li>
+                              <li>Vagrant integration</li>
+                              <li>Emmet Zen Coding</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </section>
+         </section>
 
-			<section>
-        <section>
-					<h1>INTRO CWS1</h1>
-					<h2>About the course</h2>
-					<ul class="chapterlist">
-						<!-- to be filled by Javascript -->
-					</ul>
-				</section>
-        <section>
-          <h2>Webscripting 2</h2>
-          <ul>
-            <li>
-              OPO: webscripting 2 [JPW361]
-            </li>
-            <li>
-              3 OLA's:
-              <ul>
-                <li>webscripting 2 theory (2 STP) [JLW505]</li>
-                <li>lab serverside webscripting 2 (3 STP) [JLW506]</li>
-                <li>lab clientside webscripting 2 (3 STP) [JLW507]</li>
-              </ul>
-            </li>
-            <li>
-              focus:
-              <ul>
-                <li>webscripting 1: syntax and basic concepts</li>
-                <li>webscripting 2: <em>development tools and frameworks</em></li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="CWS2 Course topics">
-          <h2>Clientside Course topics (1)</h2>
-          <ul>
-            <li>
-              Possible topics
-              <ul>
-                <li>
-                  Language fundamentals
-                  <ul>
-                    <li>ES6: <a href="http://es6-features.org/">tons of new features</a></li>
-                    <li>advanced patterns: <a href="https://github.com/addyosmani/essential-js-design-patterns/issues/41">pubsub mediator</a>, <a href="https://carldanley.com/js-facade-pattern/">facade</a>, <a href="http://node-machine.org/spec/machine">machine definition</a>...</li>
-                    <li>alternatives to classic event-based async JS: Reactive programming (hot!), promises (hot!)</li>
-                    <li>shadow DOM, web components</li>
-                    <li>error handling</li>
-                  </ul>
-                </li>
-                <li>
-                  HTML5 &amp; CSS
-                  <ul>
-                    <li>more API's (audio, geolocation, history, device orientation, notifications...)</li>
-                    <li>more game programming, Javascript game engines</li>
-                    <li><a href="http://css4.rocks/">CSS4</a></li>
-                  </ul>
-                </li>
-                <li>
-                  Frameworks
-                  <ul>
-                    <li>Javascript frameworks (Polymer, AngularJS...)</li>
-                    <li>CSS frameworks (bootstrap, MDL...)</li>
-                    <li>API frameworks (Swagger.io, Django...)</li>
-                    <li>mobile frameworks (Mobile Angular UI, jQuery mobile...)</li>
-                    <li>Serverside (NodeJS)</li>
-                    <li>Template engines (Moustache, Pure, Handlebars...)</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Clientside Course topics (2)</h2>
-          <ul>
-            <li>
-              Possible topics (cont'd)
-              <ul>
-                <li>
-                  Performance &amp; security
-                  <ul>
-                    <li>Basic Authentication, OAuth</li>
-                    <li>scalable javascript</li>
-                    <li>javascript optimizations</li>
-                    <li>CSS best practices, <a href="https://css-tricks.com/bem-101/">BEM</a></li>
-                  </ul>
-                </li>
-                <li>
-                  Devtools
-                  <ul>
-                    <li>dependency management (NPM, bower)</li>
-                    <li>task automation (Gulp, Grunt)</li>
-                    <li>preprocessing (concatenation &amp; minification, CSS preprocessors)</li>
-                    <li>code quality (jsHint, editorconfig)</li>
-                    <li>mobile: Phonegap, mobile debugging</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-toc-title="">
-          <h2>Clientside Course topics (3)</h2>
-          <ul>
-            <li>
-              We'll focus on:
-              <ul>
-                <li>
-                  <em>devtools</em> (dep. managemant, task automation, preprocessing, code quality)
-                </li>
-                <li>
-                  <em>frameworks</em> (Bootstrap, Angular, MDL, Polymer...)
-                </li>
-                <li>
-                  <em>fun stuff</em> (last week)
-                </li>
-              </ul>
-            </li>
-            <li class="arrow">
-              suggestions welcome
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Course Philosophy</h2>
-          <ul>
-            <li>
-              This course isn't
-              <ul class="x-style">
-                <li>
-                  a tutorial on Bootstrap or Angular
-                </li>
-                <li>
-                  a training of specific techniques
-                </li>
-                <li>
-                  a hands-on manual on development tools
-                </li>
-              </ul>
-            </li>
-            <li>
-              Instead, it will try to give
-              <ul class="v-style">
-                <li>
-                  a generic helicopter view of current and future technologies
-                </li>
-                <li>
-                  the right pointers to make your own choices
-                </li>
-                <li>
-                  the opportunity to practice
-                </li>
-                <li>
-                  the freedom to develop your own style
-                </li>
-              </ul>
-            </li>
-            <li class="arrow">
-              leaves more responsibility to you, might not be for everyone
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Timing &amp; Evaluation</h2>
-          <ul>
-            <li>
-              Week 1&ndash;6: OLA clientside (R. van der Linde)
-              <ul>
-                <li>6 lab sessions / 3h (permanent evaluation, 60%)</li>
-                <li>1 project (+oral defense, 40%) <span style="color:#900; font-style:italic">&rarr; you need at least 8/20 to get an OLA credit</span></li>
-              </ul>
-            </li>
-            <li>
-              Week 7&ndash;12: OLA serverside (J. Maervoet &amp; K. Picalausa)
-              <ul>
-                <li>6 lab sessions / 3h (permanent evaluation, 60%)</li>
-                <li>1 project (+oral defense, 40%) <span style="color:#900; font-style:italic">&rarr; you need at least 8/20 to get an OLA credit</span></li>
-              </ul>
-            </li>
-            <li>
-              OLA theory (R. van der Linde &amp; J. Maervoet)
-              <ul>
-                <li>weekly session of 1.5h (unless communicated otherwise in advance)</li>
-                <li>no separate evaluation</li>
-                <li>endmark = OO mark</li>
-              </ul>
-            </li>
-            <li class="no-style">
-              <ul>
-                <li class="arrow">
-                  <span style="color:#900; font-style:italic">you can't get an OO credit with an OLA &lt; 8/20</span>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Course Materials &amp; assignments</h2>
-          <ul>
-            <li>
-              Lab &amp; project
-              <ul>
-                <li>assignments and materials distributed via Toledo</li>
-                <li>check announcements regulary!</li>
-                <li>upload your solution at the end of the lab session</li>
-                <li>optionally complete your solution by next lab session (mark: average with original solution)</li>
-              </ul>
-            </li>
-            <li>
-              Theory
-              <ul>
-                <li>materials available on <a href="https://github.com/rogiervdl/ws2-cws-course-materials/">GitHub</a> (most recent version) and <a href="http://www.ikdoeict.be/leercentrum">ikdoeict.be/leercentrum</a></li>
-                <li>feel free to fork and commit improvements/additions</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Instructors</h2>
-          <ul class="columns">
-            <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
-              <p><img src="img/00_intro/lecturer_rogier.jpg" width="200" alt="" title=""></p>
-              Rogier van der Linde<br><a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
-            </li>
-            <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
-              <p><img src="img/00_intro/lecturer_joris.jpg" width="200" alt="" title=""></p>
-              Joris Maervoet<br><a href="mailto:joris.maervoet@odisee.be">joris.maervoet@odisee.be</a>
-            </li>
-            <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
-              <p><img src="img/00_intro/lecturer_kevin.jpg" width="200" alt="" title=""></p>
-              Kevin Picalausa<br><a href="mailto:kevin.picalausa@odisee.be">kevin.picalausa@odisee.be</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Domestic Rules</h2>
-          <ul>
-            <li>Can be found on Toledo</li>
-            <li>Rules/Conventions about
-              <ul>
-                <li>Plagiarism</li>
-                <li>Deadlines and Uploads</li>
-                <li>Absences</li>
-                <li>Code Style and Code Layout</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-      </section>
-        <section>
-          <h2>Help!</h2>
-          <ul>
-            <li>
-              Debugging
-              <ul>
-                <li>dump variables with <code>console.log()</code></li>
-                <li>debug using breakpoints and variables inspection</li>
-                <li>Google your error message</li>
-                <li>remove code till the problem disappears; inspect the last chunk removed</li>
-                <li>inspect call stack (less useful with events and callbacks-driven Javascript)</li>
-              </ul>
-            </li>
-            <li>
-              Get help
-              <ul>
-                <li>
-                  if you're stuck without making any progress whatsoever, timing rules:
-                  <ul>
-                    <li><em>&lt;10 min</em>: keep trying</li>
-                    <li><em>&gt;10 min</em>, co-student or the instructor around: you <i>must</i> ask for help</li>
-                    <li><em>&gt;20 min</em>, colleague around: you <i>must</i> ask for help</li>
-                    <li><em>&gt;60 min</em>, no-one around: you <i>must</i> ask for online help</li>
-                  </ul>
-                </li>
-                <li>
-                  online help: post a question on <a href="https://www.facebook.com/groups/ICT.BLUE2.0/?fref=ts">ICT-Blue FB group</a>; include a linked name of your instructor for swift response
-                </li>
-                <li>
-                  e-mail is for personal matters only (allow 3 working days for a response)
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
+         <section>
+            <section>
+               <h1>INTRO FD</h1>
+               <h2>About the course</h2>
+               <ul class="chapterlist">
+                  <!-- to be filled by Javascript -->
+               </ul>
+            </section>
+            <section>
+               <h2>Webscripting 2</h2>
+               <ul>
+                  <li>
+                     OPO: webscripting 2 [JPW361]
+                  </li>
+                  <li>
+                     3 OLA's:
+                     <ul>
+                        <li>web development theory (2 STP) [JLW505]</li>
+                        <li>lab serverside development (3 STP) [JLW506]</li>
+                        <li>lab clientside development (3 STP) [JLW507]</li>
+                     </ul>
+                  </li>
+                  <li>
+                     focus:
+                     <ul>
+                        <li>webscripting 1: syntax and basic concepts</li>
+                        <li>webscripting 2: <em>development tools and frameworks</em></li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="CWS2 Course topics">
+               <h2>Course topics (1)</h2>
+               <ul>
+                  <li>
+                     Possible topics
+                     <ul>
+                        <li>
+                           Language fundamentals
+                           <ul>
+                              <li>ES6: <a href="http://es6-features.org/">tons of new features</a></li>
+                              <li>advanced patterns: <a href="https://github.com/addyosmani/essential-js-design-patterns/issues/41">pubsub mediator</a>, <a href="https://carldanley.com/js-facade-pattern/">facade</a>, <a href="http://node-machine.org/spec/machine">machine definition</a>...</li>
+                              <li>alternatives to classic event-based async JS: Reactive programming (hot!), promises (hot!)</li>
+                              <li>shadow DOM, web components</li>
+                              <li>error handling</li>
+                           </ul>
+                        </li>
+                        <li>
+                           HTML5 &amp; CSS
+                           <ul>
+                              <li>more API's (audio, geolocation, history, device orientation, notifications...)</li>
+                              <li>more game programming, Javascript game engines</li>
+                              <li><a href="http://css4.rocks/">CSS4</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           Frameworks
+                           <ul>
+                              <li>Javascript frameworks (Polymer, AngularJS...)</li>
+                              <li>CSS frameworks (bootstrap, MDL...)</li>
+                              <li>API frameworks (Swagger.io, Django...)</li>
+                              <li>mobile frameworks (Mobile Angular UI, jQuery mobile...)</li>
+                              <li>Serverside (NodeJS)</li>
+                              <li>Template engines (Moustache, Pure, Handlebars...)</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Clientside Course topics (2)</h2>
+               <ul>
+                  <li>
+                     Possible topics (cont'd)
+                     <ul>
+                        <li>
+                           Performance &amp; security
+                           <ul>
+                              <li>Basic Authentication, OAuth</li>
+                              <li>scalable javascript</li>
+                              <li>javascript optimizations</li>
+                              <li>CSS best practices, <a href="https://css-tricks.com/bem-101/">BEM</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           Devtools
+                           <ul>
+                              <li>dependency management (NPM, bower)</li>
+                              <li>task automation (Gulp, Grunt)</li>
+                              <li>preprocessing (concatenation &amp; minification, CSS preprocessors)</li>
+                              <li>code quality (jsHint, editorconfig)</li>
+                              <li>mobile: Phonegap, mobile debugging</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section data-toc-title="">
+               <h2>Clientside Course topics (3)</h2>
+               <ul>
+                  <li>
+                     We'll focus on:
+                     <ul>
+                        <li>
+                           <em>devtools</em> (dep. managemant, task automation, preprocessing, code quality)
+                        </li>
+                        <li>
+                           <em>frameworks</em> (Bootstrap, Angular, MDL, Polymer...)
+                        </li>
+                        <li>
+                           <em>fun stuff</em> (last week)
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="arrow">
+                     suggestions welcome
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h2>Course Philosophy</h2>
+               <ul>
+                  <li>
+                     This course isn't
+                     <ul class="x-style">
+                        <li>
+                           a tutorial on Bootstrap or Angular
+                        </li>
+                        <li>
+                           a training of specific techniques
+                        </li>
+                        <li>
+                           a hands-on manual on development tools
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     Instead, it will try to give
+                     <ul class="v-style">
+                        <li>
+                           a generic helicopter view of current and future technologies
+                        </li>
+                        <li>
+                           the right pointers to make your own choices
+                        </li>
+                        <li>
+                           the opportunity to practice
+                        </li>
+                        <li>
+                           the freedom to develop your own style
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="arrow">
+                     leaves more responsibility to you, might not be for everyone
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h2>Timing &amp; Evaluation</h2>
+               <ul>
+                  <li>
+                     Week 1&ndash;6: OLA clientside (R. van der Linde)
+                     <ul>
+                        <li>6 lab sessions / 3h (permanent evaluation, 60%)</li>
+                        <li>1 project (+oral defense, 40%) <span style="color:#900; font-style:italic">&rarr; you need at least 8/20 to get an OLA credit</span></li>
+                     </ul>
+                  </li>
+                  <li>
+                     Week 7&ndash;12: OLA serverside (J. Maervoet &amp; K. Picalausa)
+                     <ul>
+                        <li>6 lab sessions / 3h (permanent evaluation, 60%)</li>
+                        <li>1 project (+oral defense, 40%) <span style="color:#900; font-style:italic">&rarr; you need at least 8/20 to get an OLA credit</span></li>
+                     </ul>
+                  </li>
+                  <li>
+                     OLA theory (R. van der Linde &amp; J. Maervoet)
+                     <ul>
+                        <li>weekly session of 1.5h (unless communicated otherwise in advance)</li>
+                        <li>no separate evaluation</li>
+                        <li>endmark = OO mark</li>
+                     </ul>
+                  </li>
+                  <li class="no-style">
+                     <ul>
+                        <li class="arrow">
+                           <span style="color:#900; font-style:italic">you can't get an OO credit with an OLA &lt; 8/20</span>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h2>Course Materials &amp; assignments</h2>
+               <ul>
+                  <li>
+                     Lab &amp; project
+                     <ul>
+                        <li>assignments and materials distributed via Toledo</li>
+                        <li>check announcements regulary!</li>
+                        <li>upload your solution at the end of the lab session</li>
+                        <li>optionally complete your solution by next lab session (mark: average with original solution)</li>
+                     </ul>
+                  </li>
+                  <li>
+                     Theory
+                     <ul>
+                        <li>materials available on <a href="https://github.com/rogiervdl/ws2-cws-course-materials/">GitHub</a> (most recent version) and <a href="http://www.ikdoeict.be/leercentrum">ikdoeict.be/leercentrum</a></li>
+                        <li>feel free to fork and commit improvements/additions</li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h2>Instructors</h2>
+               <ul class="columns">
+                  <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
+                     <p><img src="img/00_intro/lecturer_rogier.jpg" width="200" alt="" title=""></p>
+                     Rogier van der Linde<br><a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+                  </li>
+                  <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
+                     <p><img src="img/00_intro/lecturer_joris.jpg" width="200" alt="" title=""></p>
+                     Joris Maervoet<br><a href="mailto:joris.maervoet@odisee.be">joris.maervoet@odisee.be</a>
+                  </li>
+                  <li class="column column-13 visible" style="text-align: center; line-height: 1.2;">
+                     <p><img src="img/00_intro/lecturer_kevin.jpg" width="200" alt="" title=""></p>
+                     Kevin Picalausa<br><a href="mailto:kevin.picalausa@odisee.be">kevin.picalausa@odisee.be</a>
+                  </li>
+               </ul>
+            </section>
+            <section>
+               <h2>Domestic Rules</h2>
+               <ul>
+                  <li>Can be found on Toledo</li>
+                  <li>Rules/Conventions about
+                     <ul>
+                        <li>Plagiarism</li>
+                        <li>Deadlines and Uploads</li>
+                        <li>Absences</li>
+                        <li>Code Style and Code Layout</li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+         </section>
+            <section>
+               <h2>Help!</h2>
+               <ul>
+                  <li>
+                     Debugging
+                     <ul>
+                        <li>dump variables with <code>console.log()</code></li>
+                        <li>debug using breakpoints and variables inspection</li>
+                        <li>Google your error message</li>
+                        <li>remove code till the problem disappears; inspect the last chunk removed</li>
+                        <li>inspect call stack (less useful with events and callbacks-driven Javascript)</li>
+                     </ul>
+                  </li>
+                  <li>
+                     Get help
+                     <ul>
+                        <li>
+                           if you're stuck without making any progress whatsoever, timing rules:
+                           <ul>
+                              <li><em>&lt;10 min</em>: keep trying</li>
+                              <li><em>&gt;10 min</em>, co-student or the instructor around: you <i>must</i> ask for help</li>
+                              <li><em>&gt;20 min</em>, colleague around: you <i>must</i> ask for help</li>
+                              <li><em>&gt;60 min</em>, no-one around: you <i>must</i> ask for online help</li>
+                           </ul>
+                        </li>
+                        <li>
+                           online help: post a question on <a href="https://www.facebook.com/groups/ICT.BLUE2.0/?fref=ts">ICT-Blue FB group</a>; include a linked name of your instructor for swift response
+                        </li>
+                        <li>
+                           e-mail is for personal matters only (allow 3 working days for a response)
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
 
-			<section data-index-title="">
-				<section>
-					<h2>Questions?</h2>
-				</section>
-			</section>
+         <section data-index-title="">
+            <section>
+               <h2>Questions?</h2>
+            </section>
+         </section>
 
-		</div>
+      </div>
 
-		<!-- ikdoeict.be Link -->
-		<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+      <!-- ikdoeict.be Link -->
+      <a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
-		<!-- Index Link -->
-		<aside class="back">
-	      <nav>
-	        <p><a href="index.html">&larr; Back to index</a></p>
-	      </nav>
-		</aside>
+      <!-- Index Link -->
+      <aside class="back">
+         <nav>
+            <p><a href="index.html">&larr; Back to index</a></p>
+         </nav>
+      </aside>
 
 
-		<!-- bottomleft links -->
-		<ul id="extra">
-		</ul>
+      <!-- bottomleft links -->
+      <ul id="extra">
+      </ul>
 
-	</div>
+   </div>
 
-	<script src="library/jquery.min.js"></script>
-	<script src="library/head.min.js"></script>
-	<script src="library/reveal/reveal.min.js"></script>
-  <script src="library/highlight/highlight.pack.js"></script>
-	<script src="library/prefixfree.js"></script>
-	<script src="library/css-snippets.js"></script>
-	<script src="library/css-edit.js"></script>
-	<script src="library/incrementable.js"></script>
-	<script src="library/main.js"></script>
+   <script src="library/jquery.min.js"></script>
+   <script src="library/head.min.js"></script>
+   <script src="library/reveal/reveal.min.js"></script>
+   <script src="library/highlight/highlight.pack.js"></script>
+   <script src="library/prefixfree.js"></script>
+   <script src="library/css-snippets.js"></script>
+   <script src="library/css-edit.js"></script>
+   <script src="library/incrementable.js"></script>
+   <script src="library/main.js"></script>
 
 </body>
 </html>
